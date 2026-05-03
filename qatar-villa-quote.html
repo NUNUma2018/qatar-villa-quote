@@ -1,0 +1,875 @@
+<!DOCTYPE html>
+<html lang="zh" dir="ltr">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+<meta name="apple-mobile-web-app-title" content="Qatar Quote"/>
+<meta name="theme-color" content="#0D1F35"/>
+<meta name="description" content="卡塔尔别墅装修快速报价系统 Qatar Villa Quick Quotation"/>
+<title>◈ Qatar Villa Quote</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --navy: #0D1F35;
+  --navy2: #1A3A5C;
+  --gold: #B88600;
+  --gold2: #D4A017;
+  --green: #2E6B4F;
+  --cream: #E8EDF2;
+  --muted: rgba(232,237,242,0.5);
+  --dim: rgba(232,237,242,0.2);
+  --glass: rgba(255,255,255,0.05);
+  --glass2: rgba(255,255,255,0.09);
+  --border: rgba(255,255,255,0.09);
+  --radius: 14px;
+  --font-display: 'Playfair Display', Georgia, serif;
+  --font-body: 'DM Sans', system-ui, sans-serif;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+html, body { height: 100%; overflow-x: hidden; }
+body {
+  font-family: var(--font-body);
+  background: var(--navy);
+  color: var(--cream);
+  min-height: 100vh;
+  min-height: 100dvh;
+}
+
+/* ── Background ── */
+.bg-layer {
+  position: fixed; inset: 0; pointer-events: none; z-index: 0;
+  background:
+    radial-gradient(ellipse 70% 50% at 15% 15%, rgba(26,58,92,0.7) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 40% at 85% 85%, rgba(184,134,0,0.18) 0%, transparent 60%),
+    radial-gradient(ellipse 40% 60% at 50% 50%, rgba(46,107,79,0.08) 0%, transparent 70%);
+}
+.bg-grid {
+  position: fixed; inset: 0; pointer-events: none; z-index: 0;
+  background-image: linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+                    linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+  background-size: 44px 44px;
+}
+
+/* ── Header ── */
+header {
+  position: sticky; top: 0; z-index: 200;
+  background: rgba(13,31,53,0.88);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(184,134,0,0.25);
+  padding: 10px 20px;
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+}
+.logo { display: flex; align-items: center; gap: 10px; }
+.logo-gem { font-size: 22px; color: var(--gold); }
+.logo-text { line-height: 1.2; }
+.logo-title { font-family: var(--font-display); font-size: 13px; color: var(--gold); letter-spacing: 1.5px; font-weight: 700; }
+.logo-sub { font-size: 9px; color: var(--muted); letter-spacing: 0.5px; }
+.header-right { display: flex; align-items: center; gap: 8px; }
+.save-badge {
+  font-size: 10px; padding: 4px 10px; border-radius: 20px;
+  background: rgba(46,107,79,0.25); border: 1px solid rgba(46,107,79,0.5);
+  color: #7EC8A0;
+}
+
+/* ── Nav tabs ── */
+.tab-nav {
+  position: sticky; top: 56px; z-index: 190;
+  background: rgba(13,31,53,0.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  display: flex; overflow-x: auto;
+  scrollbar-width: none;
+}
+.tab-nav::-webkit-scrollbar { display: none; }
+.tab-btn {
+  flex: 1; min-width: 72px; padding: 10px 8px;
+  background: none; border: none; cursor: pointer;
+  color: var(--muted); font-family: var(--font-body); font-size: 11px;
+  display: flex; flex-direction: column; align-items: center; gap: 3px;
+  border-bottom: 2px solid transparent;
+  transition: all 0.2s; white-space: nowrap;
+}
+.tab-btn.active { color: var(--gold); border-bottom-color: var(--gold); }
+.tab-btn .tab-icon { font-size: 16px; }
+.tab-num {
+  width: 16px; height: 16px; border-radius: 50%;
+  background: var(--navy2); border: 1px solid var(--border);
+  font-size: 9px; display: flex; align-items: center; justify-content: center;
+  color: var(--muted);
+}
+.tab-btn.active .tab-num { background: var(--gold); border-color: var(--gold); color: #000; }
+.tab-btn.done .tab-num { background: var(--green); border-color: var(--green); color: #fff; }
+
+/* ── Main ── */
+main { position: relative; z-index: 1; max-width: 880px; margin: 0 auto; padding: 24px 16px 120px; }
+
+/* ── Section headers ── */
+.sec-head { margin-bottom: 20px; }
+.sec-title { font-family: var(--font-display); font-size: 22px; font-weight: 700; border-left: 3px solid var(--gold); padding-left: 12px; }
+.sec-sub { font-size: 11px; color: var(--muted); margin-top: 4px; padding-left: 15px; }
+
+/* ── Cards ── */
+.card { background: var(--glass); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; margin-bottom: 14px; }
+.card-head { padding: 14px 18px; font-weight: 600; font-size: 13px; border-bottom: 1px solid var(--border); color: var(--muted); display: flex; align-items: center; gap: 8px; }
+
+/* ── Style selector ── */
+.style-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 12px; }
+.style-card {
+  border: 2px solid var(--border); border-radius: var(--radius);
+  padding: 18px 14px; cursor: pointer; text-align: left;
+  background: var(--glass); transition: all 0.22s;
+  position: relative; overflow: hidden;
+}
+.style-card:active { transform: scale(0.97); }
+.style-card.selected { transform: translateY(-2px); }
+.style-bar { width: 28px; height: 3px; border-radius: 2px; margin-bottom: 10px; }
+.style-name { font-size: 13px; font-weight: 700; margin-bottom: 2px; }
+.style-en { font-size: 9px; color: var(--muted); margin-bottom: 8px; letter-spacing: 0.5px; }
+.style-desc { font-size: 10px; color: var(--muted); line-height: 1.5; margin-bottom: 8px; }
+.style-mult { font-size: 11px; font-weight: 700; }
+.check-badge {
+  position: absolute; top: 8px; right: 8px;
+  width: 20px; height: 20px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 11px; color: #fff; font-weight: 700;
+}
+
+/* ── Tier selector ── */
+.tier-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+.tier-card {
+  border: 2px solid var(--border); border-radius: var(--radius);
+  padding: 20px 14px; cursor: pointer; text-align: center;
+  background: var(--glass); transition: all 0.22s; position: relative;
+}
+.tier-card:active { transform: scale(0.97); }
+.tier-card.selected { transform: scale(1.03); }
+.tier-icon { font-size: 28px; margin-bottom: 10px; }
+.tier-name { font-size: 13px; font-weight: 700; margin-bottom: 4px; }
+.tier-note { font-size: 10px; color: var(--muted); margin-bottom: 8px; }
+.tier-mult { font-size: 18px; font-weight: 800; }
+.rec-badge { margin-top: 8px; font-size: 9px; padding: 3px 8px; border-radius: 20px; display: inline-block; }
+@media (max-width: 480px) { .tier-grid { grid-template-columns: 1fr; } .tier-card { display: flex; align-items: center; gap: 14px; text-align: left; padding: 14px; } .tier-icon { font-size: 24px; margin: 0; flex-shrink: 0; } }
+
+/* ── Info box ── */
+.info-box {
+  background: rgba(184,134,0,0.1); border: 1px solid rgba(184,134,0,0.3);
+  border-radius: 10px; padding: 12px 14px; font-size: 12px;
+  color: rgba(255,255,255,0.75); line-height: 1.6; margin-bottom: 18px;
+}
+.warn-box {
+  background: rgba(180,60,60,0.1); border: 1px solid rgba(180,60,60,0.3);
+  border-radius: 10px; padding: 12px 14px; font-size: 12px;
+  color: rgba(255,180,180,0.85); line-height: 1.6; margin-bottom: 18px;
+}
+
+/* ── Space list ── */
+.space-list { display: flex; flex-direction: column; gap: 8px; }
+.space-row {
+  display: flex; align-items: center; gap: 10px;
+  background: var(--glass2); border: 1px solid var(--border);
+  border-radius: 10px; padding: 10px 12px; transition: border-color 0.2s;
+}
+.space-row.has-value { border-color: rgba(184,134,0,0.35); }
+.space-icon { font-size: 20px; width: 28px; text-align: center; flex-shrink: 0; }
+.space-info { flex: 1; min-width: 0; }
+.space-name { font-size: 12px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.space-sub { font-size: 10px; color: var(--muted); margin-top: 1px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.space-input-wrap { display: flex; align-items: center; gap: 4px; flex-shrink: 0; }
+.space-input {
+  width: 68px; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.18);
+  border-radius: 8px; color: var(--cream); font-size: 14px; font-weight: 700;
+  padding: 6px 8px; text-align: center; outline: none; font-family: var(--font-body);
+  transition: border-color 0.2s;
+}
+.space-input:focus { border-color: var(--gold); }
+.space-unit { font-size: 11px; color: var(--muted); }
+.space-cost { font-size: 11px; color: var(--gold); font-weight: 700; min-width: 80px; text-align: right; flex-shrink: 0; }
+.space-del {
+  width: 26px; height: 26px; border-radius: 50%; border: 1px solid rgba(255,80,80,0.3);
+  background: rgba(255,80,80,0.1); color: rgba(255,150,150,0.8); cursor: pointer;
+  display: flex; align-items: center; justify-content: center; font-size: 14px;
+  flex-shrink: 0; transition: all 0.2s;
+}
+.space-del:hover { background: rgba(255,80,80,0.25); }
+.space-qty-wrap { display: flex; align-items: center; gap: 6px; }
+.qty-btn {
+  width: 24px; height: 24px; border-radius: 6px; border: 1px solid var(--border);
+  background: var(--glass); color: var(--cream); cursor: pointer; font-size: 14px;
+  display: flex; align-items: center; justify-content: center;
+}
+.qty-label { font-size: 12px; font-weight: 700; color: var(--gold); min-width: 16px; text-align: center; }
+
+/* ── Add space buttons ── */
+.add-section { margin-top: 20px; }
+.add-section-title { font-size: 11px; color: var(--muted); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 10px; }
+.add-grid { display: flex; flex-wrap: wrap; gap: 8px; }
+.add-btn {
+  background: var(--glass); border: 1px dashed rgba(255,255,255,0.2);
+  border-radius: 8px; padding: 7px 12px; cursor: pointer; color: var(--muted);
+  font-size: 11px; font-family: var(--font-body); transition: all 0.18s; white-space: nowrap;
+}
+.add-btn:hover, .add-btn:active { background: var(--glass2); border-color: var(--gold); color: var(--gold); }
+.custom-add { display: flex; gap: 8px; margin-top: 12px; }
+.custom-input {
+  flex: 1; background: var(--glass); border: 1px solid var(--border); border-radius: 8px;
+  color: var(--cream); font-size: 12px; padding: 8px 12px; outline: none; font-family: var(--font-body);
+}
+.custom-input:focus { border-color: var(--gold); }
+.custom-confirm { background: var(--gold); border: none; border-radius: 8px; padding: 8px 16px; color: #000; font-weight: 700; cursor: pointer; font-size: 12px; }
+
+/* ── Area summary ── */
+.area-summary {
+  margin-top: 14px; padding: 12px 16px;
+  background: rgba(184,134,0,0.08); border: 1px solid rgba(184,134,0,0.2);
+  border-radius: 10px; display: flex; justify-content: space-between; align-items: center;
+}
+.area-label { font-size: 12px; color: var(--muted); }
+.area-val { font-size: 16px; font-weight: 800; color: var(--gold); }
+
+/* ── Quote result ── */
+.client-row { display: flex; gap: 12px; margin-bottom: 18px; flex-wrap: wrap; }
+.client-field { flex: 1; min-width: 180px; }
+.client-label { font-size: 10px; color: var(--muted); display: block; margin-bottom: 4px; letter-spacing: 0.5px; }
+.client-input {
+  width: 100%; background: var(--glass2); border: 1px solid var(--border); border-radius: 8px;
+  color: var(--cream); font-size: 13px; padding: 9px 12px; outline: none; font-family: var(--font-body);
+}
+.client-input:focus { border-color: var(--gold); }
+
+.quote-card { background: var(--glass); border: 1px solid rgba(184,134,0,0.3); border-radius: var(--radius); overflow: hidden; margin-bottom: 16px; }
+.quote-header-band { background: linear-gradient(90deg, var(--navy2), #0a1826); padding: 16px 20px; display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 8px; }
+.quote-htitle { font-family: var(--font-display); font-size: 18px; color: var(--gold); font-weight: 700; }
+.quote-hmeta { font-size: 10px; color: var(--muted); margin-top: 4px; line-height: 1.6; }
+.quote-hdate { font-size: 11px; color: var(--muted); text-align: right; }
+
+.price-band { padding: 24px 20px; text-align: center; background: linear-gradient(135deg, rgba(26,58,92,0.5), rgba(184,134,0,0.08)); border-bottom: 1px solid var(--border); }
+.price-label { font-size: 10px; color: var(--muted); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 12px; }
+.price-range { display: flex; align-items: center; justify-content: center; gap: 12px; flex-wrap: wrap; }
+.price-low { font-size: 20px; font-weight: 300; color: rgba(232,237,242,0.7); }
+.price-sep { font-size: 18px; color: var(--gold); }
+.price-high { font-family: var(--font-display); font-size: 32px; font-weight: 700; color: var(--gold); }
+.price-note { margin-top: 10px; font-size: 11px; color: rgba(255,184,0,0.65); }
+.price-sqm { margin-top: 4px; font-size: 11px; color: var(--muted); }
+
+.breakdown-wrap { padding: 16px 20px; }
+.breakdown-title { font-size: 11px; color: var(--muted); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 12px; }
+.b-row { display: flex; align-items: center; gap: 8px; margin-bottom: 9px; flex-wrap: wrap; }
+.b-dot { width: 8px; height: 8px; border-radius: 2px; flex-shrink: 0; }
+.b-label { font-size: 11px; color: rgba(232,237,242,0.65); flex: 1; min-width: 140px; }
+.b-bar { flex: 2; height: 5px; background: rgba(255,255,255,0.07); border-radius: 3px; min-width: 60px; overflow: hidden; }
+.b-fill { height: 100%; border-radius: 3px; transition: width 0.8s cubic-bezier(.4,0,.2,1); }
+.b-pct { font-size: 10px; color: var(--muted); width: 30px; text-align: right; }
+.b-val { font-size: 11px; font-weight: 700; color: var(--cream); min-width: 100px; text-align: right; }
+.b-total { display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border); padding-top: 10px; margin-top: 6px; font-size: 13px; font-weight: 700; }
+
+/* ── Space table ── */
+.tbl-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+table { width: 100%; border-collapse: collapse; font-size: 11px; min-width: 480px; }
+th { background: rgba(26,58,92,0.7); color: var(--muted); padding: 8px 10px; text-align: left; font-weight: 600; border-bottom: 2px solid rgba(184,134,0,0.3); white-space: nowrap; }
+td { padding: 8px 10px; border-bottom: 1px solid rgba(255,255,255,0.04); color: var(--cream); }
+tr:last-child td { border-bottom: none; }
+
+/* ── Payment grid ── */
+.pay-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 10px; }
+.pay-card { background: var(--glass); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
+.pay-head { padding: 6px 12px; font-size: 11px; font-weight: 700; color: #fff; }
+.pay-amount { padding: 10px 12px 2px; font-size: 15px; font-weight: 800; color: var(--gold); }
+.pay-pct { font-size: 11px; color: var(--muted); font-weight: 400; }
+.pay-trigger { padding: 0 12px 3px; font-size: 10px; color: var(--muted); }
+.pay-products { padding: 0 12px 10px; font-size: 10px; color: rgba(255,255,255,0.35); }
+
+/* ── Disclaimers ── */
+.disc { padding: 8px 12px; margin-bottom: 7px; font-size: 11px; color: rgba(255,255,255,0.5); line-height: 1.65; background: rgba(255,255,255,0.03); border-radius: 0 6px 6px 0; }
+
+/* ── Bottom nav ── */
+.bottom-bar {
+  position: fixed; bottom: 0; left: 0; right: 0; z-index: 200;
+  background: rgba(13,31,53,0.95); backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-top: 1px solid rgba(184,134,0,0.25);
+  padding: 12px 20px; padding-bottom: max(12px, env(safe-area-inset-bottom));
+  display: flex; gap: 10px; justify-content: space-between;
+}
+.btn-back {
+  background: var(--glass2); border: 1px solid var(--border); color: var(--cream);
+  padding: 12px 20px; border-radius: 10px; font-size: 13px; cursor: pointer; font-family: var(--font-body);
+  flex-shrink: 0;
+}
+.btn-next {
+  flex: 1; background: linear-gradient(135deg, var(--navy2), var(--gold)); border: none;
+  color: #fff; padding: 12px 20px; border-radius: 10px; font-size: 13px;
+  font-weight: 700; cursor: pointer; font-family: var(--font-body); opacity: 1;
+  transition: opacity 0.2s;
+}
+.btn-next:disabled { opacity: 0.35; cursor: not-allowed; }
+.btn-print {
+  flex: 1; background: linear-gradient(135deg, var(--green), var(--navy2)); border: none;
+  color: #fff; padding: 12px 20px; border-radius: 10px; font-size: 13px;
+  font-weight: 700; cursor: pointer; font-family: var(--font-body);
+}
+.btn-reset {
+  background: rgba(184,134,0,0.12); border: 1px solid rgba(184,134,0,0.3); color: var(--gold);
+  padding: 12px 16px; border-radius: 10px; font-size: 13px; cursor: pointer; font-family: var(--font-body);
+  flex-shrink: 0;
+}
+
+/* ── Page transitions ── */
+.page { animation: fadeSlide 0.25s ease; }
+@keyframes fadeSlide { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+
+/* ── Utility ── */
+.text-gold { color: var(--gold); }
+.text-muted { color: var(--muted); }
+.fw7 { font-weight: 700; }
+.mt12 { margin-top: 12px; }
+.ta-right { text-align: right; }
+.ta-center { text-align: center; }
+
+@media print {
+  header, .tab-nav, .bottom-bar, .add-section, .space-del { display: none !important; }
+  body { background: white; color: black; }
+  .price-high { color: #B88600; }
+  .quote-header-band { background: #1A3A5C; }
+}
+
+/* Install banner */
+.install-banner {
+  background: linear-gradient(90deg, rgba(26,58,92,0.9), rgba(184,134,0,0.2));
+  border: 1px solid rgba(184,134,0,0.4); border-radius: 10px;
+  padding: 12px 16px; margin-bottom: 18px;
+  display: flex; align-items: center; gap: 12px; cursor: pointer;
+}
+.install-banner-text { flex: 1; font-size: 12px; line-height: 1.5; }
+.install-banner-close { color: var(--muted); font-size: 18px; cursor: pointer; }
+
+input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer-spin-button { opacity: 0.4; }
+</style>
+</head>
+<body>
+<div class="bg-layer"></div>
+<div class="bg-grid"></div>
+
+<header>
+  <div class="logo">
+    <span class="logo-gem">◈</span>
+    <div class="logo-text">
+      <div class="logo-title">QATAR VILLA QUOTE</div>
+      <div class="logo-sub">卡塔尔别墅装修快速报价 · نظام تسعير الفلل</div>
+    </div>
+  </div>
+  <div class="header-right">
+    <div class="save-badge" id="saveBadge">● 已保存</div>
+  </div>
+</header>
+
+<nav class="tab-nav" id="tabNav">
+  <button class="tab-btn active" onclick="goTab(0)">
+    <span class="tab-icon">🎨</span>
+    <span class="tab-num" id="tn0">1</span>
+    <span>风格</span>
+  </button>
+  <button class="tab-btn" onclick="goTab(1)">
+    <span class="tab-icon">💎</span>
+    <span class="tab-num" id="tn1">2</span>
+    <span>材料</span>
+  </button>
+  <button class="tab-btn" onclick="goTab(2)">
+    <span class="tab-icon">📐</span>
+    <span class="tab-num" id="tn2">3</span>
+    <span>面积</span>
+  </button>
+  <button class="tab-btn" onclick="goTab(3)">
+    <span class="tab-icon">📋</span>
+    <span class="tab-num" id="tn3">4</span>
+    <span>报价单</span>
+  </button>
+</nav>
+
+<main id="mainContent"></main>
+
+<div class="bottom-bar" id="bottomBar"></div>
+
+<script>
+// ─── State ───────────────────────────────────────────────────────────────────
+const DEFAULT_SPACES = [
+  { id:'living',    icon:'🛋️', name:'客厅 / 餐厅',    nameEn:'Living & Dining',    base:420, items:'地板·墙面·天花·灯具', qty:1, area:'' },
+  { id:'majlis',    icon:'🕌', name:'玛吉利斯 (接待厅)', nameEn:'Majlis',            base:520, items:'地板·造型天花·灯具·座台', qty:1, area:'' },
+  { id:'master',    icon:'🛏️', name:'主卧套间',        nameEn:'Master Bedroom',     base:390, items:'地板·墙面·天花·衣柜·卫浴', qty:1, area:'' },
+  { id:'bedroom',   icon:'🚪', name:'卧室',            nameEn:'Bedroom',            base:320, items:'地板·墙面·天花·衣柜', qty:1, area:'' },
+  { id:'kitchen',   icon:'🍳', name:'厨房',            nameEn:'Kitchen',            base:680, items:'橱柜·台面·瓷砖·防水·电器', qty:1, area:'' },
+  { id:'bathroom',  icon:'🚿', name:'卫生间',          nameEn:'Bathroom',           base:750, items:'洁具·瓷砖·防水·淋浴·浴室柜', qty:1, area:'' },
+  { id:'corridor',  icon:'🪜', name:'走廊 / 楼梯',    nameEn:'Corridor & Stairs',  base:380, items:'地板·墙面·扶手·天花', qty:1, area:'' },
+];
+
+const ADD_PRESETS = [
+  { icon:'🏊', name:'游泳池区域',    nameEn:'Pool Area',        base:650 },
+  { icon:'🌿', name:'花园 / 景观',   nameEn:'Garden & Landscape',base:280 },
+  { icon:'🚗', name:'车库',          nameEn:'Garage',            base:240 },
+  { icon:'🏋️', name:'健身房',        nameEn:'Gym',               base:350 },
+  { icon:'🎬', name:'家庭影院',      nameEn:'Home Cinema',       base:580 },
+  { icon:'📦', name:'储物间',        nameEn:'Storage Room',      base:200 },
+  { icon:'🛗', name:'地下室',        nameEn:'Basement',          base:310 },
+  { icon:'🌅', name:'屋顶露台',      nameEn:'Rooftop Terrace',   base:320 },
+  { icon:'🏡', name:'入口门廊',      nameEn:'Entrance Foyer',    base:450 },
+  { icon:'🧖', name:'SPA / 桑拿',    nameEn:'SPA & Sauna',       base:720 },
+  { icon:'📚', name:'书房 / 办公室', nameEn:'Study & Office',    base:340 },
+  { icon:'👶', name:'儿童游戏室',    nameEn:'Kids Playroom',     base:300 },
+];
+
+const STYLES = {
+  modern:      { label:'现代简约',  en:'Modern Minimalist',  mult:1.00, color:'#4A9EBF', desc:'清水混凝土·哑光金属·极简线条' },
+  european:    { label:'欧式古典',  en:'European Classical', mult:1.35, color:'#A07850', desc:'石膏线脚·大理石·镀金五金' },
+  luxury:      { label:'轻奢现代',  en:'Luxury Modern',      mult:1.55, color:'#B88600', desc:'岩板·黑钛不锈钢·皮革软包' },
+  arabic:      { label:'阿拉伯风',  en:'Arabic Style',       mult:1.25, color:'#2E8B5A', desc:'穹顶造型·几何马赛克·香柏木' },
+  contemporary:{ label:'当代融合',  en:'Contemporary Fusion',mult:1.20, color:'#7B5EA7', desc:'东西方融合·天然材质·艺术装置' },
+};
+
+const TIERS = {
+  standard:{ label:'标准级', en:'Standard', icon:'🏠', mult:1.0, note:'国产优质品牌材料', color:'#5588CC' },
+  premium: { label:'高端级', en:'Premium',  icon:'🏛️', mult:1.6, note:'欧洲/土耳其进口品牌', color:'#B88600', rec:true },
+  luxury:  { label:'顶奢级', en:'Luxury',   icon:'💎', mult:2.4, note:'意大利/法国顶级品牌', color:'#C0392B' },
+};
+
+const LOGISTICS_RATE = 0.12+0.09+0.10+0.04+0.03; // 38%
+const OVERHEAD = 0.18;
+const CONTINGENCY = 0.10;
+const TOTAL_ADD = 1 + LOGISTICS_RATE + OVERHEAD + CONTINGENCY;
+
+let state = {
+  tab: 0,
+  style: null,
+  tier: null,
+  spaces: JSON.parse(JSON.stringify(DEFAULT_SPACES)),
+  clientName: '',
+  projectName: '',
+  quoteRef: 'QQ-' + Date.now().toString(36).toUpperCase(),
+};
+
+// ─── Persistence ─────────────────────────────────────────────────────────────
+function saveState() {
+  try { localStorage.setItem('qvq_state', JSON.stringify(state)); updateSaveBadge(true); } catch(e) {}
+}
+function loadState() {
+  try {
+    const s = localStorage.getItem('qvq_state');
+    if (s) { const p = JSON.parse(s); if (p.spaces) state = { ...state, ...p }; }
+  } catch(e) {}
+}
+function updateSaveBadge(saved) {
+  const el = document.getElementById('saveBadge');
+  if (el) { el.textContent = saved ? '● 已保存' : '○ 未保存'; el.style.color = saved ? '#7EC8A0' : '#F0A050'; }
+}
+
+// ─── Calculations ─────────────────────────────────────────────────────────────
+function calcSpace(sp) {
+  const area = parseFloat(sp.area) || 0;
+  const sm = STYLES[state.style]?.mult || 1;
+  const tm = TIERS[state.tier]?.mult || 1;
+  const mat = area * sp.base * sm * tm;
+  const log = mat * LOGISTICS_RATE;
+  const oh  = mat * OVERHEAD;
+  const con = mat * CONTINGENCY;
+  return { area, mat, log, oh, con, total: mat+log+oh+con };
+}
+
+function calcTotals() {
+  const rows = state.spaces.map(calcSpace).filter(r=>r.area>0);
+  const totalArea = rows.reduce((a,r)=>a+r.area,0);
+  const totalMat  = rows.reduce((a,r)=>a+r.mat,0);
+  const totalLog  = rows.reduce((a,r)=>a+r.log,0);
+  const totalOH   = rows.reduce((a,r)=>a+r.oh,0);
+  const totalCon  = rows.reduce((a,r)=>a+r.con,0);
+  const gross     = totalMat+totalLog+totalOH+totalCon;
+  return { rows, totalArea, totalMat, totalLog, totalOH, totalCon, gross,
+           low: gross*0.92, high: gross*1.18 };
+}
+
+// ─── Formatting ───────────────────────────────────────────────────────────────
+function fmt(n) { return 'QAR ' + Math.round(n).toLocaleString('en-US'); }
+function pct(n) { return (n*100).toFixed(0)+'%'; }
+function uid() { return 'sp_'+Math.random().toString(36).slice(2,8); }
+
+// ─── Tab navigation ───────────────────────────────────────────────────────────
+function goTab(t) {
+  state.tab = t;
+  renderAll();
+  window.scrollTo(0, 0);
+}
+
+function renderAll() {
+  renderTabs();
+  renderMain();
+  renderBottom();
+  saveState();
+}
+
+function renderTabs() {
+  const btns = document.querySelectorAll('.tab-btn');
+  btns.forEach((b,i) => {
+    b.classList.toggle('active', i === state.tab);
+    const done = (i===0&&state.style)||(i===1&&state.tier)||(i===2&&state.spaces.some(s=>parseFloat(s.area)>0));
+    b.classList.toggle('done', done && i !== state.tab);
+    const num = document.getElementById('tn'+i);
+    if (num) { num.textContent = done && i!==state.tab ? '✓' : i+1; }
+  });
+}
+
+// ─── Page 0: Style ────────────────────────────────────────────────────────────
+function renderStyle() {
+  let cards = Object.entries(STYLES).map(([k,s]) => {
+    const sel = state.style===k;
+    return `<div class="style-card${sel?' selected':''}" onclick="selectStyle('${k}')"
+      style="border-color:${sel?s.color:'rgba(255,255,255,0.09)'};background:${sel?`linear-gradient(135deg,${s.color}22,${s.color}44)`:'var(--glass)'};box-shadow:${sel?`0 6px 28px ${s.color}44`:'none'}">
+      <div class="style-bar" style="background:${s.color}"></div>
+      <div class="style-name">${s.label}</div>
+      <div class="style-en">${s.en}</div>
+      <div class="style-desc">${s.desc}</div>
+      <div class="style-mult" style="color:${s.color}">系数 ×${s.mult.toFixed(2)}</div>
+      ${sel?`<div class="check-badge" style="background:${s.color}">✓</div>`:''}
+    </div>`;
+  }).join('');
+  return `<div class="page">
+    <div class="sec-head">
+      <div class="sec-title">选择装修风格</div>
+      <div class="sec-sub">Select Design Style · اختيار أسلوب التصميم</div>
+    </div>
+    <div class="style-grid">${cards}</div>
+  </div>`;
+}
+function selectStyle(k) { state.style=k; renderAll(); }
+
+// ─── Page 1: Tier ─────────────────────────────────────────────────────────────
+function renderTier() {
+  let cards = Object.entries(TIERS).map(([k,t]) => {
+    const sel = state.tier===k;
+    return `<div class="tier-card${sel?' selected':''}" onclick="selectTier('${k}')"
+      style="border-color:${sel?t.color:'rgba(255,255,255,0.09)'};background:${sel?`linear-gradient(135deg,${t.color}22,${t.color}55)`:'var(--glass)'}">
+      <div class="tier-icon">${t.icon}</div>
+      <div class="tier-name" style="color:${sel?t.color:'var(--cream)'}">${t.label}</div>
+      <div class="tier-note">${t.note}</div>
+      <div class="tier-mult" style="color:${t.color}">×${t.mult.toFixed(1)}</div>
+      ${t.rec?`<div class="rec-badge" style="background:rgba(184,134,0,0.15);border:1px solid rgba(184,134,0,0.4);color:var(--gold)">推荐 Recommended</div>`:''}
+    </div>`;
+  }).join('');
+  return `<div class="page">
+    <div class="sec-head">
+      <div class="sec-title">选择材料档次</div>
+      <div class="sec-sub">Material Grade · درجة جودة المواد</div>
+    </div>
+    <div class="info-box">⚠️ 客户未确认材料时，建议选<strong>高端级</strong>报价，并注明「材料待确认，价格浮动 ±15%」，保护报价准确性。</div>
+    <div class="tier-grid">${cards}</div>
+  </div>`;
+}
+function selectTier(k) { state.tier=k; renderAll(); }
+
+// ─── Page 2: Spaces ───────────────────────────────────────────────────────────
+function renderSpaces() {
+  const rows = state.spaces.map((sp,i) => {
+    const calc = calcSpace(sp);
+    const hasVal = calc.area > 0;
+    return `<div class="space-row${hasVal?' has-value':''}" id="row_${sp.id}">
+      <span class="space-icon">${sp.icon}</span>
+      <div class="space-info">
+        <div class="space-name">${sp.name}</div>
+        <div class="space-sub">${sp.items}</div>
+      </div>
+      <div class="space-input-wrap">
+        <input class="space-input" type="number" min="0" placeholder="0"
+          value="${sp.area}"
+          onchange="updateArea('${sp.id}',this.value)"
+          oninput="updateArea('${sp.id}',this.value)"
+          inputmode="decimal"/>
+        <span class="space-unit">m²</span>
+      </div>
+      ${(state.style&&state.tier&&hasVal)?`<div class="space-cost">${fmt(calc.total)}</div>`:'<div class="space-cost" style="color:var(--muted);font-size:10px">${sp.base} QAR/m²</div>'}
+      <button class="space-del" onclick="deleteSpace('${sp.id}')" title="删除">×</button>
+    </div>`;
+  }).join('');
+
+  const presets = ADD_PRESETS.filter(p => !state.spaces.find(s=>s.id===p.nameEn));
+  const presetBtns = presets.map(p =>
+    `<button class="add-btn" onclick="addPreset('${encodeURIComponent(JSON.stringify(p))}')">${p.icon} ${p.name}</button>`
+  ).join('');
+
+  const sm = STYLES[state.style]?.mult||1;
+  const tm = TIERS[state.tier]?.mult||1;
+  const totalArea = state.spaces.reduce((a,sp)=>a+(parseFloat(sp.area)||0),0);
+
+  return `<div class="page">
+    <div class="sec-head">
+      <div class="sec-title">各空间面积输入</div>
+      <div class="sec-sub">Enter Area per Space (m²) · أدخل مساحة كل فضاء</div>
+    </div>
+    ${(!state.style||!state.tier)?'<div class="warn-box">⚠️ 请先完成第1、2步选择风格和材料档次，才能看到实时估价。</div>':''}
+    <div class="space-list">${rows}</div>
+    ${totalArea>0?`<div class="area-summary"><span class="area-label">总面积合计 Total Area</span><span class="area-val">${totalArea.toFixed(1)} m²</span></div>`:''}
+    <div class="add-section">
+      <div class="add-section-title">+ 添加更多空间 Add More Spaces</div>
+      <div class="add-grid">${presetBtns}</div>
+      <div class="custom-add mt12">
+        <input class="custom-input" id="customSpaceName" placeholder="自定义空间名称... Custom space name" />
+        <button class="custom-confirm" onclick="addCustomSpace()">添加</button>
+      </div>
+    </div>
+  </div>`;
+}
+
+function updateArea(id, val) {
+  const sp = state.spaces.find(s=>s.id===id);
+  if (sp) { sp.area = val; saveState(); updateSaveBadge(false); refreshSpaceCosts(); }
+}
+function refreshSpaceCosts() {
+  // Lightweight refresh of just the cost displays without full re-render
+  state.spaces.forEach(sp => {
+    const calc = calcSpace(sp);
+    // just trigger full render for simplicity
+  });
+  saveState();
+}
+function deleteSpace(id) {
+  state.spaces = state.spaces.filter(s=>s.id!==id);
+  renderAll();
+}
+function addPreset(encoded) {
+  const p = JSON.parse(decodeURIComponent(encoded));
+  state.spaces.push({ id:uid(), icon:p.icon, name:p.name, nameEn:p.nameEn, base:p.base, items:p.nameEn, qty:1, area:'' });
+  renderAll();
+}
+function addCustomSpace() {
+  const inp = document.getElementById('customSpaceName');
+  const name = inp?.value.trim();
+  if (!name) return;
+  state.spaces.push({ id:uid(), icon:'🏠', name, nameEn:name, base:350, items:'自定义空间', qty:1, area:'' });
+  renderAll();
+}
+
+// ─── Page 3: Quote ────────────────────────────────────────────────────────────
+function renderQuote() {
+  const T = calcTotals();
+  const sm = STYLES[state.style]?.mult||1;
+  const tm = TIERS[state.tier]?.mult||1;
+  const sLabel = STYLES[state.style]?.label||'—';
+  const sEn    = STYLES[state.style]?.en||'—';
+  const tLabel = TIERS[state.tier]?.label||'—';
+  const today  = new Date().toLocaleDateString('zh-CN');
+
+  const breakdowns = [
+    { label:'材料货值 Materials', val:T.totalMat, color:'#1A3A5C' },
+    { label:'物流运输 Logistics (China→Qatar)', val:T.totalLog, color:'#2E6B4F' },
+    { label:'关税+VAT Customs 5%+VAT 5%', val:T.totalMat*0.10, color:'#7B5E3A' },
+    { label:'运营+利润 Overhead & Margin', val:T.totalOH, color:'#4A3060' },
+    { label:'材料未定缓冲 Contingency ±', val:T.totalCon, color:'#B88600' },
+  ];
+
+  const spaceRows = state.spaces.filter(sp=>parseFloat(sp.area)>0).map(sp => {
+    const c = calcSpace(sp);
+    const unitRate = Math.round(sp.base * sm * tm);
+    return `<tr>
+      <td>${sp.icon} ${sp.name}</td>
+      <td class="ta-center">${c.area} m²</td>
+      <td class="ta-center">${unitRate.toLocaleString()}</td>
+      <td class="ta-right">${fmt(c.mat)}</td>
+      <td class="ta-right text-gold">${fmt(c.log+c.con)}</td>
+      <td class="ta-right fw7">${fmt(c.total)}</td>
+    </tr>`;
+  }).join('');
+
+  const payments = [
+    { batch:'第1批 签约款', pct:0.20, color:'#1A3A5C', trigger:'合同签订当日', products:'全部产品设计确认 + 定制启动金' },
+    { batch:'第2批 基础款', pct:0.15, color:'#1A5C3A', trigger:'开工前45天', products:'防水 / 基础砖材 / 结构件' },
+    { batch:'第3批 硬装款', pct:0.25, color:'#2A4A7C', trigger:'开工后第2周', products:'地板 / 墙砖 / 天花 / 门窗' },
+    { batch:'第4批 精装款', pct:0.25, color:'#5C3A1A', trigger:'开工后第6周', products:'卫浴 / 厨柜 / 定制家具 / 灯具' },
+    { batch:'第5批 尾款',  pct:0.10, color:'#3A1A5C', trigger:'竣工验收前2周', products:'软装 / 五金 / 收尾材料' },
+    { batch:'质保金 Retention', pct:0.05, color:'#2E6B4F', trigger:'质保期满12个月后返还', products:'质量担保金（不属付款项）' },
+  ];
+  const payCards = payments.map(p => `
+    <div class="pay-card">
+      <div class="pay-head" style="background:${p.color}">${p.batch}</div>
+      <div class="pay-amount">${T.gross>0?fmt(T.gross*p.pct):'QAR —'}<span class="pay-pct"> (${(p.pct*100).toFixed(0)}%)</span></div>
+      <div class="pay-trigger">📅 ${p.trigger}</div>
+      <div class="pay-products">📦 ${p.products}</div>
+    </div>`).join('');
+
+  const bRows = breakdowns.map(b => {
+    const p = T.gross>0 ? b.val/T.gross : 0;
+    return `<div class="b-row">
+      <div class="b-dot" style="background:${b.color}"></div>
+      <div class="b-label">${b.label}</div>
+      <div class="b-bar"><div class="b-fill" style="width:${pct(p)};background:${b.color}"></div></div>
+      <div class="b-pct">${pct(p)}</div>
+      <div class="b-val">${fmt(b.val)}</div>
+    </div>`;
+  }).join('');
+
+  return `<div class="page">
+    <div class="client-row">
+      <div class="client-field">
+        <label class="client-label">客户姓名 Client Name</label>
+        <input class="client-input" placeholder="Al-____ Family" value="${state.clientName}" oninput="state.clientName=this.value;saveState()"/>
+      </div>
+      <div class="client-field">
+        <label class="client-label">项目名称 Project Name</label>
+        <input class="client-input" placeholder="Villa Project #___" value="${state.projectName}" oninput="state.projectName=this.value;saveState()"/>
+      </div>
+    </div>
+
+    <div class="quote-card">
+      <div class="quote-header-band">
+        <div>
+          <div class="quote-htitle">QUOTATION / عرض سعر / 报价单</div>
+          <div class="quote-hmeta">
+            Ref: ${state.quoteRef}<br>
+            风格: ${sLabel} (${sEn}) &nbsp;·&nbsp; 材料: ${tLabel}<br>
+            总面积: ${T.totalArea.toFixed(1)} m² &nbsp;·&nbsp; 空间数: ${state.spaces.filter(s=>parseFloat(s.area)>0).length}
+          </div>
+        </div>
+        <div class="quote-hdate">报价日期<br>${today}<br><br>有效期 30天</div>
+      </div>
+
+      <div class="price-band">
+        <div class="price-label">报价区间 / Price Range (材料未定 ±15%)</div>
+        <div class="price-range">
+          <span class="price-low">${T.gross>0?fmt(T.low):'QAR —'}</span>
+          <span class="price-sep">—</span>
+          <span class="price-high">${T.gross>0?fmt(T.high):'QAR —'}</span>
+        </div>
+        <div class="price-note">⚠️ 材料品牌未最终确认，价格浮动 ±15% · Materials unconfirmed, ±15% variance</div>
+        ${T.gross>0&&T.totalArea>0?`<div class="price-sqm">综合单价约 ≈ QAR ${Math.round(T.gross/T.totalArea).toLocaleString()} / m²</div>`:''}
+      </div>
+
+      <div class="breakdown-wrap">
+        <div class="breakdown-title">费用构成 Cost Breakdown</div>
+        ${bRows}
+        <div class="b-total">
+          <span>合计 Total（中间值）</span>
+          <span class="text-gold">${T.gross>0?fmt(T.gross):'QAR —'}</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-head">📊 各空间明细 Space Breakdown</div>
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr>
+            <th>空间</th><th>面积</th><th>单价/m²</th><th>材料成本</th><th>物流+税费</th><th>小计</th>
+          </tr></thead>
+          <tbody>${spaceRows||'<tr><td colspan="6" style="text-align:center;color:var(--muted);padding:20px">请在第3步输入面积</td></tr>'}</tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-head">💳 付款计划 Payment Schedule · جدول الدفعات</div>
+      <div style="padding:14px"><div class="pay-grid">${payCards}</div></div>
+    </div>
+
+    <div class="card">
+      <div class="card-head">📋 报价说明 Terms · شروط العرض</div>
+      <div style="padding:12px">
+        ${['本报价为概算，材料品牌及规格未最终确认，实际合同价格以确认材料清单后为准，浮动不超过 ±15%。',
+           'This is a preliminary estimate. Final contract price subject to confirmed material specifications (±15% variance).',
+           'هذا عرض سعر تقريبي. السعر النهائي مرهون بتأكيد المواد وقد يتفاوت بنسبة ±15%.',
+           '报价有效期：30天（自出具之日起）· Valid 30 days · صالح 30 يومًا',
+           '所有产品从中国定制生产，全程供货周期约45天，付款须在对应工程节点前45天完成。',
+           '付款到账后方启动产品生产及发运，所有权在安装验收前归乙方所有。'].map((t,i)=>
+          `<div class="disc" style="border-left:3px solid ${['#1A3A5C','#2E6B4F','#B88600','#555','#1A3A5C','#7B5E3A'][i]}">${t}</div>`).join('')}
+      </div>
+    </div>
+  </div>`;
+}
+
+// ─── Main render ──────────────────────────────────────────────────────────────
+function renderMain() {
+  const el = document.getElementById('mainContent');
+  let html = '';
+  switch(state.tab) {
+    case 0: html = renderStyle(); break;
+    case 1: html = renderTier(); break;
+    case 2: html = renderSpaces(); break;
+    case 3: html = renderQuote(); break;
+  }
+  el.innerHTML = html;
+}
+
+function renderBottom() {
+  const el = document.getElementById('bottomBar');
+  const t = state.tab;
+  const hasSpaces = state.spaces.some(s=>parseFloat(s.area)>0);
+  const canNext = (t===0&&state.style)||(t===1&&state.tier)||(t===2&&hasSpaces);
+
+  if (t === 3) {
+    el.innerHTML = `
+      <button class="btn-back" onclick="goTab(2)">← 返回修改</button>
+      <button class="btn-reset" onclick="resetQuote()">🔄 新报价</button>
+      <button class="btn-print" onclick="window.print()">🖨️ 打印 / Print</button>`;
+  } else {
+    el.innerHTML = `
+      ${t>0?`<button class="btn-back" onclick="goTab(${t-1})">← 上一步</button>`:'<div></div>'}
+      <button class="btn-next" ${canNext?'':'disabled'} onclick="goTab(${t+1})">
+        ${t===2?'生成报价单 →':'下一步 Next →'}
+      </button>`;
+  }
+}
+
+function resetQuote() {
+  if (!confirm('确定要清空当前报价，开始新报价？')) return;
+  state = {
+    tab: 0, style: null, tier: null,
+    spaces: JSON.parse(JSON.stringify(DEFAULT_SPACES)),
+    clientName: '', projectName: '',
+    quoteRef: 'QQ-' + Date.now().toString(36).toUpperCase(),
+  };
+  renderAll();
+}
+
+// ─── Install prompt ───────────────────────────────────────────────────────────
+let deferredPrompt = null;
+window.addEventListener('beforeinstallprompt', (e) => {
+  e.preventDefault(); deferredPrompt = e;
+  showInstallBanner();
+});
+function showInstallBanner() {
+  if (localStorage.getItem('qvq_installed')) return;
+  const banner = document.createElement('div');
+  banner.className = 'install-banner';
+  banner.innerHTML = `
+    <span style="font-size:22px">📲</span>
+    <div class="install-banner-text">
+      <strong>安装到主屏幕</strong> Install App<br>
+      <span style="font-size:11px;color:var(--muted)">iPhone: Safari→分享→添加到主屏幕 · Mac: Chrome地址栏安装图标</span>
+    </div>
+    <button onclick="installApp()" style="background:var(--gold);border:none;border-radius:8px;padding:8px 14px;color:#000;font-weight:700;cursor:pointer;font-size:12px;white-space:nowrap">安装</button>
+    <span class="install-banner-close" onclick="dismissInstall()">×</span>`;
+  document.getElementById('mainContent').prepend(banner);
+}
+function installApp() {
+  if (deferredPrompt) { deferredPrompt.prompt(); deferredPrompt.userChoice.then(r=>{ if(r.outcome==='accepted') { localStorage.setItem('qvq_installed','1'); } }); }
+}
+function dismissInstall() { localStorage.setItem('qvq_installed','1'); document.querySelector('.install-banner')?.remove(); }
+
+// ─── Service Worker (PWA offline) ────────────────────────────────────────────
+if ('serviceWorker' in navigator) {
+  const swCode = `
+const CACHE='qvq-v1';
+const URLS=[self.location.pathname];
+self.addEventListener('install',e=>e.waitUntil(caches.open(CACHE).then(c=>c.addAll(URLS))));
+self.addEventListener('fetch',e=>e.respondWith(caches.match(e.request).then(r=>r||fetch(e.request))));
+`;
+  const blob = new Blob([swCode], { type:'application/javascript' });
+  const swUrl = URL.createObjectURL(blob);
+  navigator.serviceWorker.register(swUrl).catch(()=>{});
+}
+
+// ─── Init ─────────────────────────────────────────────────────────────────────
+loadState();
+renderAll();
+setInterval(saveState, 10000);
+</script>
+</body>
+</html>
