@@ -7,8 +7,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
 <meta name="apple-mobile-web-app-title" content="Qatar Quote"/>
 <meta name="theme-color" content="#0D1F35"/>
-<meta name="description" content="卡塔尔别墅装修快速报价系统 Qatar Villa Quick Quotation"/>
-<title>◈ Qatar Villa Quote</title>
+<title>◈ Qatar Villa Quote v2</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
 <style>
@@ -30,221 +29,208 @@
 }
 * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
 html, body { height: 100%; overflow-x: hidden; }
-body {
-  font-family: var(--font-body);
-  background: var(--navy);
-  color: var(--cream);
-  min-height: 100vh;
-  min-height: 100dvh;
-}
+body { font-family: var(--font-body); background: var(--navy); color: var(--cream); min-height: 100vh; min-height: 100dvh; }
 
-/* ── Background ── */
-.bg-layer {
-  position: fixed; inset: 0; pointer-events: none; z-index: 0;
-  background:
-    radial-gradient(ellipse 70% 50% at 15% 15%, rgba(26,58,92,0.7) 0%, transparent 60%),
+.bg-layer { position: fixed; inset: 0; pointer-events: none; z-index: 0;
+  background: radial-gradient(ellipse 70% 50% at 15% 15%, rgba(26,58,92,0.7) 0%, transparent 60%),
     radial-gradient(ellipse 50% 40% at 85% 85%, rgba(184,134,0,0.18) 0%, transparent 60%),
-    radial-gradient(ellipse 40% 60% at 50% 50%, rgba(46,107,79,0.08) 0%, transparent 70%);
-}
-.bg-grid {
-  position: fixed; inset: 0; pointer-events: none; z-index: 0;
+    radial-gradient(ellipse 40% 60% at 50% 50%, rgba(46,107,79,0.08) 0%, transparent 70%); }
+.bg-grid { position: fixed; inset: 0; pointer-events: none; z-index: 0;
   background-image: linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
-                    linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
-  background-size: 44px 44px;
-}
+    linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+  background-size: 44px 44px; }
 
 /* ── Header ── */
-header {
-  position: sticky; top: 0; z-index: 200;
-  background: rgba(13,31,53,0.88);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border-bottom: 1px solid rgba(184,134,0,0.25);
-  padding: 10px 20px;
-  display: flex; align-items: center; justify-content: space-between; gap: 12px;
-}
+header { position: sticky; top: 0; z-index: 200; background: rgba(13,31,53,0.92);
+  backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(184,134,0,0.25); padding: 10px 16px;
+  display: flex; align-items: center; justify-content: space-between; gap: 8px; }
 .logo { display: flex; align-items: center; gap: 10px; }
-.logo-gem { font-size: 22px; color: var(--gold); }
+.logo-gem { font-size: 20px; color: var(--gold); }
 .logo-text { line-height: 1.2; }
-.logo-title { font-family: var(--font-display); font-size: 13px; color: var(--gold); letter-spacing: 1.5px; font-weight: 700; }
+.logo-title { font-family: var(--font-display); font-size: 12px; color: var(--gold); letter-spacing: 1.5px; font-weight: 700; }
 .logo-sub { font-size: 9px; color: var(--muted); letter-spacing: 0.5px; }
-.header-right { display: flex; align-items: center; gap: 8px; }
-.save-badge {
-  font-size: 10px; padding: 4px 10px; border-radius: 20px;
-  background: rgba(46,107,79,0.25); border: 1px solid rgba(46,107,79,0.5);
-  color: #7EC8A0;
-}
+.header-right { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
 
-/* ── Nav tabs ── */
-.tab-nav {
-  position: sticky; top: 56px; z-index: 190;
-  background: rgba(13,31,53,0.92);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border-bottom: 1px solid var(--border);
-  display: flex; overflow-x: auto;
-  scrollbar-width: none;
+/* Language toggle */
+.lang-toggle {
+  display: flex; border: 1px solid rgba(184,134,0,0.4); border-radius: 20px; overflow: hidden; flex-shrink: 0;
 }
+.lang-btn {
+  padding: 4px 10px; font-size: 10px; font-weight: 700; cursor: pointer; border: none;
+  background: transparent; color: var(--muted); font-family: var(--font-body); transition: all 0.2s; letter-spacing: 0.5px;
+}
+.lang-btn.active { background: var(--gold); color: #000; }
+
+.save-badge { font-size: 10px; padding: 4px 10px; border-radius: 20px;
+  background: rgba(46,107,79,0.25); border: 1px solid rgba(46,107,79,0.5); color: #7EC8A0; }
+
+/* ── Nav ── */
+.tab-nav { position: sticky; top: 56px; z-index: 190; background: rgba(13,31,53,0.92);
+  backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom: 1px solid var(--border);
+  display: flex; overflow-x: auto; scrollbar-width: none; }
 .tab-nav::-webkit-scrollbar { display: none; }
-.tab-btn {
-  flex: 1; min-width: 72px; padding: 10px 8px;
-  background: none; border: none; cursor: pointer;
-  color: var(--muted); font-family: var(--font-body); font-size: 11px;
-  display: flex; flex-direction: column; align-items: center; gap: 3px;
-  border-bottom: 2px solid transparent;
-  transition: all 0.2s; white-space: nowrap;
-}
+.tab-btn { flex: 1; min-width: 76px; padding: 8px 6px; background: none; border: none; cursor: pointer;
+  color: var(--muted); font-family: var(--font-body); font-size: 10px; display: flex; flex-direction: column;
+  align-items: center; gap: 2px; border-bottom: 2px solid transparent; transition: all 0.2s; white-space: nowrap; }
 .tab-btn.active { color: var(--gold); border-bottom-color: var(--gold); }
-.tab-btn .tab-icon { font-size: 16px; }
-.tab-num {
-  width: 16px; height: 16px; border-radius: 50%;
-  background: var(--navy2); border: 1px solid var(--border);
-  font-size: 9px; display: flex; align-items: center; justify-content: center;
-  color: var(--muted);
-}
+.tab-btn .tab-icon { font-size: 15px; }
+.tab-label-zh { display: block; }
+.tab-label-en { display: block; font-size: 9px; opacity: 0.6; letter-spacing: 0.3px; }
+.tab-num { width: 16px; height: 16px; border-radius: 50%; background: var(--navy2); border: 1px solid var(--border);
+  font-size: 9px; display: flex; align-items: center; justify-content: center; color: var(--muted); }
 .tab-btn.active .tab-num { background: var(--gold); border-color: var(--gold); color: #000; }
 .tab-btn.done .tab-num { background: var(--green); border-color: var(--green); color: #fff; }
 
 /* ── Main ── */
-main { position: relative; z-index: 1; max-width: 880px; margin: 0 auto; padding: 24px 16px 120px; }
+main { position: relative; z-index: 1; max-width: 880px; margin: 0 auto; padding: 24px 16px 130px; }
+.page { animation: fadeSlide 0.25s ease; }
+@keyframes fadeSlide { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
 
-/* ── Section headers ── */
 .sec-head { margin-bottom: 20px; }
 .sec-title { font-family: var(--font-display); font-size: 22px; font-weight: 700; border-left: 3px solid var(--gold); padding-left: 12px; }
 .sec-sub { font-size: 11px; color: var(--muted); margin-top: 4px; padding-left: 15px; }
 
 /* ── Cards ── */
 .card { background: var(--glass); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; margin-bottom: 14px; }
-.card-head { padding: 14px 18px; font-weight: 600; font-size: 13px; border-bottom: 1px solid var(--border); color: var(--muted); display: flex; align-items: center; gap: 8px; }
+.card-head { padding: 12px 18px; font-weight: 600; font-size: 12px; border-bottom: 1px solid var(--border); color: var(--muted); display: flex; align-items: center; gap: 8px; }
 
 /* ── Style selector ── */
-.style-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 12px; }
-.style-card {
-  border: 2px solid var(--border); border-radius: var(--radius);
-  padding: 18px 14px; cursor: pointer; text-align: left;
-  background: var(--glass); transition: all 0.22s;
-  position: relative; overflow: hidden;
-}
+.style-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(148px, 1fr)); gap: 12px; }
+.style-card { border: 2px solid var(--border); border-radius: var(--radius); padding: 16px 12px; cursor: pointer;
+  text-align: left; background: var(--glass); transition: all 0.22s; position: relative; overflow: hidden; }
 .style-card:active { transform: scale(0.97); }
 .style-card.selected { transform: translateY(-2px); }
 .style-bar { width: 28px; height: 3px; border-radius: 2px; margin-bottom: 10px; }
-.style-name { font-size: 13px; font-weight: 700; margin-bottom: 2px; }
-.style-en { font-size: 9px; color: var(--muted); margin-bottom: 8px; letter-spacing: 0.5px; }
-.style-desc { font-size: 10px; color: var(--muted); line-height: 1.5; margin-bottom: 8px; }
+.style-name { font-size: 13px; font-weight: 700; margin-bottom: 1px; }
+.style-en { font-size: 9px; color: var(--muted); margin-bottom: 6px; letter-spacing: 0.5px; }
+.style-desc-zh { font-size: 10px; color: var(--muted); line-height: 1.5; margin-bottom: 2px; }
+.style-desc-en { font-size: 9px; color: rgba(232,237,242,0.35); line-height: 1.5; margin-bottom: 8px; }
 .style-mult { font-size: 11px; font-weight: 700; }
-.check-badge {
-  position: absolute; top: 8px; right: 8px;
-  width: 20px; height: 20px; border-radius: 50%;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 11px; color: #fff; font-weight: 700;
-}
+.check-badge { position: absolute; top: 8px; right: 8px; width: 20px; height: 20px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center; font-size: 11px; color: #fff; font-weight: 700; }
 
-/* ── Tier selector ── */
+/* ── Tier ── */
 .tier-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
-.tier-card {
-  border: 2px solid var(--border); border-radius: var(--radius);
-  padding: 20px 14px; cursor: pointer; text-align: center;
-  background: var(--glass); transition: all 0.22s; position: relative;
-}
+.tier-card { border: 2px solid var(--border); border-radius: var(--radius); padding: 18px 12px; cursor: pointer;
+  text-align: center; background: var(--glass); transition: all 0.22s; position: relative; }
 .tier-card:active { transform: scale(0.97); }
 .tier-card.selected { transform: scale(1.03); }
-.tier-icon { font-size: 28px; margin-bottom: 10px; }
-.tier-name { font-size: 13px; font-weight: 700; margin-bottom: 4px; }
-.tier-note { font-size: 10px; color: var(--muted); margin-bottom: 8px; }
+.tier-icon { font-size: 26px; margin-bottom: 8px; }
+.tier-name { font-size: 13px; font-weight: 700; margin-bottom: 2px; }
+.tier-name-en { font-size: 10px; color: var(--muted); margin-bottom: 4px; }
+.tier-note-zh { font-size: 10px; color: var(--muted); margin-bottom: 2px; }
+.tier-note-en { font-size: 9px; color: rgba(232,237,242,0.3); margin-bottom: 8px; }
 .tier-mult { font-size: 18px; font-weight: 800; }
 .rec-badge { margin-top: 8px; font-size: 9px; padding: 3px 8px; border-radius: 20px; display: inline-block; }
-@media (max-width: 480px) { .tier-grid { grid-template-columns: 1fr; } .tier-card { display: flex; align-items: center; gap: 14px; text-align: left; padding: 14px; } .tier-icon { font-size: 24px; margin: 0; flex-shrink: 0; } }
+@media (max-width: 480px) {
+  .tier-grid { grid-template-columns: 1fr; }
+  .tier-card { display: flex; align-items: center; gap: 14px; text-align: left; padding: 12px; }
+  .tier-icon { font-size: 22px; margin: 0; flex-shrink: 0; }
+}
 
-/* ── Info box ── */
-.info-box {
-  background: rgba(184,134,0,0.1); border: 1px solid rgba(184,134,0,0.3);
-  border-radius: 10px; padding: 12px 14px; font-size: 12px;
-  color: rgba(255,255,255,0.75); line-height: 1.6; margin-bottom: 18px;
-}
-.warn-box {
-  background: rgba(180,60,60,0.1); border: 1px solid rgba(180,60,60,0.3);
-  border-radius: 10px; padding: 12px 14px; font-size: 12px;
-  color: rgba(255,180,180,0.85); line-height: 1.6; margin-bottom: 18px;
-}
+/* ── Info boxes ── */
+.info-box { background: rgba(184,134,0,0.1); border: 1px solid rgba(184,134,0,0.3); border-radius: 10px;
+  padding: 12px 14px; font-size: 12px; color: rgba(255,255,255,0.75); line-height: 1.6; margin-bottom: 18px; }
+.warn-box { background: rgba(180,60,60,0.1); border: 1px solid rgba(180,60,60,0.3); border-radius: 10px;
+  padding: 12px 14px; font-size: 12px; color: rgba(255,180,180,0.85); line-height: 1.6; margin-bottom: 18px; }
 
 /* ── Space list ── */
 .space-list { display: flex; flex-direction: column; gap: 8px; }
-.space-row {
-  display: flex; align-items: center; gap: 10px;
-  background: var(--glass2); border: 1px solid var(--border);
-  border-radius: 10px; padding: 10px 12px; transition: border-color 0.2s;
-}
+.space-row { display: flex; align-items: center; gap: 8px; background: var(--glass2); border: 1px solid var(--border);
+  border-radius: 10px; padding: 10px 12px; transition: border-color 0.2s; flex-wrap: wrap; }
 .space-row.has-value { border-color: rgba(184,134,0,0.35); }
-.space-icon { font-size: 20px; width: 28px; text-align: center; flex-shrink: 0; }
-.space-info { flex: 1; min-width: 0; }
-.space-name { font-size: 12px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.space-sub { font-size: 10px; color: var(--muted); margin-top: 1px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.space-input-wrap { display: flex; align-items: center; gap: 4px; flex-shrink: 0; }
-.space-input {
-  width: 68px; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.18);
-  border-radius: 8px; color: var(--cream); font-size: 14px; font-weight: 700;
-  padding: 6px 8px; text-align: center; outline: none; font-family: var(--font-body);
-  transition: border-color 0.2s;
-}
+.space-icon { font-size: 18px; width: 26px; text-align: center; flex-shrink: 0; }
+.space-info { flex: 1; min-width: 90px; }
+.space-name { font-size: 12px; font-weight: 600; }
+.space-name-en { font-size: 9px; color: rgba(232,237,242,0.4); margin-top: 1px; }
+.space-sub { font-size: 10px; color: var(--muted); margin-top: 1px; }
+
+.space-controls { display: flex; align-items: center; gap: 6px; flex-shrink: 0; flex-wrap: nowrap; }
+.space-input { width: 64px; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.18);
+  border-radius: 8px; color: var(--cream); font-size: 14px; font-weight: 700; padding: 6px 6px;
+  text-align: center; outline: none; font-family: var(--font-body); transition: border-color 0.2s; }
 .space-input:focus { border-color: var(--gold); }
 .space-unit { font-size: 11px; color: var(--muted); }
-.space-cost { font-size: 11px; color: var(--gold); font-weight: 700; min-width: 80px; text-align: right; flex-shrink: 0; }
-.space-del {
-  width: 26px; height: 26px; border-radius: 50%; border: 1px solid rgba(255,80,80,0.3);
-  background: rgba(255,80,80,0.1); color: rgba(255,150,150,0.8); cursor: pointer;
-  display: flex; align-items: center; justify-content: center; font-size: 14px;
-  flex-shrink: 0; transition: all 0.2s;
-}
-.space-del:hover { background: rgba(255,80,80,0.25); }
-.space-qty-wrap { display: flex; align-items: center; gap: 6px; }
-.qty-btn {
-  width: 24px; height: 24px; border-radius: 6px; border: 1px solid var(--border);
-  background: var(--glass); color: var(--cream); cursor: pointer; font-size: 14px;
-  display: flex; align-items: center; justify-content: center;
-}
-.qty-label { font-size: 12px; font-weight: 700; color: var(--gold); min-width: 16px; text-align: center; }
 
-/* ── Add space buttons ── */
+/* Base price edit */
+.base-price-wrap { display: flex; align-items: center; gap: 3px; }
+.base-price-input { width: 56px; background: rgba(184,134,0,0.1); border: 1px solid rgba(184,134,0,0.3);
+  border-radius: 6px; color: var(--gold); font-size: 10px; font-weight: 700; padding: 3px 5px;
+  text-align: center; outline: none; font-family: var(--font-body); transition: border-color 0.2s; }
+.base-price-input:focus { border-color: var(--gold); background: rgba(184,134,0,0.2); }
+.base-price-label { font-size: 9px; color: rgba(184,134,0,0.6); white-space: nowrap; }
+
+.space-cost { font-size: 11px; color: var(--gold); font-weight: 700; min-width: 88px; text-align: right; flex-shrink: 0; }
+.space-del { width: 26px; height: 26px; border-radius: 50%; border: 1px solid rgba(255,80,80,0.3);
+  background: rgba(255,80,80,0.1); color: rgba(255,150,150,0.8); cursor: pointer;
+  display: flex; align-items: center; justify-content: center; font-size: 14px; flex-shrink: 0; transition: all 0.2s; }
+.space-del:hover { background: rgba(255,80,80,0.25); }
+
+/* Area quick buttons */
+.area-quick { display: flex; gap: 3px; flex-shrink: 0; }
+.area-quick-btn { width: 22px; height: 22px; border-radius: 5px; border: 1px solid var(--border);
+  background: var(--glass); color: var(--cream); cursor: pointer; font-size: 13px;
+  display: flex; align-items: center; justify-content: center; font-weight: 700; }
+.area-quick-btn:active { background: rgba(184,134,0,0.2); }
+
+/* ── Add spaces ── */
 .add-section { margin-top: 20px; }
 .add-section-title { font-size: 11px; color: var(--muted); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 10px; }
 .add-grid { display: flex; flex-wrap: wrap; gap: 8px; }
-.add-btn {
-  background: var(--glass); border: 1px dashed rgba(255,255,255,0.2);
-  border-radius: 8px; padding: 7px 12px; cursor: pointer; color: var(--muted);
-  font-size: 11px; font-family: var(--font-body); transition: all 0.18s; white-space: nowrap;
-}
+.add-btn { background: var(--glass); border: 1px dashed rgba(255,255,255,0.2); border-radius: 8px;
+  padding: 7px 12px; cursor: pointer; color: var(--muted); font-size: 11px; font-family: var(--font-body);
+  transition: all 0.18s; white-space: nowrap; }
 .add-btn:hover, .add-btn:active { background: var(--glass2); border-color: var(--gold); color: var(--gold); }
 .custom-add { display: flex; gap: 8px; margin-top: 12px; }
-.custom-input {
-  flex: 1; background: var(--glass); border: 1px solid var(--border); border-radius: 8px;
-  color: var(--cream); font-size: 12px; padding: 8px 12px; outline: none; font-family: var(--font-body);
-}
+.custom-input { flex: 1; background: var(--glass); border: 1px solid var(--border); border-radius: 8px;
+  color: var(--cream); font-size: 12px; padding: 8px 12px; outline: none; font-family: var(--font-body); }
 .custom-input:focus { border-color: var(--gold); }
 .custom-confirm { background: var(--gold); border: none; border-radius: 8px; padding: 8px 16px; color: #000; font-weight: 700; cursor: pointer; font-size: 12px; }
 
-/* ── Area summary ── */
-.area-summary {
-  margin-top: 14px; padding: 12px 16px;
-  background: rgba(184,134,0,0.08); border: 1px solid rgba(184,134,0,0.2);
-  border-radius: 10px; display: flex; justify-content: space-between; align-items: center;
-}
+.area-summary { margin-top: 14px; padding: 12px 16px; background: rgba(184,134,0,0.08);
+  border: 1px solid rgba(184,134,0,0.2); border-radius: 10px; display: flex; justify-content: space-between; align-items: center; }
 .area-label { font-size: 12px; color: var(--muted); }
 .area-val { font-size: 16px; font-weight: 800; color: var(--gold); }
 
-/* ── Quote result ── */
+/* ── Price edit panel ── */
+.price-edit-panel { background: rgba(184,134,0,0.07); border: 1px solid rgba(184,134,0,0.25);
+  border-radius: 12px; padding: 14px 16px; margin-bottom: 18px; }
+.price-edit-title { font-size: 12px; font-weight: 700; color: var(--gold); margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
+.price-edit-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 8px; }
+.price-edit-row { display: flex; align-items: center; justify-content: space-between; background: rgba(255,255,255,0.04);
+  border-radius: 8px; padding: 8px 12px; gap: 8px; }
+.price-edit-name { font-size: 11px; color: var(--cream); flex: 1; }
+.price-edit-input { width: 70px; background: rgba(184,134,0,0.12); border: 1px solid rgba(184,134,0,0.4);
+  border-radius: 6px; color: var(--gold); font-size: 12px; font-weight: 700; padding: 4px 8px;
+  text-align: center; outline: none; font-family: var(--font-body); }
+.price-edit-input:focus { border-color: var(--gold2); background: rgba(184,134,0,0.25); }
+.price-edit-unit { font-size: 9px; color: rgba(184,134,0,0.6); white-space: nowrap; }
+.price-reset-btn { background: rgba(184,134,0,0.15); border: 1px solid rgba(184,134,0,0.3);
+  border-radius: 6px; color: var(--gold); font-size: 10px; cursor: pointer; padding: 4px 10px; white-space: nowrap; }
+
+/* ── Global price multiplier ── */
+.global-adj { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; flex-wrap: wrap; }
+.global-adj-label { font-size: 11px; color: var(--muted); }
+.global-adj-btns { display: flex; gap: 6px; flex-wrap: wrap; }
+.adj-btn { padding: 5px 12px; border-radius: 8px; border: 1px solid var(--border); background: var(--glass);
+  color: var(--cream); font-size: 11px; cursor: pointer; font-family: var(--font-body); transition: all 0.18s; }
+.adj-btn:hover { border-color: var(--gold); color: var(--gold); background: rgba(184,134,0,0.1); }
+.adj-btn.active { background: rgba(184,134,0,0.2); border-color: var(--gold); color: var(--gold); font-weight: 700; }
+
+/* ── Quote ── */
 .client-row { display: flex; gap: 12px; margin-bottom: 18px; flex-wrap: wrap; }
 .client-field { flex: 1; min-width: 180px; }
 .client-label { font-size: 10px; color: var(--muted); display: block; margin-bottom: 4px; letter-spacing: 0.5px; }
-.client-input {
-  width: 100%; background: var(--glass2); border: 1px solid var(--border); border-radius: 8px;
-  color: var(--cream); font-size: 13px; padding: 9px 12px; outline: none; font-family: var(--font-body);
-}
+.client-input { width: 100%; background: var(--glass2); border: 1px solid var(--border); border-radius: 8px;
+  color: var(--cream); font-size: 13px; padding: 9px 12px; outline: none; font-family: var(--font-body); }
 .client-input:focus { border-color: var(--gold); }
 
 .quote-card { background: var(--glass); border: 1px solid rgba(184,134,0,0.3); border-radius: var(--radius); overflow: hidden; margin-bottom: 16px; }
-.quote-header-band { background: linear-gradient(90deg, var(--navy2), #0a1826); padding: 16px 20px; display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 8px; }
+.quote-header-band { background: linear-gradient(90deg, var(--navy2), #0a1826); padding: 16px 20px;
+  display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 8px; }
 .quote-htitle { font-family: var(--font-display); font-size: 18px; color: var(--gold); font-weight: 700; }
-.quote-hmeta { font-size: 10px; color: var(--muted); margin-top: 4px; line-height: 1.6; }
+.quote-hmeta { font-size: 10px; color: var(--muted); margin-top: 4px; line-height: 1.7; }
 .quote-hdate { font-size: 11px; color: var(--muted); text-align: right; }
 
 .price-band { padding: 24px 20px; text-align: center; background: linear-gradient(135deg, rgba(26,58,92,0.5), rgba(184,134,0,0.08)); border-bottom: 1px solid var(--border); }
@@ -255,6 +241,20 @@ main { position: relative; z-index: 1; max-width: 880px; margin: 0 auto; padding
 .price-high { font-family: var(--font-display); font-size: 32px; font-weight: 700; color: var(--gold); }
 .price-note { margin-top: 10px; font-size: 11px; color: rgba(255,184,0,0.65); }
 .price-sqm { margin-top: 4px; font-size: 11px; color: var(--muted); }
+
+/* Manual price override in quote */
+.manual-override { display: flex; align-items: center; gap: 10px; margin-top: 14px; padding: 10px 16px;
+  background: rgba(255,255,255,0.04); border-radius: 10px; flex-wrap: wrap; justify-content: center; }
+.manual-override-label { font-size: 11px; color: var(--muted); }
+.manual-discount { display: flex; gap: 6px; }
+.disc-btn { padding: 4px 10px; border-radius: 6px; border: 1px solid var(--border); background: var(--glass);
+  color: var(--muted); font-size: 10px; cursor: pointer; font-family: var(--font-body); transition: all 0.18s; }
+.disc-btn.active { background: rgba(46,107,79,0.25); border-color: rgba(46,107,79,0.5); color: #7EC8A0; font-weight: 700; }
+.disc-btn.disc-neg { }
+.disc-btn.disc-neg.active { background: rgba(180,60,60,0.2); border-color: rgba(180,60,60,0.4); color: rgba(255,150,150,0.9); }
+.custom-disc-input { width: 60px; background: var(--glass); border: 1px solid var(--border); border-radius: 6px;
+  color: var(--cream); font-size: 11px; padding: 4px 6px; text-align: center; outline: none; font-family: var(--font-body); }
+.custom-disc-input:focus { border-color: var(--gold); }
 
 .breakdown-wrap { padding: 16px 20px; }
 .breakdown-title { font-size: 11px; color: var(--muted); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 12px; }
@@ -267,62 +267,41 @@ main { position: relative; z-index: 1; max-width: 880px; margin: 0 auto; padding
 .b-val { font-size: 11px; font-weight: 700; color: var(--cream); min-width: 100px; text-align: right; }
 .b-total { display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border); padding-top: 10px; margin-top: 6px; font-size: 13px; font-weight: 700; }
 
-/* ── Space table ── */
+/* ── Table ── */
 .tbl-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
 table { width: 100%; border-collapse: collapse; font-size: 11px; min-width: 480px; }
-th { background: rgba(26,58,92,0.7); color: var(--muted); padding: 8px 10px; text-align: left; font-weight: 600; border-bottom: 2px solid rgba(184,134,0,0.3); white-space: nowrap; }
+th { background: rgba(26,58,92,0.7); color: var(--muted); padding: 8px 10px; text-align: left; font-weight: 600;
+  border-bottom: 2px solid rgba(184,134,0,0.3); white-space: nowrap; }
 td { padding: 8px 10px; border-bottom: 1px solid rgba(255,255,255,0.04); color: var(--cream); }
 tr:last-child td { border-bottom: none; }
 
-/* ── Payment grid ── */
-.pay-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 10px; }
+/* ── Payment ── */
+.pay-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 10px; }
 .pay-card { background: var(--glass); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
 .pay-head { padding: 6px 12px; font-size: 11px; font-weight: 700; color: #fff; }
 .pay-amount { padding: 10px 12px 2px; font-size: 15px; font-weight: 800; color: var(--gold); }
 .pay-pct { font-size: 11px; color: var(--muted); font-weight: 400; }
-.pay-trigger { padding: 0 12px 3px; font-size: 10px; color: var(--muted); }
+.pay-trigger { padding: 0 12px 2px; font-size: 10px; color: var(--muted); }
+.pay-trigger-en { padding: 0 12px 3px; font-size: 9px; color: rgba(232,237,242,0.25); }
 .pay-products { padding: 0 12px 10px; font-size: 10px; color: rgba(255,255,255,0.35); }
 
-/* ── Disclaimers ── */
-.disc { padding: 8px 12px; margin-bottom: 7px; font-size: 11px; color: rgba(255,255,255,0.5); line-height: 1.65; background: rgba(255,255,255,0.03); border-radius: 0 6px 6px 0; }
+.disc { padding: 8px 12px; margin-bottom: 7px; font-size: 11px; color: rgba(255,255,255,0.5);
+  line-height: 1.65; background: rgba(255,255,255,0.03); border-radius: 0 6px 6px 0; }
 
-/* ── Bottom nav ── */
-.bottom-bar {
-  position: fixed; bottom: 0; left: 0; right: 0; z-index: 200;
-  background: rgba(13,31,53,0.95); backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border-top: 1px solid rgba(184,134,0,0.25);
-  padding: 12px 20px; padding-bottom: max(12px, env(safe-area-inset-bottom));
-  display: flex; gap: 10px; justify-content: space-between;
-}
-.btn-back {
-  background: var(--glass2); border: 1px solid var(--border); color: var(--cream);
-  padding: 12px 20px; border-radius: 10px; font-size: 13px; cursor: pointer; font-family: var(--font-body);
-  flex-shrink: 0;
-}
-.btn-next {
-  flex: 1; background: linear-gradient(135deg, var(--navy2), var(--gold)); border: none;
-  color: #fff; padding: 12px 20px; border-radius: 10px; font-size: 13px;
-  font-weight: 700; cursor: pointer; font-family: var(--font-body); opacity: 1;
-  transition: opacity 0.2s;
-}
+/* ── Bottom bar ── */
+.bottom-bar { position: fixed; bottom: 0; left: 0; right: 0; z-index: 200; background: rgba(13,31,53,0.95);
+  backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-top: 1px solid rgba(184,134,0,0.25);
+  padding: 12px 16px; padding-bottom: max(12px, env(safe-area-inset-bottom)); display: flex; gap: 10px; justify-content: space-between; }
+.btn-back { background: var(--glass2); border: 1px solid var(--border); color: var(--cream); padding: 11px 16px;
+  border-radius: 10px; font-size: 12px; cursor: pointer; font-family: var(--font-body); flex-shrink: 0; }
+.btn-next { flex: 1; background: linear-gradient(135deg, var(--navy2), var(--gold)); border: none; color: #fff;
+  padding: 12px 16px; border-radius: 10px; font-size: 13px; font-weight: 700; cursor: pointer; font-family: var(--font-body); transition: opacity 0.2s; }
 .btn-next:disabled { opacity: 0.35; cursor: not-allowed; }
-.btn-print {
-  flex: 1; background: linear-gradient(135deg, var(--green), var(--navy2)); border: none;
-  color: #fff; padding: 12px 20px; border-radius: 10px; font-size: 13px;
-  font-weight: 700; cursor: pointer; font-family: var(--font-body);
-}
-.btn-reset {
-  background: rgba(184,134,0,0.12); border: 1px solid rgba(184,134,0,0.3); color: var(--gold);
-  padding: 12px 16px; border-radius: 10px; font-size: 13px; cursor: pointer; font-family: var(--font-body);
-  flex-shrink: 0;
-}
+.btn-print { flex: 1; background: linear-gradient(135deg, var(--green), var(--navy2)); border: none; color: #fff;
+  padding: 12px 16px; border-radius: 10px; font-size: 13px; font-weight: 700; cursor: pointer; font-family: var(--font-body); }
+.btn-reset { background: rgba(184,134,0,0.12); border: 1px solid rgba(184,134,0,0.3); color: var(--gold);
+  padding: 11px 14px; border-radius: 10px; font-size: 12px; cursor: pointer; font-family: var(--font-body); flex-shrink: 0; }
 
-/* ── Page transitions ── */
-.page { animation: fadeSlide 0.25s ease; }
-@keyframes fadeSlide { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
-
-/* ── Utility ── */
 .text-gold { color: var(--gold); }
 .text-muted { color: var(--muted); }
 .fw7 { font-weight: 700; }
@@ -330,23 +309,18 @@ tr:last-child td { border-bottom: none; }
 .ta-right { text-align: right; }
 .ta-center { text-align: center; }
 
+/* lang-aware */
+.zh-only { display: block; }
+.en-only { display: none; }
+body.lang-en .zh-only { display: none; }
+body.lang-en .en-only { display: block; }
+
 @media print {
-  header, .tab-nav, .bottom-bar, .add-section, .space-del { display: none !important; }
+  header, .tab-nav, .bottom-bar, .add-section, .space-del, .price-edit-panel, .manual-override { display: none !important; }
   body { background: white; color: black; }
   .price-high { color: #B88600; }
   .quote-header-band { background: #1A3A5C; }
 }
-
-/* Install banner */
-.install-banner {
-  background: linear-gradient(90deg, rgba(26,58,92,0.9), rgba(184,134,0,0.2));
-  border: 1px solid rgba(184,134,0,0.4); border-radius: 10px;
-  padding: 12px 16px; margin-bottom: 18px;
-  display: flex; align-items: center; gap: 12px; cursor: pointer;
-}
-.install-banner-text { flex: 1; font-size: 12px; line-height: 1.5; }
-.install-banner-close { color: var(--muted); font-size: 18px; cursor: pointer; }
-
 input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer-spin-button { opacity: 0.4; }
 </style>
 </head>
@@ -363,6 +337,10 @@ input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer
     </div>
   </div>
   <div class="header-right">
+    <div class="lang-toggle">
+      <button class="lang-btn active" id="langZH" onclick="setLang('zh')">中文</button>
+      <button class="lang-btn" id="langEN" onclick="setLang('en')">EN</button>
+    </div>
     <div class="save-badge" id="saveBadge">● 已保存</div>
   </div>
 </header>
@@ -371,74 +349,183 @@ input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer
   <button class="tab-btn active" onclick="goTab(0)">
     <span class="tab-icon">🎨</span>
     <span class="tab-num" id="tn0">1</span>
-    <span>风格</span>
+    <span class="tab-label-zh">风格</span>
+    <span class="tab-label-en">Style</span>
   </button>
   <button class="tab-btn" onclick="goTab(1)">
     <span class="tab-icon">💎</span>
     <span class="tab-num" id="tn1">2</span>
-    <span>材料</span>
+    <span class="tab-label-zh">材料</span>
+    <span class="tab-label-en">Grade</span>
   </button>
   <button class="tab-btn" onclick="goTab(2)">
     <span class="tab-icon">📐</span>
     <span class="tab-num" id="tn2">3</span>
-    <span>面积</span>
+    <span class="tab-label-zh">面积</span>
+    <span class="tab-label-en">Area</span>
   </button>
   <button class="tab-btn" onclick="goTab(3)">
     <span class="tab-icon">📋</span>
     <span class="tab-num" id="tn3">4</span>
-    <span>报价单</span>
+    <span class="tab-label-zh">报价单</span>
+    <span class="tab-label-en">Quote</span>
   </button>
 </nav>
 
 <main id="mainContent"></main>
-
 <div class="bottom-bar" id="bottomBar"></div>
 
 <script>
-// ─── State ───────────────────────────────────────────────────────────────────
+// ─── i18n ────────────────────────────────────────────────────────────────────
+const T = {
+  zh: {
+    styleTitle: '选择装修风格',
+    styleSub: 'Select Design Style · اختيار أسلوب التصميم',
+    styleCoeff: '系数',
+    tierTitle: '选择材料档次',
+    tierSub: 'Material Grade · درجة جودة المواد',
+    tierWarn: '⚠️ 客户未确认材料时，建议选<strong>高端级</strong>报价，并注明「材料待确认，价格浮动 ±15%」，保护报价准确性。',
+    areaTitle: '各空间面积输入',
+    areaSub: 'Enter Area per Space (m²) · أدخل مساحة كل فضاء',
+    areaWarn: '⚠️ 请先完成第1、2步选择风格和材料档次，才能看到实时估价。',
+    areaTotal: '总面积合计 Total Area',
+    addMore: '+ 添加更多空间 Add More Spaces',
+    customPlaceholder: '自定义空间名称... Custom space name',
+    addBtn: '添加',
+    priceEditTitle: '✏️ 修改基础单价 Edit Base Prices (QAR/m²)',
+    priceResetBtn: '恢复默认',
+    globalAdj: '全局价格调整：',
+    clientName: '客户姓名 Client Name',
+    projectName: '项目名称 Project Name',
+    quoteTitle: 'QUOTATION / عرض سعر / 报价单',
+    styleLabel: '风格', matLabel: '材料', areaLabel: '总面积', spacesLabel: '空间数',
+    priceRangeLabel: 'PRICE RANGE 报价区间 (材料未定 ±15%)',
+    priceNote: '⚠️ 材料品牌未最终确认，价格浮动 ±15% · Materials unconfirmed, ±15% variance',
+    sqmLabel: '综合单价约',
+    manualAdjLabel: '报价调整 Quote Adjustment:',
+    breakdownTitle: '费用构成 Cost Breakdown',
+    breakdownTotal: '合计 Total（中间值）',
+    spaceBreakTitle: '📊 各空间明细 Space Breakdown',
+    colSpace: '空间', colArea: '面积', colUnit: '单价/m²', colMat: '材料成本', colLogTax: '物流+税费', colSubtotal: '小计',
+    noAreaMsg: '请在第3步输入面积',
+    payTitle: '💳 付款计划 Payment Schedule · جدول الدفعات',
+    termsTitle: '📋 报价说明 Terms · شروط العرض',
+    backBtn: '← 返回修改',
+    newQuote: '🔄 新报价',
+    printBtn: '🖨️ 打印 / Print',
+    prevStep: '← 上一步',
+    nextStep: '下一步 Next →',
+    genQuote: '生成报价单 →',
+    saved: '● 已保存', unsaved: '○ 未保存',
+    confirmReset: '确定要清空当前报价，开始新报价？',
+    validDays: '有效期 30天',
+    quoteDate: '报价日期',
+    defaultRate: '默认',
+  },
+  en: {
+    styleTitle: 'Select Design Style',
+    styleSub: '选择装修风格 · اختيار أسلوب التصميم',
+    styleCoeff: 'Multiplier',
+    tierTitle: 'Select Material Grade',
+    tierSub: '选择材料档次 · درجة جودة المواد',
+    tierWarn: '⚠️ If materials are unconfirmed, recommend using <strong>Premium</strong> grade and note "Materials TBC, price variance ±15%."',
+    areaTitle: 'Enter Area per Space',
+    areaSub: '各空间面积输入 (m²) · أدخل مساحة كل فضاء',
+    areaWarn: '⚠️ Please complete Steps 1 & 2 (Style & Grade) first to see live estimates.',
+    areaTotal: 'Total Area 总面积合计',
+    addMore: '+ Add More Spaces 添加更多空间',
+    customPlaceholder: 'Custom space name 自定义空间名称...',
+    addBtn: 'Add',
+    priceEditTitle: '✏️ Edit Base Prices 修改基础单价 (QAR/m²)',
+    priceResetBtn: 'Reset Defaults',
+    globalAdj: 'Global Adjustment:',
+    clientName: 'Client Name 客户姓名',
+    projectName: 'Project Name 项目名称',
+    quoteTitle: 'QUOTATION / عرض سعر / 报价单',
+    styleLabel: 'Style', matLabel: 'Grade', areaLabel: 'Total Area', spacesLabel: 'Spaces',
+    priceRangeLabel: 'PRICE RANGE 报价区间 (Materials TBC ±15%)',
+    priceNote: '⚠️ Materials unconfirmed, price may vary ±15% · 材料品牌未最终确认，价格浮动 ±15%',
+    sqmLabel: 'Blended rate approx.',
+    manualAdjLabel: 'Quote Adjustment 报价调整:',
+    breakdownTitle: 'Cost Breakdown 费用构成',
+    breakdownTotal: 'Total 合计 (Midpoint)',
+    spaceBreakTitle: '📊 Space Breakdown 各空间明细',
+    colSpace: 'Space', colArea: 'Area', colUnit: 'Rate/m²', colMat: 'Material', colLogTax: 'Logistics+Tax', colSubtotal: 'Subtotal',
+    noAreaMsg: 'Enter areas in Step 3',
+    payTitle: '💳 Payment Schedule 付款计划 · جدول الدفعات',
+    termsTitle: '📋 Terms & Conditions 报价说明 · شروط العرض',
+    backBtn: '← Back / Edit',
+    newQuote: '🔄 New Quote',
+    printBtn: '🖨️ Print / 打印',
+    prevStep: '← Previous',
+    nextStep: 'Next →',
+    genQuote: 'Generate Quote →',
+    saved: '● Saved', unsaved: '○ Unsaved',
+    confirmReset: 'Clear current quote and start a new one?',
+    validDays: 'Valid 30 days',
+    quoteDate: 'Quote Date',
+    defaultRate: 'Default',
+  }
+};
+
+let lang = 'zh';
+function t(k) { return T[lang][k] || T.zh[k] || k; }
+function setLang(l) {
+  lang = l;
+  document.body.className = l === 'en' ? 'lang-en' : '';
+  document.getElementById('langZH').classList.toggle('active', l==='zh');
+  document.getElementById('langEN').classList.toggle('active', l==='en');
+  renderAll();
+}
+
+// ─── Default data ─────────────────────────────────────────────────────────────
+const DEFAULT_BASES = {
+  living:420, majlis:520, master:390, bedroom:320, kitchen:680,
+  bathroom:750, corridor:380
+};
+
 const DEFAULT_SPACES = [
-  { id:'living',    icon:'🛋️', name:'客厅 / 餐厅',    nameEn:'Living & Dining',    base:420, items:'地板·墙面·天花·灯具', qty:1, area:'' },
-  { id:'majlis',    icon:'🕌', name:'玛吉利斯 (接待厅)', nameEn:'Majlis',            base:520, items:'地板·造型天花·灯具·座台', qty:1, area:'' },
-  { id:'master',    icon:'🛏️', name:'主卧套间',        nameEn:'Master Bedroom',     base:390, items:'地板·墙面·天花·衣柜·卫浴', qty:1, area:'' },
-  { id:'bedroom',   icon:'🚪', name:'卧室',            nameEn:'Bedroom',            base:320, items:'地板·墙面·天花·衣柜', qty:1, area:'' },
-  { id:'kitchen',   icon:'🍳', name:'厨房',            nameEn:'Kitchen',            base:680, items:'橱柜·台面·瓷砖·防水·电器', qty:1, area:'' },
-  { id:'bathroom',  icon:'🚿', name:'卫生间',          nameEn:'Bathroom',           base:750, items:'洁具·瓷砖·防水·淋浴·浴室柜', qty:1, area:'' },
-  { id:'corridor',  icon:'🪜', name:'走廊 / 楼梯',    nameEn:'Corridor & Stairs',  base:380, items:'地板·墙面·扶手·天花', qty:1, area:'' },
+  { id:'living',    icon:'🛋️', name:'客厅 / 餐厅',       nameEn:'Living & Dining',    base:420, items:'地板·墙面·天花·灯具',            itemsEn:'Flooring · Walls · Ceiling · Lighting', qty:1, area:'' },
+  { id:'majlis',    icon:'🕌', name:'玛吉利斯 (接待厅)',  nameEn:'Majlis / Reception', base:520, items:'地板·造型天花·灯具·座台',          itemsEn:'Floor · Cove Ceiling · Lighting · Seating', qty:1, area:'' },
+  { id:'master',    icon:'🛏️', name:'主卧套间',           nameEn:'Master Bedroom Suite',base:390, items:'地板·墙面·天花·衣柜·卫浴',      itemsEn:'Floor · Walls · Wardrobe · En-suite', qty:1, area:'' },
+  { id:'bedroom',   icon:'🚪', name:'卧室',               nameEn:'Bedroom',             base:320, items:'地板·墙面·天花·衣柜',            itemsEn:'Floor · Walls · Ceiling · Wardrobe', qty:1, area:'' },
+  { id:'kitchen',   icon:'🍳', name:'厨房',               nameEn:'Kitchen',             base:680, items:'橱柜·台面·瓷砖·防水·电器',      itemsEn:'Cabinets · Countertop · Tiles · Waterproofing', qty:1, area:'' },
+  { id:'bathroom',  icon:'🚿', name:'卫生间',             nameEn:'Bathroom',            base:750, items:'洁具·瓷砖·防水·淋浴·浴室柜',    itemsEn:'Sanitaryware · Tiles · Shower · Vanity', qty:1, area:'' },
+  { id:'corridor',  icon:'🪜', name:'走廊 / 楼梯',       nameEn:'Corridor & Stairs',   base:380, items:'地板·墙面·扶手·天花',            itemsEn:'Floor · Walls · Handrail · Ceiling', qty:1, area:'' },
 ];
 
 const ADD_PRESETS = [
-  { icon:'🏊', name:'游泳池区域',    nameEn:'Pool Area',        base:650 },
-  { icon:'🌿', name:'花园 / 景观',   nameEn:'Garden & Landscape',base:280 },
-  { icon:'🚗', name:'车库',          nameEn:'Garage',            base:240 },
-  { icon:'🏋️', name:'健身房',        nameEn:'Gym',               base:350 },
-  { icon:'🎬', name:'家庭影院',      nameEn:'Home Cinema',       base:580 },
-  { icon:'📦', name:'储物间',        nameEn:'Storage Room',      base:200 },
-  { icon:'🛗', name:'地下室',        nameEn:'Basement',          base:310 },
-  { icon:'🌅', name:'屋顶露台',      nameEn:'Rooftop Terrace',   base:320 },
-  { icon:'🏡', name:'入口门廊',      nameEn:'Entrance Foyer',    base:450 },
-  { icon:'🧖', name:'SPA / 桑拿',    nameEn:'SPA & Sauna',       base:720 },
-  { icon:'📚', name:'书房 / 办公室', nameEn:'Study & Office',    base:340 },
-  { icon:'👶', name:'儿童游戏室',    nameEn:'Kids Playroom',     base:300 },
+  { icon:'🏊', name:'游泳池区域',    nameEn:'Pool Area',          base:650 },
+  { icon:'🌿', name:'花园 / 景观',   nameEn:'Garden & Landscape', base:280 },
+  { icon:'🚗', name:'车库',          nameEn:'Garage',             base:240 },
+  { icon:'🏋️', name:'健身房',        nameEn:'Gym',                base:350 },
+  { icon:'🎬', name:'家庭影院',      nameEn:'Home Cinema',        base:580 },
+  { icon:'📦', name:'储物间',        nameEn:'Storage Room',       base:200 },
+  { icon:'🛗', name:'地下室',        nameEn:'Basement',           base:310 },
+  { icon:'🌅', name:'屋顶露台',      nameEn:'Rooftop Terrace',    base:320 },
+  { icon:'🏡', name:'入口门廊',      nameEn:'Entrance Foyer',     base:450 },
+  { icon:'🧖', name:'SPA / 桑拿',    nameEn:'SPA & Sauna',        base:720 },
+  { icon:'📚', name:'书房 / 办公室', nameEn:'Study & Office',     base:340 },
+  { icon:'👶', name:'儿童游戏室',    nameEn:'Kids Playroom',      base:300 },
 ];
 
 const STYLES = {
-  modern:      { label:'现代简约',  en:'Modern Minimalist',  mult:1.00, color:'#4A9EBF', desc:'清水混凝土·哑光金属·极简线条' },
-  european:    { label:'欧式古典',  en:'European Classical', mult:1.35, color:'#A07850', desc:'石膏线脚·大理石·镀金五金' },
-  luxury:      { label:'轻奢现代',  en:'Luxury Modern',      mult:1.55, color:'#B88600', desc:'岩板·黑钛不锈钢·皮革软包' },
-  arabic:      { label:'阿拉伯风',  en:'Arabic Style',       mult:1.25, color:'#2E8B5A', desc:'穹顶造型·几何马赛克·香柏木' },
-  contemporary:{ label:'当代融合',  en:'Contemporary Fusion',mult:1.20, color:'#7B5EA7', desc:'东西方融合·天然材质·艺术装置' },
+  modern:      { label:'现代简约',  en:'Modern Minimalist',  mult:1.00, color:'#4A9EBF', desc:'清水混凝土·哑光金属·极简线条',       descEn:'Polished concrete · Matte metal · Clean lines' },
+  european:    { label:'欧式古典',  en:'European Classical', mult:1.35, color:'#A07850', desc:'石膏线脚·大理石·镀金五金',           descEn:'Plaster cornice · Marble · Gilded hardware' },
+  luxury:      { label:'轻奢现代',  en:'Luxury Modern',      mult:1.55, color:'#B88600', desc:'岩板·黑钛不锈钢·皮革软包',           descEn:'Sintered stone · Black titanium · Leather panels' },
+  arabic:      { label:'阿拉伯风',  en:'Arabic Style',       mult:1.25, color:'#2E8B5A', desc:'穹顶造型·几何马赛克·香柏木',         descEn:'Dome arches · Geometric mosaic · Cedar wood' },
+  contemporary:{ label:'当代融合',  en:'Contemporary Fusion',mult:1.20, color:'#7B5EA7', desc:'东西方融合·天然材质·艺术装置',       descEn:'East-West fusion · Natural materials · Art features' },
 };
 
 const TIERS = {
-  standard:{ label:'标准级', en:'Standard', icon:'🏠', mult:1.0, note:'国产优质品牌材料', color:'#5588CC' },
-  premium: { label:'高端级', en:'Premium',  icon:'🏛️', mult:1.6, note:'欧洲/土耳其进口品牌', color:'#B88600', rec:true },
-  luxury:  { label:'顶奢级', en:'Luxury',   icon:'💎', mult:2.4, note:'意大利/法国顶级品牌', color:'#C0392B' },
+  standard:{ label:'标准级', en:'Standard', icon:'🏠', mult:1.0, noteZh:'国产优质品牌材料',    noteEn:'Quality domestic brand materials', color:'#5588CC' },
+  premium: { label:'高端级', en:'Premium',  icon:'🏛️', mult:1.6, noteZh:'欧洲/土耳其进口品牌', noteEn:'European / Turkish imported brands', color:'#B88600', rec:true },
+  luxury:  { label:'顶奢级', en:'Luxury',   icon:'💎', mult:2.4, noteZh:'意大利/法国顶级品牌', noteEn:'Italian / French prestige brands', color:'#C0392B' },
 };
 
-const LOGISTICS_RATE = 0.12+0.09+0.10+0.04+0.03; // 38%
+const LOGISTICS_RATE = 0.12+0.09+0.10+0.04+0.03;
 const OVERHEAD = 0.18;
 const CONTINGENCY = 0.10;
-const TOTAL_ADD = 1 + LOGISTICS_RATE + OVERHEAD + CONTINGENCY;
 
 let state = {
   tab: 0,
@@ -448,29 +535,32 @@ let state = {
   clientName: '',
   projectName: '',
   quoteRef: 'QQ-' + Date.now().toString(36).toUpperCase(),
+  discount: 0,   // manual discount multiplier, e.g. -0.05 = -5%
+  globalAdj: 0,  // global adjustment
 };
 
-// ─── Persistence ─────────────────────────────────────────────────────────────
+// ─── Persistence ──────────────────────────────────────────────────────────────
 function saveState() {
-  try { localStorage.setItem('qvq_state', JSON.stringify(state)); updateSaveBadge(true); } catch(e) {}
+  try { localStorage.setItem('qvq_state2', JSON.stringify(state)); updateSaveBadge(true); } catch(e) {}
 }
 function loadState() {
   try {
-    const s = localStorage.getItem('qvq_state');
+    const s = localStorage.getItem('qvq_state2');
     if (s) { const p = JSON.parse(s); if (p.spaces) state = { ...state, ...p }; }
   } catch(e) {}
 }
 function updateSaveBadge(saved) {
   const el = document.getElementById('saveBadge');
-  if (el) { el.textContent = saved ? '● 已保存' : '○ 未保存'; el.style.color = saved ? '#7EC8A0' : '#F0A050'; }
+  if (el) { el.textContent = saved ? t('saved') : t('unsaved'); el.style.color = saved ? '#7EC8A0' : '#F0A050'; }
 }
 
-// ─── Calculations ─────────────────────────────────────────────────────────────
+// ─── Calculations ──────────────────────────────────────────────────────────────
 function calcSpace(sp) {
   const area = parseFloat(sp.area) || 0;
   const sm = STYLES[state.style]?.mult || 1;
   const tm = TIERS[state.tier]?.mult || 1;
-  const mat = area * sp.base * sm * tm;
+  const discMult = 1 + (state.discount || 0);
+  const mat = area * sp.base * sm * tm * discMult;
   const log = mat * LOGISTICS_RATE;
   const oh  = mat * OVERHEAD;
   const con = mat * CONTINGENCY;
@@ -489,17 +579,13 @@ function calcTotals() {
            low: gross*0.92, high: gross*1.18 };
 }
 
-// ─── Formatting ───────────────────────────────────────────────────────────────
 function fmt(n) { return 'QAR ' + Math.round(n).toLocaleString('en-US'); }
+function fmtN(n) { return Math.round(n).toLocaleString('en-US'); }
 function pct(n) { return (n*100).toFixed(0)+'%'; }
 function uid() { return 'sp_'+Math.random().toString(36).slice(2,8); }
 
-// ─── Tab navigation ───────────────────────────────────────────────────────────
-function goTab(t) {
-  state.tab = t;
-  renderAll();
-  window.scrollTo(0, 0);
-}
+// ─── Tab navigation ────────────────────────────────────────────────────────────
+function goTab(t) { state.tab = t; renderAll(); window.scrollTo(0,0); }
 
 function renderAll() {
   renderTabs();
@@ -511,109 +597,134 @@ function renderAll() {
 function renderTabs() {
   const btns = document.querySelectorAll('.tab-btn');
   btns.forEach((b,i) => {
-    b.classList.toggle('active', i === state.tab);
+    b.classList.toggle('active', i===state.tab);
     const done = (i===0&&state.style)||(i===1&&state.tier)||(i===2&&state.spaces.some(s=>parseFloat(s.area)>0));
-    b.classList.toggle('done', done && i !== state.tab);
+    b.classList.toggle('done', done && i!==state.tab);
     const num = document.getElementById('tn'+i);
-    if (num) { num.textContent = done && i!==state.tab ? '✓' : i+1; }
+    if (num) num.textContent = done && i!==state.tab ? '✓' : i+1;
   });
 }
 
-// ─── Page 0: Style ────────────────────────────────────────────────────────────
+// ─── Page 0: Style ─────────────────────────────────────────────────────────────
 function renderStyle() {
   let cards = Object.entries(STYLES).map(([k,s]) => {
     const sel = state.style===k;
     return `<div class="style-card${sel?' selected':''}" onclick="selectStyle('${k}')"
       style="border-color:${sel?s.color:'rgba(255,255,255,0.09)'};background:${sel?`linear-gradient(135deg,${s.color}22,${s.color}44)`:'var(--glass)'};box-shadow:${sel?`0 6px 28px ${s.color}44`:'none'}">
       <div class="style-bar" style="background:${s.color}"></div>
-      <div class="style-name">${s.label}</div>
-      <div class="style-en">${s.en}</div>
-      <div class="style-desc">${s.desc}</div>
-      <div class="style-mult" style="color:${s.color}">系数 ×${s.mult.toFixed(2)}</div>
+      <div class="style-name">${lang==='en'?s.en:s.label}</div>
+      <div class="style-en">${lang==='en'?s.label:s.en}</div>
+      <div class="style-desc-zh zh-only">${s.desc}</div>
+      <div class="style-desc-en en-only">${s.descEn}</div>
+      <div class="style-desc-zh en-only" style="color:rgba(232,237,242,0.25)">${s.desc}</div>
+      <div class="style-mult" style="color:${s.color}">${t('styleCoeff')} ×${s.mult.toFixed(2)}</div>
       ${sel?`<div class="check-badge" style="background:${s.color}">✓</div>`:''}
     </div>`;
   }).join('');
   return `<div class="page">
     <div class="sec-head">
-      <div class="sec-title">选择装修风格</div>
-      <div class="sec-sub">Select Design Style · اختيار أسلوب التصميم</div>
+      <div class="sec-title">${t('styleTitle')}</div>
+      <div class="sec-sub">${t('styleSub')}</div>
     </div>
     <div class="style-grid">${cards}</div>
   </div>`;
 }
 function selectStyle(k) { state.style=k; renderAll(); }
 
-// ─── Page 1: Tier ─────────────────────────────────────────────────────────────
+// ─── Page 1: Tier ──────────────────────────────────────────────────────────────
 function renderTier() {
-  let cards = Object.entries(TIERS).map(([k,t]) => {
+  let cards = Object.entries(TIERS).map(([k,tier]) => {
     const sel = state.tier===k;
     return `<div class="tier-card${sel?' selected':''}" onclick="selectTier('${k}')"
-      style="border-color:${sel?t.color:'rgba(255,255,255,0.09)'};background:${sel?`linear-gradient(135deg,${t.color}22,${t.color}55)`:'var(--glass)'}">
-      <div class="tier-icon">${t.icon}</div>
-      <div class="tier-name" style="color:${sel?t.color:'var(--cream)'}">${t.label}</div>
-      <div class="tier-note">${t.note}</div>
-      <div class="tier-mult" style="color:${t.color}">×${t.mult.toFixed(1)}</div>
-      ${t.rec?`<div class="rec-badge" style="background:rgba(184,134,0,0.15);border:1px solid rgba(184,134,0,0.4);color:var(--gold)">推荐 Recommended</div>`:''}
+      style="border-color:${sel?tier.color:'rgba(255,255,255,0.09)'};background:${sel?`linear-gradient(135deg,${tier.color}22,${tier.color}55)`:'var(--glass)'}">
+      <div class="tier-icon">${tier.icon}</div>
+      <div class="tier-name" style="color:${sel?tier.color:'var(--cream)'}">${lang==='en'?tier.en:tier.label}</div>
+      <div class="tier-name-en">${lang==='en'?tier.label:tier.en}</div>
+      <div class="tier-note-zh zh-only">${tier.noteZh}</div>
+      <div class="tier-note-en en-only">${tier.noteEn}</div>
+      <div class="tier-note-zh en-only" style="font-size:9px;color:rgba(232,237,242,0.25)">${tier.noteZh}</div>
+      <div class="tier-mult" style="color:${tier.color}">×${tier.mult.toFixed(1)}</div>
+      ${tier.rec?`<div class="rec-badge" style="background:rgba(184,134,0,0.15);border:1px solid rgba(184,134,0,0.4);color:var(--gold)">推荐 Recommended</div>`:''}
     </div>`;
   }).join('');
   return `<div class="page">
     <div class="sec-head">
-      <div class="sec-title">选择材料档次</div>
-      <div class="sec-sub">Material Grade · درجة جودة المواد</div>
+      <div class="sec-title">${t('tierTitle')}</div>
+      <div class="sec-sub">${t('tierSub')}</div>
     </div>
-    <div class="info-box">⚠️ 客户未确认材料时，建议选<strong>高端级</strong>报价，并注明「材料待确认，价格浮动 ±15%」，保护报价准确性。</div>
+    <div class="info-box">${t('tierWarn')}</div>
     <div class="tier-grid">${cards}</div>
   </div>`;
 }
 function selectTier(k) { state.tier=k; renderAll(); }
 
-// ─── Page 2: Spaces ───────────────────────────────────────────────────────────
+// ─── Page 2: Spaces ────────────────────────────────────────────────────────────
 function renderSpaces() {
+  const sm = STYLES[state.style]?.mult||1;
+  const tm = TIERS[state.tier]?.mult||1;
+
   const rows = state.spaces.map((sp,i) => {
     const calc = calcSpace(sp);
     const hasVal = calc.area > 0;
+    const spaceName = lang==='en' ? (sp.nameEn||sp.name) : sp.name;
+    const spaceAlt  = lang==='en' ? sp.name : (sp.nameEn||'');
+    const itemsStr  = lang==='en' ? (sp.itemsEn||sp.items) : sp.items;
     return `<div class="space-row${hasVal?' has-value':''}" id="row_${sp.id}">
       <span class="space-icon">${sp.icon}</span>
       <div class="space-info">
-        <div class="space-name">${sp.name}</div>
-        <div class="space-sub">${sp.items}</div>
+        <div class="space-name">${spaceName}</div>
+        ${spaceAlt?`<div class="space-name-en">${spaceAlt}</div>`:''}
+        <div class="space-sub">${itemsStr}</div>
       </div>
-      <div class="space-input-wrap">
-        <input class="space-input" type="number" min="0" placeholder="0"
-          value="${sp.area}"
-          onchange="updateArea('${sp.id}',this.value)"
-          oninput="updateArea('${sp.id}',this.value)"
-          inputmode="decimal"/>
-        <span class="space-unit">m²</span>
+      <div style="display:flex;flex-direction:column;gap:4px;align-items:flex-end;flex-shrink:0">
+        <div class="space-controls">
+          <div class="area-quick">
+            <button class="area-quick-btn" onclick="adjustArea('${sp.id}',-5)" title="-5">−</button>
+            <button class="area-quick-btn" onclick="adjustArea('${sp.id}',5)" title="+5">+</button>
+          </div>
+          <input class="space-input" type="number" min="0" placeholder="0"
+            value="${sp.area}"
+            onchange="updateArea('${sp.id}',this.value)"
+            oninput="updateArea('${sp.id}',this.value)"
+            inputmode="decimal"/>
+          <span class="space-unit">m²</span>
+        </div>
+        <div class="base-price-wrap">
+          <input class="base-price-input" type="number" min="50" max="5000"
+            value="${sp.base}"
+            onchange="updateBase('${sp.id}',this.value)"
+            oninput="updateBase('${sp.id}',this.value)"
+            inputmode="decimal" title="Base rate QAR/m²"/>
+          <span class="base-price-label">QAR/m²</span>
+        </div>
       </div>
-      ${(state.style&&state.tier&&hasVal)?`<div class="space-cost">${fmt(calc.total)}</div>`:'<div class="space-cost" style="color:var(--muted);font-size:10px">${sp.base} QAR/m²</div>'}
-      <button class="space-del" onclick="deleteSpace('${sp.id}')" title="删除">×</button>
+      ${(state.style&&state.tier&&hasVal)?`<div class="space-cost">${fmt(calc.total)}</div>`:`<div class="space-cost" style="color:var(--muted);font-size:10px">${sp.base} QAR/m²</div>`}
+      <button class="space-del" onclick="deleteSpace('${sp.id}')" title="删除 Delete">×</button>
     </div>`;
   }).join('');
 
-  const presets = ADD_PRESETS.filter(p => !state.spaces.find(s=>s.id===p.nameEn));
-  const presetBtns = presets.map(p =>
-    `<button class="add-btn" onclick="addPreset('${encodeURIComponent(JSON.stringify(p))}')">${p.icon} ${p.name}</button>`
-  ).join('');
+  const presets = ADD_PRESETS.filter(p => !state.spaces.find(s=>s.nameEn===p.nameEn));
+  const presetBtns = presets.map(p => {
+    const label = lang==='en' ? p.nameEn : p.name;
+    return `<button class="add-btn" onclick="addPreset('${encodeURIComponent(JSON.stringify(p))}')">${p.icon} ${label}</button>`;
+  }).join('');
 
-  const sm = STYLES[state.style]?.mult||1;
-  const tm = TIERS[state.tier]?.mult||1;
   const totalArea = state.spaces.reduce((a,sp)=>a+(parseFloat(sp.area)||0),0);
 
   return `<div class="page">
     <div class="sec-head">
-      <div class="sec-title">各空间面积输入</div>
-      <div class="sec-sub">Enter Area per Space (m²) · أدخل مساحة كل فضاء</div>
+      <div class="sec-title">${t('areaTitle')}</div>
+      <div class="sec-sub">${t('areaSub')}</div>
     </div>
-    ${(!state.style||!state.tier)?'<div class="warn-box">⚠️ 请先完成第1、2步选择风格和材料档次，才能看到实时估价。</div>':''}
+    ${(!state.style||!state.tier)?`<div class="warn-box">${t('areaWarn')}</div>`:''}
     <div class="space-list">${rows}</div>
-    ${totalArea>0?`<div class="area-summary"><span class="area-label">总面积合计 Total Area</span><span class="area-val">${totalArea.toFixed(1)} m²</span></div>`:''}
+    ${totalArea>0?`<div class="area-summary"><span class="area-label">${t('areaTotal')}</span><span class="area-val">${totalArea.toFixed(1)} m²</span></div>`:''}
     <div class="add-section">
-      <div class="add-section-title">+ 添加更多空间 Add More Spaces</div>
+      <div class="add-section-title">${t('addMore')}</div>
       <div class="add-grid">${presetBtns}</div>
       <div class="custom-add mt12">
-        <input class="custom-input" id="customSpaceName" placeholder="自定义空间名称... Custom space name" />
-        <button class="custom-confirm" onclick="addCustomSpace()">添加</button>
+        <input class="custom-input" id="customSpaceName" placeholder="${t('customPlaceholder')}"/>
+        <button class="custom-confirm" onclick="addCustomSpace()">${t('addBtn')}</button>
       </div>
     </div>
   </div>`;
@@ -621,56 +732,60 @@ function renderSpaces() {
 
 function updateArea(id, val) {
   const sp = state.spaces.find(s=>s.id===id);
-  if (sp) { sp.area = val; saveState(); updateSaveBadge(false); refreshSpaceCosts(); }
+  if (sp) { sp.area = val; saveState(); updateSaveBadge(false); }
 }
-function refreshSpaceCosts() {
-  // Lightweight refresh of just the cost displays without full re-render
-  state.spaces.forEach(sp => {
-    const calc = calcSpace(sp);
-    // just trigger full render for simplicity
-  });
-  saveState();
+function adjustArea(id, delta) {
+  const sp = state.spaces.find(s=>s.id===id);
+  if (sp) { const cur = parseFloat(sp.area)||0; sp.area = Math.max(0, cur+delta).toString(); renderAll(); }
 }
-function deleteSpace(id) {
-  state.spaces = state.spaces.filter(s=>s.id!==id);
-  renderAll();
+function updateBase(id, val) {
+  const sp = state.spaces.find(s=>s.id===id);
+  if (sp) { sp.base = Math.max(50, parseFloat(val)||50); saveState(); updateSaveBadge(false); }
 }
+function deleteSpace(id) { state.spaces = state.spaces.filter(s=>s.id!==id); renderAll(); }
 function addPreset(encoded) {
   const p = JSON.parse(decodeURIComponent(encoded));
-  state.spaces.push({ id:uid(), icon:p.icon, name:p.name, nameEn:p.nameEn, base:p.base, items:p.nameEn, qty:1, area:'' });
+  state.spaces.push({ id:uid(), icon:p.icon, name:p.name, nameEn:p.nameEn, base:p.base,
+    items:p.nameEn, itemsEn:p.nameEn, qty:1, area:'' });
   renderAll();
 }
 function addCustomSpace() {
   const inp = document.getElementById('customSpaceName');
   const name = inp?.value.trim();
   if (!name) return;
-  state.spaces.push({ id:uid(), icon:'🏠', name, nameEn:name, base:350, items:'自定义空间', qty:1, area:'' });
+  state.spaces.push({ id:uid(), icon:'🏠', name, nameEn:name, base:350, items:'自定义 Custom', itemsEn:'Custom Space', qty:1, area:'' });
   renderAll();
 }
 
-// ─── Page 3: Quote ────────────────────────────────────────────────────────────
+// ─── Page 3: Quote ─────────────────────────────────────────────────────────────
+function setDiscount(val) {
+  state.discount = val;
+  renderAll();
+}
+
 function renderQuote() {
-  const T = calcTotals();
+  const T2 = calcTotals();
   const sm = STYLES[state.style]?.mult||1;
   const tm = TIERS[state.tier]?.mult||1;
-  const sLabel = STYLES[state.style]?.label||'—';
-  const sEn    = STYLES[state.style]?.en||'—';
-  const tLabel = TIERS[state.tier]?.label||'—';
-  const today  = new Date().toLocaleDateString('zh-CN');
+  const sLabel = lang==='en' ? (STYLES[state.style]?.en||'—') : (STYLES[state.style]?.label||'—');
+  const tLabel = lang==='en' ? (TIERS[state.tier]?.en||'—')   : (TIERS[state.tier]?.label||'—');
+  const today = new Date().toLocaleDateString(lang==='en'?'en-GB':'zh-CN');
+  const disc = state.discount || 0;
 
   const breakdowns = [
-    { label:'材料货值 Materials', val:T.totalMat, color:'#1A3A5C' },
-    { label:'物流运输 Logistics (China→Qatar)', val:T.totalLog, color:'#2E6B4F' },
-    { label:'关税+VAT Customs 5%+VAT 5%', val:T.totalMat*0.10, color:'#7B5E3A' },
-    { label:'运营+利润 Overhead & Margin', val:T.totalOH, color:'#4A3060' },
-    { label:'材料未定缓冲 Contingency ±', val:T.totalCon, color:'#B88600' },
+    { label: lang==='en'?'Materials 材料货值':'材料货值 Materials',                           val:T2.totalMat,    color:'#1A3A5C' },
+    { label: lang==='en'?'Logistics China→Qatar 物流运输':'物流运输 Logistics (China→Qatar)', val:T2.totalLog,    color:'#2E6B4F' },
+    { label: lang==='en'?'Customs 5% + VAT 5% 关税+VAT':'关税+VAT Customs 5%+VAT 5%',       val:T2.totalMat*0.10,color:'#7B5E3A' },
+    { label: lang==='en'?'Overhead & Margin 运营+利润':'运营+利润 Overhead & Margin',          val:T2.totalOH,     color:'#4A3060' },
+    { label: lang==='en'?'Contingency Buffer 材料缓冲':'材料未定缓冲 Contingency ±',          val:T2.totalCon,    color:'#B88600' },
   ];
 
   const spaceRows = state.spaces.filter(sp=>parseFloat(sp.area)>0).map(sp => {
     const c = calcSpace(sp);
     const unitRate = Math.round(sp.base * sm * tm);
+    const spLabel = lang==='en' ? (sp.nameEn||sp.name) : sp.name;
     return `<tr>
-      <td>${sp.icon} ${sp.name}</td>
+      <td>${sp.icon} ${spLabel}</td>
       <td class="ta-center">${c.area} m²</td>
       <td class="ta-center">${unitRate.toLocaleString()}</td>
       <td class="ta-right">${fmt(c.mat)}</td>
@@ -680,23 +795,24 @@ function renderQuote() {
   }).join('');
 
   const payments = [
-    { batch:'第1批 签约款', pct:0.20, color:'#1A3A5C', trigger:'合同签订当日', products:'全部产品设计确认 + 定制启动金' },
-    { batch:'第2批 基础款', pct:0.15, color:'#1A5C3A', trigger:'开工前45天', products:'防水 / 基础砖材 / 结构件' },
-    { batch:'第3批 硬装款', pct:0.25, color:'#2A4A7C', trigger:'开工后第2周', products:'地板 / 墙砖 / 天花 / 门窗' },
-    { batch:'第4批 精装款', pct:0.25, color:'#5C3A1A', trigger:'开工后第6周', products:'卫浴 / 厨柜 / 定制家具 / 灯具' },
-    { batch:'第5批 尾款',  pct:0.10, color:'#3A1A5C', trigger:'竣工验收前2周', products:'软装 / 五金 / 收尾材料' },
-    { batch:'质保金 Retention', pct:0.05, color:'#2E6B4F', trigger:'质保期满12个月后返还', products:'质量担保金（不属付款项）' },
+    { batchZh:'第1批 签约款',    batchEn:'Batch 1 Deposit',         pct2:0.20, color:'#1A3A5C', triggerZh:'合同签订当日',         triggerEn:'Upon contract signing',    products:'全部产品设计确认 + 定制启动金 · Design confirmation + production start' },
+    { batchZh:'第2批 基础款',    batchEn:'Batch 2 Foundation',      pct2:0.15, color:'#1A5C3A', triggerZh:'开工前45天',            triggerEn:'45 days before start',     products:'防水 / 基础砖材 / 结构件 · Waterproofing / Base tiles / Structural' },
+    { batchZh:'第3批 硬装款',    batchEn:'Batch 3 Hard Fit-out',    pct2:0.25, color:'#2A4A7C', triggerZh:'开工后第2周',           triggerEn:'Week 2 after start',       products:'地板 / 墙砖 / 天花 / 门窗 · Flooring / Wall tiles / Ceilings / Doors' },
+    { batchZh:'第4批 精装款',    batchEn:'Batch 4 Finishing',       pct2:0.25, color:'#5C3A1A', triggerZh:'开工后第6周',           triggerEn:'Week 6 after start',       products:'卫浴 / 厨柜 / 定制家具 / 灯具 · Bathrooms / Kitchen / Custom furniture' },
+    { batchZh:'第5批 尾款',      batchEn:'Batch 5 Final',           pct2:0.10, color:'#3A1A5C', triggerZh:'竣工验收前2周',        triggerEn:'2 weeks before handover',  products:'软装 / 五金 / 收尾材料 · Soft furnishings / Hardware / Trim' },
+    { batchZh:'质保金 Retention',batchEn:'Retention (Quality Bond)',pct2:0.05, color:'#2E6B4F', triggerZh:'质保期满12个月后返还', triggerEn:'Returned after 12-month DLP',products:'质量担保金 · Quality assurance bond (not a payment)' },
   ];
   const payCards = payments.map(p => `
     <div class="pay-card">
-      <div class="pay-head" style="background:${p.color}">${p.batch}</div>
-      <div class="pay-amount">${T.gross>0?fmt(T.gross*p.pct):'QAR —'}<span class="pay-pct"> (${(p.pct*100).toFixed(0)}%)</span></div>
-      <div class="pay-trigger">📅 ${p.trigger}</div>
+      <div class="pay-head" style="background:${p.color}">${lang==='en'?p.batchEn:p.batchZh}</div>
+      <div class="pay-amount">${T2.gross>0?fmt(T2.gross*p.pct2):'QAR —'}<span class="pay-pct"> (${(p.pct2*100).toFixed(0)}%)</span></div>
+      <div class="pay-trigger">📅 ${lang==='en'?p.triggerEn:p.triggerZh}</div>
+      <div class="pay-trigger-en">${lang==='en'?p.triggerZh:p.triggerEn}</div>
       <div class="pay-products">📦 ${p.products}</div>
     </div>`).join('');
 
   const bRows = breakdowns.map(b => {
-    const p = T.gross>0 ? b.val/T.gross : 0;
+    const p = T2.gross>0 ? b.val/T2.gross : 0;
     return `<div class="b-row">
       <div class="b-dot" style="background:${b.color}"></div>
       <div class="b-label">${b.label}</div>
@@ -706,14 +822,43 @@ function renderQuote() {
     </div>`;
   }).join('');
 
+  const discOptions = [
+    { label: lang==='en'?'No Adj.':'无调整',    val: 0     },
+    { label: '-3%',  val: -0.03 },
+    { label: '-5%',  val: -0.05 },
+    { label: '-8%',  val: -0.08 },
+    { label: '-10%', val: -0.10 },
+    { label: '+5%',  val: 0.05  },
+    { label: '+10%', val: 0.10  },
+  ];
+  const discBtns = discOptions.map(d =>
+    `<button class="disc-btn${disc===d.val?' active':''}${d.val<0?' disc-neg':''}" onclick="setDiscount(${d.val})">${d.label}</button>`
+  ).join('');
+
+  const terms = lang==='en' ? [
+    'This is a preliminary estimate. Final contract price is subject to confirmed material specifications (±15% variance).',
+    '本报价为概算，材料品牌及规格未最终确认，实际合同价格以确认材料清单后为准，浮动不超过 ±15%。',
+    'هذا عرض سعر تقريبي. السعر النهائي مرهون بتأكيد المواد وقد يتفاوت بنسبة ±15%.',
+    'Quotation valid 30 days from issue date · 报价有效期30天 · صالح 30 يومًا',
+    'All products are custom-manufactured in China. Total lead time approx. 45 days. Payment must be received 45 days before each project milestone.',
+    'Production and shipping commence upon cleared payment. Title remains with Supplier until installation acceptance.',
+  ] : [
+    '本报价为概算，材料品牌及规格未最终确认，实际合同价格以确认材料清单后为准，浮动不超过 ±15%。',
+    'This is a preliminary estimate. Final contract price subject to confirmed material specifications (±15% variance).',
+    'هذا عرض سعر تقريبي. السعر النهائي مرهون بتأكيد المواد وقد يتفاوت بنسبة ±15%.',
+    '报价有效期：30天（自出具之日起）· Valid 30 days · صالح 30 يومًا',
+    '所有产品从中国定制生产，全程供货周期约45天，付款须在对应工程节点前45天完成。',
+    '付款到账后方启动产品生产及发运，所有权在安装验收前归乙方所有。',
+  ];
+
   return `<div class="page">
     <div class="client-row">
       <div class="client-field">
-        <label class="client-label">客户姓名 Client Name</label>
+        <label class="client-label">${t('clientName')}</label>
         <input class="client-input" placeholder="Al-____ Family" value="${state.clientName}" oninput="state.clientName=this.value;saveState()"/>
       </div>
       <div class="client-field">
-        <label class="client-label">项目名称 Project Name</label>
+        <label class="client-label">${t('projectName')}</label>
         <input class="client-input" placeholder="Villa Project #___" value="${state.projectName}" oninput="state.projectName=this.value;saveState()"/>
       </div>
     </div>
@@ -721,70 +866,69 @@ function renderQuote() {
     <div class="quote-card">
       <div class="quote-header-band">
         <div>
-          <div class="quote-htitle">QUOTATION / عرض سعر / 报价单</div>
+          <div class="quote-htitle">${t('quoteTitle')}</div>
           <div class="quote-hmeta">
             Ref: ${state.quoteRef}<br>
-            风格: ${sLabel} (${sEn}) &nbsp;·&nbsp; 材料: ${tLabel}<br>
-            总面积: ${T.totalArea.toFixed(1)} m² &nbsp;·&nbsp; 空间数: ${state.spaces.filter(s=>parseFloat(s.area)>0).length}
+            ${t('styleLabel')}: ${sLabel} &nbsp;·&nbsp; ${t('matLabel')}: ${tLabel}<br>
+            ${t('areaLabel')}: ${T2.totalArea.toFixed(1)} m² &nbsp;·&nbsp; ${t('spacesLabel')}: ${state.spaces.filter(s=>parseFloat(s.area)>0).length}
+            ${disc!==0?`<br><span style="color:${disc<0?'#7EC8A0':'#F0A050'}">⚑ ${disc>0?'+':''}${(disc*100).toFixed(0)}% ${lang==='en'?'adjustment applied':'调整已应用'}</span>`:''}
           </div>
         </div>
-        <div class="quote-hdate">报价日期<br>${today}<br><br>有效期 30天</div>
+        <div class="quote-hdate">${t('quoteDate')}<br>${today}<br><br>${t('validDays')}</div>
       </div>
 
       <div class="price-band">
-        <div class="price-label">报价区间 / Price Range (材料未定 ±15%)</div>
+        <div class="price-label">${t('priceRangeLabel')}</div>
         <div class="price-range">
-          <span class="price-low">${T.gross>0?fmt(T.low):'QAR —'}</span>
+          <span class="price-low">${T2.gross>0?fmt(T2.low):'QAR —'}</span>
           <span class="price-sep">—</span>
-          <span class="price-high">${T.gross>0?fmt(T.high):'QAR —'}</span>
+          <span class="price-high">${T2.gross>0?fmt(T2.high):'QAR —'}</span>
         </div>
-        <div class="price-note">⚠️ 材料品牌未最终确认，价格浮动 ±15% · Materials unconfirmed, ±15% variance</div>
-        ${T.gross>0&&T.totalArea>0?`<div class="price-sqm">综合单价约 ≈ QAR ${Math.round(T.gross/T.totalArea).toLocaleString()} / m²</div>`:''}
+        <div class="price-note">${t('priceNote')}</div>
+        ${T2.gross>0&&T2.totalArea>0?`<div class="price-sqm">${t('sqmLabel')} ≈ QAR ${Math.round(T2.gross/T2.totalArea).toLocaleString()} / m²</div>`:''}
+        <div class="manual-override">
+          <span class="manual-override-label">${t('manualAdjLabel')}</span>
+          <div class="manual-discount">${discBtns}</div>
+        </div>
       </div>
 
       <div class="breakdown-wrap">
-        <div class="breakdown-title">费用构成 Cost Breakdown</div>
+        <div class="breakdown-title">${t('breakdownTitle')}</div>
         ${bRows}
         <div class="b-total">
-          <span>合计 Total（中间值）</span>
-          <span class="text-gold">${T.gross>0?fmt(T.gross):'QAR —'}</span>
+          <span>${t('breakdownTotal')}</span>
+          <span class="text-gold">${T2.gross>0?fmt(T2.gross):'QAR —'}</span>
         </div>
       </div>
     </div>
 
     <div class="card">
-      <div class="card-head">📊 各空间明细 Space Breakdown</div>
+      <div class="card-head">${t('spaceBreakTitle')}</div>
       <div class="tbl-wrap">
         <table>
           <thead><tr>
-            <th>空间</th><th>面积</th><th>单价/m²</th><th>材料成本</th><th>物流+税费</th><th>小计</th>
+            <th>${t('colSpace')}</th><th>${t('colArea')}</th><th>${t('colUnit')}</th><th>${t('colMat')}</th><th>${t('colLogTax')}</th><th>${t('colSubtotal')}</th>
           </tr></thead>
-          <tbody>${spaceRows||'<tr><td colspan="6" style="text-align:center;color:var(--muted);padding:20px">请在第3步输入面积</td></tr>'}</tbody>
+          <tbody>${spaceRows||`<tr><td colspan="6" style="text-align:center;color:var(--muted);padding:20px">${t('noAreaMsg')}</td></tr>`}</tbody>
         </table>
       </div>
     </div>
 
     <div class="card">
-      <div class="card-head">💳 付款计划 Payment Schedule · جدول الدفعات</div>
+      <div class="card-head">${t('payTitle')}</div>
       <div style="padding:14px"><div class="pay-grid">${payCards}</div></div>
     </div>
 
     <div class="card">
-      <div class="card-head">📋 报价说明 Terms · شروط العرض</div>
+      <div class="card-head">${t('termsTitle')}</div>
       <div style="padding:12px">
-        ${['本报价为概算，材料品牌及规格未最终确认，实际合同价格以确认材料清单后为准，浮动不超过 ±15%。',
-           'This is a preliminary estimate. Final contract price subject to confirmed material specifications (±15% variance).',
-           'هذا عرض سعر تقريبي. السعر النهائي مرهون بتأكيد المواد وقد يتفاوت بنسبة ±15%.',
-           '报价有效期：30天（自出具之日起）· Valid 30 days · صالح 30 يومًا',
-           '所有产品从中国定制生产，全程供货周期约45天，付款须在对应工程节点前45天完成。',
-           '付款到账后方启动产品生产及发运，所有权在安装验收前归乙方所有。'].map((t,i)=>
-          `<div class="disc" style="border-left:3px solid ${['#1A3A5C','#2E6B4F','#B88600','#555','#1A3A5C','#7B5E3A'][i]}">${t}</div>`).join('')}
+        ${terms.map((txt,i)=>`<div class="disc" style="border-left:3px solid ${['#1A3A5C','#2E6B4F','#B88600','#555','#1A3A5C','#7B5E3A'][i]}">${txt}</div>`).join('')}
       </div>
     </div>
   </div>`;
 }
 
-// ─── Main render ──────────────────────────────────────────────────────────────
+// ─── Main render ───────────────────────────────────────────────────────────────
 function renderMain() {
   const el = document.getElementById('mainContent');
   let html = '';
@@ -799,74 +943,44 @@ function renderMain() {
 
 function renderBottom() {
   const el = document.getElementById('bottomBar');
-  const t = state.tab;
+  const tab = state.tab;
   const hasSpaces = state.spaces.some(s=>parseFloat(s.area)>0);
-  const canNext = (t===0&&state.style)||(t===1&&state.tier)||(t===2&&hasSpaces);
+  const canNext = (tab===0&&state.style)||(tab===1&&state.tier)||(tab===2&&hasSpaces);
 
-  if (t === 3) {
+  if (tab === 3) {
     el.innerHTML = `
-      <button class="btn-back" onclick="goTab(2)">← 返回修改</button>
-      <button class="btn-reset" onclick="resetQuote()">🔄 新报价</button>
-      <button class="btn-print" onclick="window.print()">🖨️ 打印 / Print</button>`;
+      <button class="btn-back" onclick="goTab(2)">${t('backBtn')}</button>
+      <button class="btn-reset" onclick="resetQuote()">${t('newQuote')}</button>
+      <button class="btn-print" onclick="window.print()">${t('printBtn')}</button>`;
   } else {
     el.innerHTML = `
-      ${t>0?`<button class="btn-back" onclick="goTab(${t-1})">← 上一步</button>`:'<div></div>'}
-      <button class="btn-next" ${canNext?'':'disabled'} onclick="goTab(${t+1})">
-        ${t===2?'生成报价单 →':'下一步 Next →'}
+      ${tab>0?`<button class="btn-back" onclick="goTab(${tab-1})">${t('prevStep')}</button>`:'<div></div>'}
+      <button class="btn-next" ${canNext?'':'disabled'} onclick="goTab(${tab+1})">
+        ${tab===2?t('genQuote'):t('nextStep')}
       </button>`;
   }
 }
 
 function resetQuote() {
-  if (!confirm('确定要清空当前报价，开始新报价？')) return;
+  if (!confirm(t('confirmReset'))) return;
   state = {
     tab: 0, style: null, tier: null,
     spaces: JSON.parse(JSON.stringify(DEFAULT_SPACES)),
     clientName: '', projectName: '',
     quoteRef: 'QQ-' + Date.now().toString(36).toUpperCase(),
+    discount: 0, globalAdj: 0,
   };
   renderAll();
 }
 
-// ─── Install prompt ───────────────────────────────────────────────────────────
-let deferredPrompt = null;
-window.addEventListener('beforeinstallprompt', (e) => {
-  e.preventDefault(); deferredPrompt = e;
-  showInstallBanner();
-});
-function showInstallBanner() {
-  if (localStorage.getItem('qvq_installed')) return;
-  const banner = document.createElement('div');
-  banner.className = 'install-banner';
-  banner.innerHTML = `
-    <span style="font-size:22px">📲</span>
-    <div class="install-banner-text">
-      <strong>安装到主屏幕</strong> Install App<br>
-      <span style="font-size:11px;color:var(--muted)">iPhone: Safari→分享→添加到主屏幕 · Mac: Chrome地址栏安装图标</span>
-    </div>
-    <button onclick="installApp()" style="background:var(--gold);border:none;border-radius:8px;padding:8px 14px;color:#000;font-weight:700;cursor:pointer;font-size:12px;white-space:nowrap">安装</button>
-    <span class="install-banner-close" onclick="dismissInstall()">×</span>`;
-  document.getElementById('mainContent').prepend(banner);
-}
-function installApp() {
-  if (deferredPrompt) { deferredPrompt.prompt(); deferredPrompt.userChoice.then(r=>{ if(r.outcome==='accepted') { localStorage.setItem('qvq_installed','1'); } }); }
-}
-function dismissInstall() { localStorage.setItem('qvq_installed','1'); document.querySelector('.install-banner')?.remove(); }
-
-// ─── Service Worker (PWA offline) ────────────────────────────────────────────
+// ─── PWA ──────────────────────────────────────────────────────────────────────
 if ('serviceWorker' in navigator) {
-  const swCode = `
-const CACHE='qvq-v1';
-const URLS=[self.location.pathname];
-self.addEventListener('install',e=>e.waitUntil(caches.open(CACHE).then(c=>c.addAll(URLS))));
-self.addEventListener('fetch',e=>e.respondWith(caches.match(e.request).then(r=>r||fetch(e.request))));
-`;
-  const blob = new Blob([swCode], { type:'application/javascript' });
-  const swUrl = URL.createObjectURL(blob);
-  navigator.serviceWorker.register(swUrl).catch(()=>{});
+  const swCode = `const CACHE='qvq-v2';const URLS=[self.location.pathname];self.addEventListener('install',e=>e.waitUntil(caches.open(CACHE).then(c=>c.addAll(URLS))));self.addEventListener('fetch',e=>e.respondWith(caches.match(e.request).then(r=>r||fetch(e.request))));`;
+  const blob = new Blob([swCode], {type:'application/javascript'});
+  navigator.serviceWorker.register(URL.createObjectURL(blob)).catch(()=>{});
 }
 
-// ─── Init ─────────────────────────────────────────────────────────────────────
+// ─── Init ──────────────────────────────────────────────────────────────────────
 loadState();
 renderAll();
 setInterval(saveState, 10000);
