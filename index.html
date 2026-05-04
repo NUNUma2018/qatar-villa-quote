@@ -28,7 +28,7 @@
   --font-body: 'DM Sans', system-ui, sans-serif;
 }
 * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
-html, body { height: 100%; overflow-x: hidden; }
+html, body { overflow-x: hidden; }
 body { font-family: var(--font-body); background: var(--navy); color: var(--cream); min-height: 100vh; min-height: 100dvh; }
 
 .bg-layer { position: fixed; inset: 0; pointer-events: none; z-index: 0;
@@ -350,9 +350,10 @@ body.lang-en .en-only { display: block; }
 .ar { font-family: 'Noto Sans Arabic', 'Segoe UI', sans-serif; direction: rtl; unicode-bidi: embed; }
 
 /* ═══════════════════════════════════════════════════════════════════════════
-   PRINT CONTAINER — hidden by default; shown via #printRoot.show class.
-   When shown, it COVERS THE ENTIRE SCREEN. This is the only reliable way
-   to make iOS Safari + Mac Safari print the right content with backgrounds.
+   PRINT PREVIEW MODE (in-page overlay used as a fallback)
+   The PRIMARY print method opens a popup window with a clean print-only doc
+   (most reliable on iOS Safari, Mac Safari, Chrome). This overlay is shown
+   when popup is blocked or as on-screen preview before printing.
    ═══════════════════════════════════════════════════════════════════════════ */
 
 #printRoot {
@@ -361,34 +362,6 @@ body.lang-en .en-only { display: block; }
   color: #E8EDF2;
   font-family: 'DM Sans', 'Segoe UI', Arial, sans-serif;
 }
-
-/* When in "print preview" mode (shown on screen), cover the entire viewport */
-body.printing #printRoot {
-  display: block;
-  position: fixed;
-  inset: 0;
-  z-index: 99999;
-  overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
-  padding: 0;
-}
-body.printing > *:not(#printRoot):not(.printing-toolbar) {
-  display: none !important;
-}
-
-/* Make each page look like a printed A4 page during preview */
-body.printing #printRoot .pr-page {
-  width: 100%;
-  max-width: 210mm;
-  margin: 0 auto 12px;
-  padding: 12mm 10mm;
-  background: #0D1F35;
-  box-shadow: 0 4px 30px rgba(0,0,0,0.5);
-  min-height: 270mm;
-  box-sizing: border-box;
-}
-body.printing #printRoot .pr-page:first-child { margin-top: 80px; }
-body.printing #printRoot .pr-page:last-child { margin-bottom: 60px; }
 
 /* Print preview toolbar (shown on top when in print mode) */
 .printing-toolbar {
@@ -402,7 +375,6 @@ body.printing #printRoot .pr-page:last-child { margin-bottom: 60px; }
   padding: 10px 14px;
   padding-top: max(10px, env(safe-area-inset-top));
   border-bottom: 1px solid rgba(184,134,0,0.4);
-  display: flex;
   gap: 8px;
   align-items: center;
   justify-content: space-between;
@@ -579,65 +551,10 @@ body.printing .printing-toolbar { display: flex; }
 }
 
 /* ═══════════════════════════════════════════════════════════════════════════
-   @media print rules — applied when user actually invokes print
+   No @media print rules in the main page.
+   Printing happens in a popup window with its own clean stylesheet.
+   See buildPrintHTML() in JavaScript below.
    ═══════════════════════════════════════════════════════════════════════════ */
-@media print {
-  @page {
-    size: A4 portrait;
-    margin: 0;
-  }
-
-  /* CRITICAL: force backgrounds to print */
-  html, body, * {
-    -webkit-print-color-adjust: exact !important;
-    print-color-adjust: exact !important;
-    color-adjust: exact !important;
-  }
-
-  html { background: #0D1F35 !important; margin: 0 !important; padding: 0 !important; }
-  body {
-    background: #0D1F35 !important;
-    color: #E8EDF2 !important;
-    margin: 0 !important;
-    padding: 0 !important;
-    min-height: 0 !important;
-  }
-
-  /* Hide all non-print UI completely */
-  header, .tab-nav, .bottom-bar, .bg-layer, .bg-grid,
-  #mainContent, .sync-modal-overlay, .printing-toolbar {
-    display: none !important;
-  }
-
-  /* Print root takes over the whole page */
-  #printRoot {
-    display: block !important;
-    position: static !important;
-    width: 100% !important;
-    background: #0D1F35 !important;
-    padding: 0 !important;
-    margin: 0 !important;
-    overflow: visible !important;
-    box-shadow: none !important;
-  }
-
-  /* Page breaks — reset preview-only screen styling */
-  .pr-page {
-    page-break-after: always;
-    background: #0D1F35 !important;
-    padding: 10mm !important;
-    margin: 0 !important;
-    max-width: none !important;
-    width: 100% !important;
-    box-shadow: none !important;
-    min-height: 0 !important;
-  }
-  body.printing #printRoot .pr-page:first-child { margin-top: 0 !important; }
-  body.printing #printRoot .pr-page:last-child { margin-bottom: 0 !important; }
-  .pr-page:last-child, .pr-page.no-break-after { page-break-after: auto; }
-  .pr-card, .pr-pay-card, .pr-b-row { page-break-inside: avoid; }
-  .pr-header, .pr-client-row, .pr-price-band { page-break-inside: avoid; }
-}
 
 input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer-spin-button { opacity: 0.4; }
 </style>
