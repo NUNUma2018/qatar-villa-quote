@@ -350,20 +350,83 @@ body.lang-en .en-only { display: block; }
 .ar { font-family: 'Noto Sans Arabic', 'Segoe UI', sans-serif; direction: rtl; unicode-bidi: embed; }
 
 /* ═══════════════════════════════════════════════════════════════════════════
-   PRINT CONTAINER (always in DOM, hidden on screen, shown on print)
+   PRINT CONTAINER — hidden by default; shown via #printRoot.show class.
+   When shown, it COVERS THE ENTIRE SCREEN. This is the only reliable way
+   to make iOS Safari + Mac Safari print the right content with backgrounds.
    ═══════════════════════════════════════════════════════════════════════════ */
 
 #printRoot {
-  position: absolute;
-  left: -10000px;
-  top: 0;
-  width: 210mm;
+  display: none;
   background: #0D1F35;
   color: #E8EDF2;
   font-family: 'DM Sans', 'Segoe UI', Arial, sans-serif;
-  padding: 10mm;
-  /* Force background painting using inline body wrapper trick */
 }
+
+/* When in "print preview" mode (shown on screen), cover the entire viewport */
+body.printing #printRoot {
+  display: block;
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  padding: 0;
+}
+body.printing > *:not(#printRoot):not(.printing-toolbar) {
+  display: none !important;
+}
+
+/* Make each page look like a printed A4 page during preview */
+body.printing #printRoot .pr-page {
+  width: 100%;
+  max-width: 210mm;
+  margin: 0 auto 12px;
+  padding: 12mm 10mm;
+  background: #0D1F35;
+  box-shadow: 0 4px 30px rgba(0,0,0,0.5);
+  min-height: 270mm;
+  box-sizing: border-box;
+}
+body.printing #printRoot .pr-page:first-child { margin-top: 80px; }
+body.printing #printRoot .pr-page:last-child { margin-bottom: 60px; }
+
+/* Print preview toolbar (shown on top when in print mode) */
+.printing-toolbar {
+  display: none;
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100000;
+  background: rgba(13,31,53,0.95);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  padding: 10px 14px;
+  padding-top: max(10px, env(safe-area-inset-top));
+  border-bottom: 1px solid rgba(184,134,0,0.4);
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+body.printing .printing-toolbar { display: flex; }
+.printing-toolbar-info {
+  font-size: 11px; color: rgba(232,237,242,0.6); flex: 1; min-width: 100px;
+}
+.printing-toolbar-btns { display: flex; gap: 6px; flex-shrink: 0; }
+.printing-btn {
+  padding: 8px 14px; border-radius: 8px; border: none;
+  font-family: 'DM Sans', sans-serif; font-size: 12px; font-weight: 700;
+  cursor: pointer; white-space: nowrap;
+}
+.printing-btn-print {
+  background: linear-gradient(135deg, #1A3A5C, #B88600);
+  color: #fff;
+}
+.printing-btn-close {
+  background: rgba(255,255,255,0.1); color: #E8EDF2;
+  border: 1px solid rgba(255,255,255,0.2);
+}
+
 #printRoot * {
   -webkit-print-color-adjust: exact !important;
   print-color-adjust: exact !important;
@@ -516,27 +579,22 @@ body.lang-en .en-only { display: block; }
 }
 
 /* ═══════════════════════════════════════════════════════════════════════════
-   @media print rules
+   @media print rules — applied when user actually invokes print
    ═══════════════════════════════════════════════════════════════════════════ */
 @media print {
   @page {
     size: A4 portrait;
-    margin: 0;     /* margins handled by #printRoot padding so background fills page */
+    margin: 0;
   }
 
-  /* CRITICAL: force background printing on every element */
+  /* CRITICAL: force backgrounds to print */
   html, body, * {
     -webkit-print-color-adjust: exact !important;
     print-color-adjust: exact !important;
     color-adjust: exact !important;
   }
 
-  html {
-    background: #0D1F35 !important;
-    margin: 0 !important;
-    padding: 0 !important;
-  }
-
+  html { background: #0D1F35 !important; margin: 0 !important; padding: 0 !important; }
   body {
     background: #0D1F35 !important;
     color: #E8EDF2 !important;
@@ -545,27 +603,38 @@ body.lang-en .en-only { display: block; }
     min-height: 0 !important;
   }
 
-  /* Hide all interactive UI */
+  /* Hide all non-print UI completely */
   header, .tab-nav, .bottom-bar, .bg-layer, .bg-grid,
-  #mainContent, .sync-modal-overlay {
+  #mainContent, .sync-modal-overlay, .printing-toolbar {
     display: none !important;
   }
 
-  /* Show print root in normal flow */
+  /* Print root takes over the whole page */
   #printRoot {
+    display: block !important;
     position: static !important;
-    left: 0 !important;
     width: 100% !important;
+    background: #0D1F35 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    overflow: visible !important;
+    box-shadow: none !important;
+  }
+
+  /* Page breaks — reset preview-only screen styling */
+  .pr-page {
+    page-break-after: always;
     background: #0D1F35 !important;
     padding: 10mm !important;
     margin: 0 !important;
-    display: block !important;
+    max-width: none !important;
+    width: 100% !important;
+    box-shadow: none !important;
+    min-height: 0 !important;
   }
-
-  /* Page breaks */
-  .pr-page { page-break-after: always; padding: 0; }
-  .pr-page:last-child { page-break-after: auto; }
-  .pr-page.no-break-after { page-break-after: auto; }
+  body.printing #printRoot .pr-page:first-child { margin-top: 0 !important; }
+  body.printing #printRoot .pr-page:last-child { margin-bottom: 0 !important; }
+  .pr-page:last-child, .pr-page.no-break-after { page-break-after: auto; }
   .pr-card, .pr-pay-card, .pr-b-row { page-break-inside: avoid; }
   .pr-header, .pr-client-row, .pr-price-band { page-break-inside: avoid; }
 }
@@ -624,8 +693,17 @@ input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer
 
 <main id="mainContent"></main>
 
-<!-- Print container always in DOM (offscreen on screen, becomes visible on print) -->
+<!-- Print container always in DOM (hidden on screen, shown for print preview) -->
 <div id="printRoot"></div>
+
+<!-- Print preview toolbar (only visible when body.printing is set) -->
+<div class="printing-toolbar" id="printingToolbar">
+  <div class="printing-toolbar-info" id="printingInfo">📄 打印预览 / Print Preview</div>
+  <div class="printing-toolbar-btns">
+    <button class="printing-btn printing-btn-print" onclick="actuallyPrint()">🖨️ 打印 / Print</button>
+    <button class="printing-btn printing-btn-close" onclick="exitPrintMode()">✕ 关闭 / Close</button>
+  </div>
+</div>
 
 <!-- Sync modal -->
 <div class="sync-modal-overlay" id="syncModal" onclick="if(event.target===this)closeSyncModal()">
@@ -1745,14 +1823,83 @@ function renderBottom() {
   }
 }
 
-// ─── Print trigger (ensures print root is up-to-date) ─────────────────────────
-function doPrint() {
-  renderPrintRoot();
-  // small delay for layout settle (esp. on iOS Safari)
-  setTimeout(() => {
-    window.print();
-  }, 100);
+// ─── Print flow (iOS Safari + Mac Safari + Chrome compatible) ─────────────────
+// Strategy:
+//   1. Click "Print" → enter print preview mode (full-screen overlay)
+//   2. User sees the EXACT print output filling their screen, can scroll all 3 pages
+//   3. Click "Print" in toolbar → calls window.print()
+//   4. After print or cancel, exit preview mode
+//
+// This works around iOS Safari's print() unreliability AND solves the "only
+// prints visible part" problem because the print content IS the only thing
+// rendered when print() is called.
+
+function isIOSDevice() {
+  return /iPad|iPhone|iPod/.test(navigator.userAgent) ||
+         (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
 }
+
+function doPrint() {
+  // 1. Re-render print root with latest data
+  renderPrintRoot();
+
+  // 2. Update toolbar with stats + iOS instructions
+  const T2 = calcTotals();
+  const info = document.getElementById('printingInfo');
+  if (info) {
+    const iOS = isIOSDevice();
+    if (iOS) {
+      info.innerHTML = `📄 ${state.clientName||'Quote'} · ${T2.totalArea.toFixed(1)} m²<br>
+        <span style="font-size:9px;color:rgba(255,184,0,0.85)">⓵ 点击「打印」按钮 → ⓶ 在打印对话框「双指张开」缩略图 → ⓷ 分享 → 存到「文件」/邮件<br>Tap Print → pinch-zoom preview → Share → Save to Files</span>`;
+    } else {
+      info.innerHTML = `📄 ${state.clientName||'Quote'} · ${T2.totalArea.toFixed(1)} m² · ${T2.gross>0?fmt(T2.gross):'—'}<br>
+        <span style="font-size:9px;color:rgba(232,237,242,0.5)">在打印对话框选择「保存为 PDF」即可导出 · Choose "Save as PDF" in print dialog · 必须勾选「背景图形」/ Enable "Background graphics"</span>`;
+    }
+  }
+
+  // 3. Enter print mode — show #printRoot full-screen
+  document.body.classList.add('printing');
+  window.scrollTo(0, 0);
+
+  // 4. On desktop with reliable window.print(), we can auto-trigger after a tick.
+  //    On iOS, we let the user tap the toolbar "Print" button (more reliable).
+  if (!isIOSDevice()) {
+    // Desktop: show preview briefly then trigger print dialog
+    setTimeout(() => {
+      try {
+        window.print();
+      } catch(e) {
+        console.warn('Print failed:', e);
+      }
+    }, 350);
+  }
+  // iOS: user must tap the Print button — window.print() is too unreliable to auto-call
+}
+
+function actuallyPrint() {
+  try {
+    window.print();
+  } catch(e) {
+    alert('打印失败 / Print failed: ' + e.message + '\n\n请使用 Safari 的「分享」→「打印」功能。\nPlease use Safari Share → Print menu.');
+  }
+}
+
+function exitPrintMode() {
+  document.body.classList.remove('printing');
+  window.scrollTo(0, 0);
+}
+
+// Auto-exit print mode after the print dialog closes
+window.addEventListener('afterprint', () => {
+  setTimeout(() => exitPrintMode(), 100);
+});
+
+// ESC key exits print mode (desktop)
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape' && document.body.classList.contains('printing')) {
+    exitPrintMode();
+  }
+});
 
 function resetQuote() {
   if (!confirm(t('confirmReset'))) return;
