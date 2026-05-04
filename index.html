@@ -7,7 +7,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
 <meta name="apple-mobile-web-app-title" content="Qatar Quote"/>
 <meta name="theme-color" content="#0D1F35"/>
-<title>◈ Qatar Villa Quote v2</title>
+<title>◈ Qatar Villa Quote v3</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=DM+Sans:wght@300;400;500;600;700&family=Noto+Sans+Arabic:wght@400;600;700&display=swap" rel="stylesheet"/>
 <style>
@@ -64,6 +64,65 @@ header { position: sticky; top: 0; z-index: 200; background: rgba(13,31,53,0.92)
 
 .save-badge { font-size: 10px; padding: 4px 10px; border-radius: 20px;
   background: rgba(46,107,79,0.25); border: 1px solid rgba(46,107,79,0.5); color: #7EC8A0; }
+
+/* Sync menu button */
+.sync-btn {
+  width: 30px; height: 30px; border-radius: 50%; border: 1px solid rgba(184,134,0,0.4);
+  background: rgba(184,134,0,0.1); color: var(--gold); font-size: 14px; cursor: pointer;
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+}
+.sync-btn:active { background: rgba(184,134,0,0.25); }
+
+/* Sync modal */
+.sync-modal-overlay {
+  position: fixed; inset: 0; z-index: 1000; background: rgba(0,0,0,0.7);
+  backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+  display: none; align-items: center; justify-content: center; padding: 16px;
+}
+.sync-modal-overlay.show { display: flex; }
+.sync-modal {
+  background: linear-gradient(180deg, var(--navy2), var(--navy));
+  border: 1px solid rgba(184,134,0,0.4); border-radius: 16px;
+  width: 100%; max-width: 460px; max-height: 90vh; overflow-y: auto;
+  box-shadow: 0 30px 60px rgba(0,0,0,0.5);
+}
+.sync-modal-head {
+  padding: 16px 20px; border-bottom: 1px solid var(--border);
+  display: flex; justify-content: space-between; align-items: center;
+}
+.sync-modal-title { font-family: var(--font-display); font-size: 18px; color: var(--gold); font-weight: 700; }
+.sync-close {
+  width: 28px; height: 28px; border-radius: 50%; background: var(--glass2);
+  border: 1px solid var(--border); color: var(--cream); font-size: 16px; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+}
+.sync-modal-body { padding: 14px 20px 20px; }
+.sync-section { margin-bottom: 16px; }
+.sync-section:last-child { margin-bottom: 0; }
+.sync-section-title { font-size: 11px; color: var(--gold); letter-spacing: 1px;
+  text-transform: uppercase; margin-bottom: 8px; font-weight: 700; }
+.sync-section-desc { font-size: 11px; color: var(--muted); line-height: 1.6; margin-bottom: 10px; }
+.sync-action-btn {
+  width: 100%; padding: 12px 14px; border-radius: 10px; border: 1px solid var(--border);
+  background: var(--glass); color: var(--cream); font-family: var(--font-body); font-size: 13px;
+  cursor: pointer; display: flex; align-items: center; gap: 12px; margin-bottom: 8px;
+  transition: all 0.18s; text-align: left;
+}
+.sync-action-btn:hover, .sync-action-btn:active {
+  border-color: var(--gold); background: rgba(184,134,0,0.12); color: var(--gold);
+}
+.sync-action-icon { font-size: 18px; flex-shrink: 0; }
+.sync-action-text { flex: 1; }
+.sync-action-name { font-size: 13px; font-weight: 600; }
+.sync-action-sub { font-size: 10px; color: rgba(255,255,255,0.5); margin-top: 2px; }
+.sync-file-input { display: none; }
+.share-url-box {
+  background: rgba(0,0,0,0.3); border: 1px solid var(--border); border-radius: 8px;
+  padding: 8px 10px; font-size: 10px; color: var(--cream); word-break: break-all;
+  font-family: monospace; margin-top: 6px; max-height: 80px; overflow-y: auto;
+}
+.copy-feedback { font-size: 10px; color: #7EC8A0; margin-top: 4px; display: none; }
+.copy-feedback.show { display: block; }
 
 /* ── Nav ── */
 .tab-nav { position: sticky; top: 56px; z-index: 190; background: rgba(13,31,53,0.92);
@@ -193,31 +252,6 @@ main { position: relative; z-index: 1; max-width: 880px; margin: 0 auto; padding
 .area-label { font-size: 12px; color: var(--muted); }
 .area-val { font-size: 16px; font-weight: 800; color: var(--gold); }
 
-/* ── Price edit panel ── */
-.price-edit-panel { background: rgba(184,134,0,0.07); border: 1px solid rgba(184,134,0,0.25);
-  border-radius: 12px; padding: 14px 16px; margin-bottom: 18px; }
-.price-edit-title { font-size: 12px; font-weight: 700; color: var(--gold); margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
-.price-edit-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 8px; }
-.price-edit-row { display: flex; align-items: center; justify-content: space-between; background: rgba(255,255,255,0.04);
-  border-radius: 8px; padding: 8px 12px; gap: 8px; }
-.price-edit-name { font-size: 11px; color: var(--cream); flex: 1; }
-.price-edit-input { width: 70px; background: rgba(184,134,0,0.12); border: 1px solid rgba(184,134,0,0.4);
-  border-radius: 6px; color: var(--gold); font-size: 12px; font-weight: 700; padding: 4px 8px;
-  text-align: center; outline: none; font-family: var(--font-body); }
-.price-edit-input:focus { border-color: var(--gold2); background: rgba(184,134,0,0.25); }
-.price-edit-unit { font-size: 9px; color: rgba(184,134,0,0.6); white-space: nowrap; }
-.price-reset-btn { background: rgba(184,134,0,0.15); border: 1px solid rgba(184,134,0,0.3);
-  border-radius: 6px; color: var(--gold); font-size: 10px; cursor: pointer; padding: 4px 10px; white-space: nowrap; }
-
-/* ── Global price multiplier ── */
-.global-adj { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; flex-wrap: wrap; }
-.global-adj-label { font-size: 11px; color: var(--muted); }
-.global-adj-btns { display: flex; gap: 6px; flex-wrap: wrap; }
-.adj-btn { padding: 5px 12px; border-radius: 8px; border: 1px solid var(--border); background: var(--glass);
-  color: var(--cream); font-size: 11px; cursor: pointer; font-family: var(--font-body); transition: all 0.18s; }
-.adj-btn:hover { border-color: var(--gold); color: var(--gold); background: rgba(184,134,0,0.1); }
-.adj-btn.active { background: rgba(184,134,0,0.2); border-color: var(--gold); color: var(--gold); font-weight: 700; }
-
 /* ── Quote ── */
 .client-row { display: flex; gap: 12px; margin-bottom: 18px; flex-wrap: wrap; }
 .client-field { flex: 1; min-width: 180px; }
@@ -246,15 +280,12 @@ main { position: relative; z-index: 1; max-width: 880px; margin: 0 auto; padding
 .manual-override { display: flex; align-items: center; gap: 10px; margin-top: 14px; padding: 10px 16px;
   background: rgba(255,255,255,0.04); border-radius: 10px; flex-wrap: wrap; justify-content: center; }
 .manual-override-label { font-size: 11px; color: var(--muted); }
-.manual-discount { display: flex; gap: 6px; }
+.manual-discount { display: flex; gap: 6px; flex-wrap: wrap; }
 .disc-btn { padding: 4px 10px; border-radius: 6px; border: 1px solid var(--border); background: var(--glass);
   color: var(--muted); font-size: 10px; cursor: pointer; font-family: var(--font-body); transition: all 0.18s; }
 .disc-btn.active { background: rgba(46,107,79,0.25); border-color: rgba(46,107,79,0.5); color: #7EC8A0; font-weight: 700; }
 .disc-btn.disc-neg { }
 .disc-btn.disc-neg.active { background: rgba(180,60,60,0.2); border-color: rgba(180,60,60,0.4); color: rgba(255,150,150,0.9); }
-.custom-disc-input { width: 60px; background: var(--glass); border: 1px solid var(--border); border-radius: 6px;
-  color: var(--cream); font-size: 11px; padding: 4px 6px; text-align: center; outline: none; font-family: var(--font-body); }
-.custom-disc-input:focus { border-color: var(--gold); }
 
 .breakdown-wrap { padding: 16px 20px; }
 .breakdown-title { font-size: 11px; color: var(--muted); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 12px; }
@@ -318,124 +349,227 @@ body.lang-en .en-only { display: block; }
 /* ── Arabic font support ── */
 .ar { font-family: 'Noto Sans Arabic', 'Segoe UI', sans-serif; direction: rtl; unicode-bidi: embed; }
 
-/* ── Bilingual label helper ── */
-.bilingual { display: flex; flex-direction: column; gap: 1px; }
-.bilingual .line-en { font-size: 0.9em; color: rgba(232,237,242,0.65); }
-.bilingual .line-ar { font-size: 0.82em; color: rgba(232,237,242,0.5); font-family: 'Noto Sans Arabic', sans-serif; direction: rtl; text-align: right; }
+/* ═══════════════════════════════════════════════════════════════════════════
+   PRINT CONTAINER (always in DOM, hidden on screen, shown on print)
+   ═══════════════════════════════════════════════════════════════════════════ */
 
-/* ── Print ── */
-/* ── Print ── */
-@media print {
-  @page { size: A4 portrait; margin: 12mm 10mm; }
-
-  /* ── Force dark theme preserved in print ── */
-  * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
-
-  /* hide all UI chrome — keep only #printContainer */
-  header, .tab-nav, .bottom-bar, .add-section, .space-del,
-  .price-edit-panel, .manual-override, .lang-toggle, .save-badge,
-  .area-quick, .base-price-wrap, .disc-btn, .custom-disc-input,
-  .manual-override-label, #langZH, #langEN,
-  #mainContent, .bg-layer, .bg-grid { display: none !important; }
-
-  /* show only print container */
-  #printContainer { display: block !important; }
-
-  html { background: #0D1F35 !important; }
-  body { background: #0D1F35 !important; color: #E8EDF2 !important;
-    font-family: 'DM Sans', 'Segoe UI', Arial, sans-serif;
-    margin: 0; padding: 0; min-height: auto; }
-
-  /* print layout wrapper */
-  #printContainer { padding: 0; max-width: 100%; }
-
-  /* print header band */
-  .print-header {
-    background: linear-gradient(90deg, #1A3A5C, #0a1826) !important;
-    color: #E8EDF2 !important;
-    padding: 14px 18px; border-radius: 8px 8px 0 0;
-    display: flex; justify-content: space-between; align-items: flex-start;
-    border-bottom: 2px solid #B88600;
-    page-break-inside: avoid;
-  }
-  .print-logo-title { font-family: 'Playfair Display', Georgia, serif; font-size: 16pt; color: #D4A017 !important; font-weight: 700; }
-  .print-logo-sub { font-size: 8pt; color: rgba(232,237,242,0.6) !important; margin-top: 3px; }
-  .print-ref { font-size: 8.5pt; color: rgba(232,237,242,0.7) !important; line-height: 1.8; text-align: right; }
-
-  /* price band */
-  .print-price-band {
-    background: linear-gradient(135deg, rgba(26,58,92,0.8), rgba(184,134,0,0.12)) !important;
-    border: 1px solid rgba(184,134,0,0.4); border-top: none;
-    padding: 18px; text-align: center;
-    page-break-inside: avoid;
-  }
-  .print-price-label { font-size: 8pt; color: rgba(232,237,242,0.55) !important; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 8px; }
-  .print-price-ar { font-size: 8pt; color: rgba(184,134,0,0.6) !important; font-family: 'Noto Sans Arabic',sans-serif; direction: rtl; margin-bottom: 8px; }
-  .print-price-range { display: flex; align-items: center; justify-content: center; gap: 10px; flex-wrap: wrap; }
-  .print-price-low { font-size: 14pt; font-weight: 300; color: rgba(232,237,242,0.75) !important; }
-  .print-price-sep { font-size: 14pt; color: #B88600 !important; }
-  .print-price-high { font-family: 'Playfair Display', Georgia, serif; font-size: 26pt; font-weight: 700; color: #D4A017 !important; }
-  .print-price-note { margin-top: 6px; font-size: 8pt; color: rgba(184,134,0,0.8) !important; }
-  .print-sqm { margin-top: 4px; font-size: 8pt; color: rgba(232,237,242,0.5) !important; }
-
-  /* section cards */
-  .print-card { background: rgba(255,255,255,0.04) !important; border: 1px solid rgba(255,255,255,0.12) !important;
-    border-radius: 8px; overflow: hidden; margin-bottom: 10px; page-break-inside: avoid; }
-  .print-card-head { background: rgba(26,58,92,0.85) !important; color: #E8EDF2 !important;
-    font-size: 9pt; font-weight: 600; padding: 8px 14px;
-    border-bottom: 1px solid rgba(184,134,0,0.3); }
-  .print-card-body { padding: 12px 16px; }
-
-  /* breakdown */
-  .print-b-row { display: flex; align-items: center; gap: 8px; margin-bottom: 7px; }
-  .print-b-dot { width: 8px; height: 8px; border-radius: 2px; flex-shrink: 0; }
-  .print-b-label { font-size: 9pt; color: rgba(232,237,242,0.8) !important; flex: 1; }
-  .print-b-ar { font-size: 7.5pt; color: rgba(232,237,242,0.4) !important; font-family: 'Noto Sans Arabic',sans-serif; direction: rtl; display: block; }
-  .print-b-pct { font-size: 8pt; color: rgba(232,237,242,0.5) !important; width: 32px; text-align: right; }
-  .print-b-val { font-size: 9pt; font-weight: 700; color: #D4A017 !important; min-width: 110px; text-align: right; }
-  .print-b-total { display: flex; justify-content: space-between; font-size: 11pt; font-weight: 800;
-    border-top: 1.5px solid rgba(184,134,0,0.4); padding-top: 8px; margin-top: 6px;
-    color: #E8EDF2 !important; }
-  .print-b-total-val { color: #D4A017 !important; }
-
-  /* table */
-  .print-tbl { width: 100%; border-collapse: collapse; font-size: 8.5pt; }
-  .print-tbl th { background: rgba(26,58,92,0.9) !important; color: rgba(232,237,242,0.85) !important;
-    padding: 6px 8px; text-align: left; font-weight: 600; border-bottom: 2px solid rgba(184,134,0,0.4); white-space: nowrap; }
-  .print-tbl td { padding: 5px 8px; border-bottom: 1px solid rgba(255,255,255,0.06); color: #E8EDF2 !important; }
-  .print-tbl .gold { color: #D4A017 !important; }
-  .print-tbl .dim { font-size: 7.5pt; color: rgba(232,237,242,0.4) !important; font-family: 'Noto Sans Arabic',sans-serif; direction: rtl; display: block; }
-
-  /* payment grid */
-  .print-pay-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 7px; }
-  .print-pay-card { border: 1px solid rgba(255,255,255,0.12) !important; border-radius: 6px; overflow: hidden; page-break-inside: avoid; }
-  .print-pay-head { font-size: 8pt; font-weight: 700; color: #fff !important; padding: 5px 10px; }
-  .print-pay-ar { font-size: 7pt; color: rgba(255,255,255,0.55) !important; padding: 2px 10px 0; font-family: 'Noto Sans Arabic',sans-serif; direction: rtl; text-align: right; }
-  .print-pay-amt { font-size: 11pt; font-weight: 800; color: #D4A017 !important; padding: 6px 10px 1px; }
-  .print-pay-pct { font-size: 8pt; color: rgba(232,237,242,0.55) !important; }
-  .print-pay-trig { font-size: 8pt; color: rgba(232,237,242,0.7) !important; padding: 0 10px 2px; }
-  .print-pay-trig2 { font-size: 7pt; color: rgba(232,237,242,0.4) !important; padding: 0 10px 2px; }
-  .print-pay-trig-ar { font-size: 7pt; color: rgba(184,134,0,0.6) !important; padding: 0 10px 3px; font-family: 'Noto Sans Arabic',sans-serif; direction: rtl; text-align: right; }
-  .print-pay-prod { font-size: 7pt; color: rgba(255,255,255,0.35) !important; padding: 0 10px 8px; }
-
-  /* terms */
-  .print-disc { padding: 6px 10px; margin-bottom: 5px; font-size: 8pt; color: rgba(232,237,242,0.65) !important;
-    line-height: 1.6; background: rgba(255,255,255,0.03) !important; border-radius: 0 5px 5px 0; }
-
-  /* client row */
-  .print-client-row { display: flex; gap: 12px; margin-bottom: 14px; }
-  .print-client-field { flex: 1; }
-  .print-client-label { font-size: 8pt; color: rgba(232,237,242,0.5) !important; display: block; margin-bottom: 3px; }
-  .print-client-val { font-size: 11pt; font-weight: 600; color: #E8EDF2 !important; padding: 6px 0; border-bottom: 1px solid rgba(184,134,0,0.3); }
-
-  /* footer */
-  .print-footer { text-align: center; font-size: 7pt; color: rgba(232,237,242,0.3) !important;
-    border-top: 1px solid rgba(255,255,255,0.08); padding: 8px 0 2px; margin-top: 8px; }
-
-  /* page breaks */
-  .print-break-before { page-break-before: always; }
-  .print-avoid-break { page-break-inside: avoid; }
+#printRoot {
+  position: absolute;
+  left: -10000px;
+  top: 0;
+  width: 210mm;
+  background: #0D1F35;
+  color: #E8EDF2;
+  font-family: 'DM Sans', 'Segoe UI', Arial, sans-serif;
+  padding: 10mm;
+  /* Force background painting using inline body wrapper trick */
 }
+#printRoot * {
+  -webkit-print-color-adjust: exact !important;
+  print-color-adjust: exact !important;
+  color-adjust: exact !important;
+}
+
+/* Print container components */
+.pr-page {
+  background: #0D1F35;
+  color: #E8EDF2;
+  padding: 0;
+  page-break-after: always;
+}
+.pr-page:last-child { page-break-after: auto; }
+.pr-page.no-break-after { page-break-after: auto; }
+
+.pr-header {
+  background: linear-gradient(90deg, #1A3A5C, #0a1826);
+  color: #E8EDF2;
+  padding: 14px 18px;
+  border-radius: 8px 8px 0 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  border-bottom: 2px solid #B88600;
+}
+.pr-header-left { flex: 1; }
+.pr-logo-title { font-family: 'Playfair Display', Georgia, serif; font-size: 18pt; color: #D4A017; font-weight: 700; }
+.pr-logo-sub { font-size: 8pt; color: rgba(232,237,242,0.6); margin-top: 4px; letter-spacing: 0.5px; }
+.pr-ref-block { text-align: right; font-size: 8.5pt; color: rgba(232,237,242,0.7); line-height: 1.7; }
+.pr-ref-block strong { color: #D4A017; }
+
+.pr-client-row {
+  background: rgba(255,255,255,0.04);
+  display: flex;
+  border: 1px solid rgba(184,134,0,0.25);
+  border-top: none;
+  border-bottom: none;
+}
+.pr-client-cell {
+  flex: 1;
+  padding: 10px 16px;
+  border-right: 1px solid rgba(255,255,255,0.08);
+}
+.pr-client-cell:last-child { border-right: none; }
+.pr-client-label { font-size: 8pt; color: rgba(232,237,242,0.5); margin-bottom: 4px; letter-spacing: 0.4px; }
+.pr-client-val { font-size: 11pt; font-weight: 600; color: #E8EDF2; min-height: 14pt; }
+
+.pr-price-band {
+  background: linear-gradient(135deg, rgba(26,58,92,0.85), rgba(184,134,0,0.15));
+  border: 1px solid rgba(184,134,0,0.4);
+  border-top: none;
+  padding: 18px;
+  text-align: center;
+}
+.pr-price-label { font-size: 8pt; color: rgba(232,237,242,0.55); letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 6px; }
+.pr-price-ar { font-size: 8pt; color: rgba(184,134,0,0.6); font-family: 'Noto Sans Arabic',sans-serif; direction: rtl; margin-bottom: 8px; }
+.pr-price-range { display: flex; align-items: center; justify-content: center; gap: 10px; flex-wrap: wrap; }
+.pr-price-low { font-size: 14pt; font-weight: 300; color: rgba(232,237,242,0.75); }
+.pr-price-sep { font-size: 14pt; color: #B88600; }
+.pr-price-high { font-family: 'Playfair Display', Georgia, serif; font-size: 26pt; font-weight: 700; color: #D4A017; }
+.pr-price-note { margin-top: 6px; font-size: 8pt; color: rgba(184,134,0,0.85); }
+.pr-sqm { margin-top: 4px; font-size: 8pt; color: rgba(232,237,242,0.55); }
+
+.pr-card {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 8px;
+  overflow: hidden;
+  margin-top: 10px;
+  page-break-inside: avoid;
+}
+.pr-card-head {
+  background: rgba(26,58,92,0.85);
+  color: #E8EDF2;
+  font-size: 9.5pt;
+  font-weight: 600;
+  padding: 8px 14px;
+  border-bottom: 1px solid rgba(184,134,0,0.3);
+}
+.pr-card-body { padding: 12px 16px; }
+
+.pr-b-row { display: flex; align-items: center; gap: 8px; margin-bottom: 7px; }
+.pr-b-dot { width: 9px; height: 9px; border-radius: 2px; flex-shrink: 0; }
+.pr-b-label { font-size: 9pt; color: rgba(232,237,242,0.85); flex: 1; }
+.pr-b-ar { font-size: 7.5pt; color: rgba(232,237,242,0.4); font-family: 'Noto Sans Arabic',sans-serif; direction: rtl; display: block; }
+.pr-b-bar-track { flex: 1.6; height: 6px; background: rgba(255,255,255,0.08); border-radius: 3px; overflow: hidden; min-width: 50px; }
+.pr-b-bar-fill { height: 100%; border-radius: 3px; }
+.pr-b-pct { font-size: 8pt; color: rgba(232,237,242,0.55); width: 32px; text-align: right; }
+.pr-b-val { font-size: 9pt; font-weight: 700; color: #D4A017; min-width: 110px; text-align: right; }
+.pr-b-total {
+  display: flex; justify-content: space-between; font-size: 11pt; font-weight: 800;
+  border-top: 1.5px solid rgba(184,134,0,0.4); padding-top: 8px; margin-top: 6px;
+  color: #E8EDF2;
+}
+.pr-b-total-val { color: #D4A017; }
+
+.pr-tbl { width: 100%; border-collapse: collapse; font-size: 8.5pt; }
+.pr-tbl th {
+  background: rgba(26,58,92,0.9);
+  color: rgba(232,237,242,0.85);
+  padding: 6px 8px;
+  text-align: left;
+  font-weight: 600;
+  border-bottom: 2px solid rgba(184,134,0,0.4);
+  white-space: nowrap;
+}
+.pr-tbl td {
+  padding: 5px 8px;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  color: #E8EDF2;
+}
+.pr-tbl .gold { color: #D4A017; }
+.pr-tbl .dim-ar { font-size: 7.5pt; color: rgba(232,237,242,0.4); font-family: 'Noto Sans Arabic',sans-serif; direction: rtl; display: block; }
+
+.pr-pay-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 7px; }
+.pr-pay-card {
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 6px;
+  overflow: hidden;
+  page-break-inside: avoid;
+  background: rgba(255,255,255,0.03);
+}
+.pr-pay-head { font-size: 8.5pt; font-weight: 700; color: #fff; padding: 5px 10px; }
+.pr-pay-ar-batch { font-size: 7pt; color: rgba(255,255,255,0.6); padding: 2px 10px 0; font-family: 'Noto Sans Arabic',sans-serif; direction: rtl; text-align: right; }
+.pr-pay-amt { font-size: 11pt; font-weight: 800; color: #D4A017; padding: 6px 10px 1px; }
+.pr-pay-pct { font-size: 8pt; color: rgba(232,237,242,0.55); }
+.pr-pay-trig { font-size: 8pt; color: rgba(232,237,242,0.7); padding: 0 10px 2px; }
+.pr-pay-trig2 { font-size: 7.5pt; color: rgba(232,237,242,0.4); padding: 0 10px 2px; }
+.pr-pay-trig-ar { font-size: 7pt; color: rgba(184,134,0,0.7); padding: 0 10px 3px; font-family: 'Noto Sans Arabic',sans-serif; direction: rtl; text-align: right; }
+.pr-pay-prod { font-size: 7pt; color: rgba(255,255,255,0.4); padding: 0 10px 8px; line-height: 1.5; }
+
+.pr-disc {
+  padding: 7px 10px;
+  margin-bottom: 5px;
+  font-size: 8pt;
+  color: rgba(232,237,242,0.7);
+  line-height: 1.6;
+  background: rgba(255,255,255,0.03);
+  border-radius: 0 5px 5px 0;
+}
+
+.pr-footer {
+  text-align: center;
+  font-size: 7.5pt;
+  color: rgba(232,237,242,0.35);
+  border-top: 1px solid rgba(255,255,255,0.08);
+  padding: 10px 0 4px;
+  margin-top: 12px;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   @media print rules
+   ═══════════════════════════════════════════════════════════════════════════ */
+@media print {
+  @page {
+    size: A4 portrait;
+    margin: 0;     /* margins handled by #printRoot padding so background fills page */
+  }
+
+  /* CRITICAL: force background printing on every element */
+  html, body, * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    color-adjust: exact !important;
+  }
+
+  html {
+    background: #0D1F35 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  body {
+    background: #0D1F35 !important;
+    color: #E8EDF2 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    min-height: 0 !important;
+  }
+
+  /* Hide all interactive UI */
+  header, .tab-nav, .bottom-bar, .bg-layer, .bg-grid,
+  #mainContent, .sync-modal-overlay {
+    display: none !important;
+  }
+
+  /* Show print root in normal flow */
+  #printRoot {
+    position: static !important;
+    left: 0 !important;
+    width: 100% !important;
+    background: #0D1F35 !important;
+    padding: 10mm !important;
+    margin: 0 !important;
+    display: block !important;
+  }
+
+  /* Page breaks */
+  .pr-page { page-break-after: always; padding: 0; }
+  .pr-page:last-child { page-break-after: auto; }
+  .pr-page.no-break-after { page-break-after: auto; }
+  .pr-card, .pr-pay-card, .pr-b-row { page-break-inside: avoid; }
+  .pr-header, .pr-client-row, .pr-price-band { page-break-inside: avoid; }
+}
+
 input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer-spin-button { opacity: 0.4; }
 </style>
 </head>
@@ -456,6 +590,7 @@ input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer
       <button class="lang-btn active" id="langZH" onclick="setLang('zh')">中文</button>
       <button class="lang-btn" id="langEN" onclick="setLang('en')">EN</button>
     </div>
+    <button class="sync-btn" onclick="openSyncModal()" title="同步 / Sync">⇄</button>
     <div class="save-badge" id="saveBadge">● 已保存</div>
   </div>
 </header>
@@ -488,7 +623,23 @@ input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer
 </nav>
 
 <main id="mainContent"></main>
-<div id="printContainer" style="display:none"></div>
+
+<!-- Print container always in DOM (offscreen on screen, becomes visible on print) -->
+<div id="printRoot"></div>
+
+<!-- Sync modal -->
+<div class="sync-modal-overlay" id="syncModal" onclick="if(event.target===this)closeSyncModal()">
+  <div class="sync-modal">
+    <div class="sync-modal-head">
+      <div class="sync-modal-title">⇄ 同步 / Sync / مزامنة</div>
+      <button class="sync-close" onclick="closeSyncModal()">×</button>
+    </div>
+    <div class="sync-modal-body" id="syncModalBody"></div>
+  </div>
+</div>
+
+<input type="file" id="fileInput" class="sync-file-input" accept=".json,.csv" onchange="handleFileImport(event)"/>
+
 <div class="bottom-bar" id="bottomBar"></div>
 
 <script>
@@ -508,9 +659,6 @@ const T = {
     addMore: '+ 添加更多空间 Add More Spaces',
     customPlaceholder: '自定义空间名称... Custom space name',
     addBtn: '添加',
-    priceEditTitle: '✏️ 修改基础单价 Edit Base Prices (QAR/m²)',
-    priceResetBtn: '恢复默认',
-    globalAdj: '全局价格调整：',
     clientName: '客户姓名 Client Name',
     projectName: '项目名称 Project Name',
     quoteTitle: 'QUOTATION / عرض سعر / 报价单',
@@ -536,9 +684,7 @@ const T = {
     confirmReset: '确定要清空当前报价，开始新报价？',
     validDays: '有效期 30天 · Valid 30 days · صالح 30 يومًا',
     quoteDate: '报价日期 Quote Date · تاريخ العرض',
-    defaultRate: '默认',
-    arClientLabel: 'اسم العميل',
-    arProjectLabel: 'اسم المشروع',
+    arClientLabel: 'اسم العميل', arProjectLabel: 'اسم المشروع',
     arStyleLabel: 'الأسلوب', arMatLabel: 'الدرجة', arAreaLabel: 'المساحة الإجمالية', arSpacesLabel: 'الفضاءات',
     arPriceRange: 'نطاق السعر (المواد غير مؤكدة ±15%)',
     arSqmLabel: 'معدل المتر المربع تقريبًا',
@@ -548,6 +694,24 @@ const T = {
     arPayTitle: 'جدول الدفعات',
     arTermsTitle: 'شروط العرض',
     arColSpace: 'الفضاء', arColArea: 'المساحة', arColUnit: 'السعر/م²', arColMat: 'تكلفة المواد', arColLogTax: 'الشحن+الضريبة', arColSub: 'الإجمالي الفرعي',
+    syncTitle: '同步 / Sync',
+    syncShareTitle: '🔗 分享链接 (跨设备查看)',
+    syncShareDesc: '生成包含全部数据的链接，发到 iMessage / WhatsApp / 邮件，对方在任何设备打开即可查看完整报价。',
+    syncCopyLink: '复制链接 Copy Link',
+    syncShareLink: '系统分享 Share via System',
+    syncFileTitle: '📁 文件导出 / 导入 (iCloud Drive)',
+    syncFileDesc: '导出 .json 文件保存到 iCloud Drive / Files，iPhone 与 Mac 自动同步。也可导入之前的备份文件。',
+    syncExportJSON: '导出 JSON 备份 (.json)',
+    syncExportJSONSub: '可在任何设备恢复完整报价数据',
+    syncImportJSON: '导入 JSON 文件 (.json/.csv)',
+    syncImportJSONSub: '从 iCloud Drive / 文件 App 中选择',
+    syncCSVTitle: '📊 Pages / Numbers 兼容',
+    syncCSVDesc: '导出空间清单为 CSV 文件，可在 Numbers / Pages / Excel 中编辑后再导回。',
+    syncExportCSV: '导出 CSV (Numbers/Pages 编辑)',
+    syncExportCSVSub: '在 Numbers 中编辑面积和价格',
+    syncCopied: '✓ 已复制到剪贴板！',
+    syncImported: '✓ 已成功导入',
+    syncImportFailed: '✗ 导入失败：',
   },
   en: {
     styleTitle: 'Select Design Style',
@@ -563,9 +727,6 @@ const T = {
     addMore: '+ Add More Spaces 添加更多空间',
     customPlaceholder: 'Custom space name 自定义空间名称...',
     addBtn: 'Add',
-    priceEditTitle: '✏️ Edit Base Prices 修改基础单价 (QAR/m²)',
-    priceResetBtn: 'Reset Defaults',
-    globalAdj: 'Global Adjustment:',
     clientName: 'Client Name 客户姓名',
     projectName: 'Project Name 项目名称',
     quoteTitle: 'QUOTATION / عرض سعر / 报价单',
@@ -591,9 +752,7 @@ const T = {
     confirmReset: 'Clear current quote and start a new one?',
     validDays: 'Valid 30 days · 有效期30天 · صالح 30 يومًا',
     quoteDate: 'Quote Date · 报价日期 · تاريخ العرض',
-    defaultRate: 'Default',
-    arClientLabel: 'اسم العميل',
-    arProjectLabel: 'اسم المشروع',
+    arClientLabel: 'اسم العميل', arProjectLabel: 'اسم المشروع',
     arStyleLabel: 'الأسلوب', arMatLabel: 'الدرجة', arAreaLabel: 'المساحة الإجمالية', arSpacesLabel: 'الفضاءات',
     arPriceRange: 'نطاق السعر (المواد غير مؤكدة ±15%)',
     arSqmLabel: 'معدل المتر المربع تقريبًا',
@@ -603,6 +762,24 @@ const T = {
     arPayTitle: 'جدول الدفعات',
     arTermsTitle: 'شروط العرض',
     arColSpace: 'الفضاء', arColArea: 'المساحة', arColUnit: 'السعر/م²', arColMat: 'تكلفة المواد', arColLogTax: 'الشحن+الضريبة', arColSub: 'الإجمالي الفرعي',
+    syncTitle: 'Sync 同步',
+    syncShareTitle: '🔗 Share Link (Cross-Device View)',
+    syncShareDesc: 'Generate a link with all data. Send via iMessage / WhatsApp / Email — open on any device to view the full quote.',
+    syncCopyLink: 'Copy Link 复制链接',
+    syncShareLink: 'Share via System 系统分享',
+    syncFileTitle: '📁 File Export / Import (iCloud Drive)',
+    syncFileDesc: 'Export a .json file to iCloud Drive / Files — iPhone and Mac sync automatically. Or import a previous backup.',
+    syncExportJSON: 'Export JSON Backup (.json)',
+    syncExportJSONSub: 'Restore full quote data on any device',
+    syncImportJSON: 'Import JSON File (.json/.csv)',
+    syncImportJSONSub: 'Choose from iCloud Drive / Files app',
+    syncCSVTitle: '📊 Pages / Numbers Compatible',
+    syncCSVDesc: 'Export space list as CSV — edit in Numbers / Pages / Excel and re-import.',
+    syncExportCSV: 'Export CSV (Edit in Numbers/Pages)',
+    syncExportCSVSub: 'Edit areas and prices in Numbers',
+    syncCopied: '✓ Copied to clipboard!',
+    syncImported: '✓ Successfully imported',
+    syncImportFailed: '✗ Import failed: ',
   }
 };
 
@@ -673,8 +850,8 @@ let state = {
   clientName: '',
   projectName: '',
   quoteRef: 'QQ-' + Date.now().toString(36).toUpperCase(),
-  discount: 0,   // manual discount multiplier, e.g. -0.05 = -5%
-  globalAdj: 0,  // global adjustment
+  discount: 0,
+  globalAdj: 0,
 };
 
 // ─── Persistence ──────────────────────────────────────────────────────────────
@@ -682,20 +859,17 @@ function saveState() {
   try { localStorage.setItem('qvq_state3', JSON.stringify(state)); updateSaveBadge(true); } catch(e) {}
 }
 function loadState() {
-  // Priority 1: URL hash (cross-device share)
   try {
     const hash = location.hash.slice(1);
     if (hash && hash.startsWith('q=')) {
       const decoded = JSON.parse(decodeURIComponent(atob(hash.slice(2))));
       if (decoded && decoded.spaces) {
         state = { ...state, ...decoded };
-        // clear hash so refresh doesn't re-load old share
         history.replaceState(null, '', location.pathname);
         return;
       }
     }
   } catch(e) {}
-  // Priority 2: localStorage
   try {
     const s = localStorage.getItem('qvq_state3') || localStorage.getItem('qvq_state2');
     if (s) { const p = JSON.parse(s); if (p.spaces) state = { ...state, ...p }; }
@@ -706,19 +880,245 @@ function updateSaveBadge(saved) {
   if (el) { el.textContent = saved ? t('saved') : t('unsaved'); el.style.color = saved ? '#7EC8A0' : '#F0A050'; }
 }
 
-// ─── Share via URL ─────────────────────────────────────────────────────────────
-function shareQuote() {
+// ─── Sync modal: cross-device sharing & file export/import ────────────────────
+function openSyncModal() {
+  renderSyncModal();
+  document.getElementById('syncModal').classList.add('show');
+}
+function closeSyncModal() {
+  document.getElementById('syncModal').classList.remove('show');
+}
+
+function renderSyncModal() {
+  const body = document.getElementById('syncModalBody');
+  const shareUrl = buildShareUrl();
+  body.innerHTML = `
+    <div class="sync-section">
+      <div class="sync-section-title">${t('syncShareTitle')}</div>
+      <div class="sync-section-desc">${t('syncShareDesc')}</div>
+      <button class="sync-action-btn" onclick="copyShareLink()">
+        <span class="sync-action-icon">📋</span>
+        <div class="sync-action-text">
+          <div class="sync-action-name">${t('syncCopyLink')}</div>
+          <div class="sync-action-sub">iMessage / WhatsApp / Email</div>
+        </div>
+      </button>
+      <button class="sync-action-btn" onclick="systemShareLink()">
+        <span class="sync-action-icon">📤</span>
+        <div class="sync-action-text">
+          <div class="sync-action-name">${t('syncShareLink')}</div>
+          <div class="sync-action-sub">AirDrop / iMessage / Mail</div>
+        </div>
+      </button>
+      <div class="copy-feedback" id="copyFeedback">${t('syncCopied')}</div>
+      <div class="share-url-box" id="shareUrlBox">${shareUrl}</div>
+    </div>
+
+    <div class="sync-section">
+      <div class="sync-section-title">${t('syncFileTitle')}</div>
+      <div class="sync-section-desc">${t('syncFileDesc')}</div>
+      <button class="sync-action-btn" onclick="exportJSON()">
+        <span class="sync-action-icon">💾</span>
+        <div class="sync-action-text">
+          <div class="sync-action-name">${t('syncExportJSON')}</div>
+          <div class="sync-action-sub">${t('syncExportJSONSub')}</div>
+        </div>
+      </button>
+      <button class="sync-action-btn" onclick="document.getElementById('fileInput').click()">
+        <span class="sync-action-icon">📂</span>
+        <div class="sync-action-text">
+          <div class="sync-action-name">${t('syncImportJSON')}</div>
+          <div class="sync-action-sub">${t('syncImportJSONSub')}</div>
+        </div>
+      </button>
+    </div>
+
+    <div class="sync-section">
+      <div class="sync-section-title">${t('syncCSVTitle')}</div>
+      <div class="sync-section-desc">${t('syncCSVDesc')}</div>
+      <button class="sync-action-btn" onclick="exportCSV()">
+        <span class="sync-action-icon">📊</span>
+        <div class="sync-action-text">
+          <div class="sync-action-name">${t('syncExportCSV')}</div>
+          <div class="sync-action-sub">${t('syncExportCSVSub')}</div>
+        </div>
+      </button>
+    </div>
+  `;
+}
+
+function buildShareUrl() {
   try {
-    const payload = btoa(encodeURIComponent(JSON.stringify(state)));
-    const url = location.origin + location.pathname + '#q=' + payload;
-    if (navigator.share) {
-      navigator.share({ title: 'Qatar Villa Quote', text: '报价单 / عرض سعر', url });
-    } else if (navigator.clipboard) {
-      navigator.clipboard.writeText(url).then(() => alert('🔗 链接已复制！在任何设备浏览器打开即可查看完整报价。\nLink copied! Open on any device to view quote.'));
-    } else {
-      prompt('复制此链接 Copy this link:', url);
+    const payload = btoa(unescape(encodeURIComponent(JSON.stringify(state))));
+    return location.origin + location.pathname + '#q=' + payload;
+  } catch(e) { return location.href; }
+}
+
+function copyShareLink() {
+  const url = buildShareUrl();
+  if (navigator.clipboard) {
+    navigator.clipboard.writeText(url).then(() => {
+      const fb = document.getElementById('copyFeedback');
+      fb.classList.add('show');
+      setTimeout(() => fb.classList.remove('show'), 2000);
+    }).catch(() => fallbackCopy(url));
+  } else {
+    fallbackCopy(url);
+  }
+}
+
+function fallbackCopy(text) {
+  const ta = document.createElement('textarea');
+  ta.value = text; document.body.appendChild(ta);
+  ta.select(); document.execCommand('copy'); document.body.removeChild(ta);
+  const fb = document.getElementById('copyFeedback');
+  if (fb) { fb.classList.add('show'); setTimeout(() => fb.classList.remove('show'), 2000); }
+}
+
+function systemShareLink() {
+  const url = buildShareUrl();
+  if (navigator.share) {
+    navigator.share({
+      title: 'Qatar Villa Quote',
+      text: `${state.clientName || 'Villa'} - ${state.projectName || 'Quote'}`,
+      url: url
+    }).catch(() => {});
+  } else {
+    copyShareLink();
+  }
+}
+
+// JSON Export — downloads .json file (works on iOS Files / iCloud Drive)
+function exportJSON() {
+  const dataStr = JSON.stringify(state, null, 2);
+  const blob = new Blob([dataStr], { type: 'application/json' });
+  const filename = `QVQ_${(state.clientName||'quote').replace(/\s+/g,'_')}_${Date.now()}.json`;
+  triggerDownload(blob, filename);
+}
+
+// CSV Export — Numbers/Pages/Excel friendly (UTF-8 BOM for Excel)
+function exportCSV() {
+  const sm = STYLES[state.style]?.mult||1;
+  const tm = TIERS[state.tier]?.mult||1;
+  const sLabel = STYLES[state.style]?.label||'';
+  const tLabel = TIERS[state.tier]?.label||'';
+
+  let csv = '\uFEFF'; // UTF-8 BOM for Numbers/Excel
+  csv += `"Qatar Villa Quote","${state.quoteRef}","${state.clientName}","${state.projectName}"\n`;
+  csv += `"Style 风格","${sLabel}","Grade 材料","${tLabel}"\n`;
+  csv += '\n';
+  csv += '"Icon","Space 空间","Name EN","Name AR","Area m²","Base QAR/m²","Style Mult","Tier Mult","Material Cost","Logistics","Overhead","Contingency","Subtotal QAR"\n';
+
+  state.spaces.forEach(sp => {
+    const c = calcSpace(sp);
+    csv += `"${sp.icon}","${sp.name}","${sp.nameEn||''}","${sp.nameAr||''}",${c.area},${sp.base},${sm},${tm},${Math.round(c.mat)},${Math.round(c.log)},${Math.round(c.oh)},${Math.round(c.con)},${Math.round(c.total)}\n`;
+  });
+
+  const T2 = calcTotals();
+  csv += '\n';
+  csv += `"TOTALS","","","",${T2.totalArea.toFixed(1)},"","","",${Math.round(T2.totalMat)},${Math.round(T2.totalLog)},${Math.round(T2.totalOH)},${Math.round(T2.totalCon)},${Math.round(T2.gross)}\n`;
+  csv += `"Price Range Low (QAR)","${Math.round(T2.low)}"\n`;
+  csv += `"Price Range High (QAR)","${Math.round(T2.high)}"\n`;
+  csv += `"Discount Applied","${(state.discount*100).toFixed(0)}%"\n`;
+
+  const blob = new Blob([csv], { type: 'text/csv;charset=utf-8' });
+  const filename = `QVQ_${(state.clientName||'quote').replace(/\s+/g,'_')}_${Date.now()}.csv`;
+  triggerDownload(blob, filename);
+}
+
+function triggerDownload(blob, filename) {
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = filename;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  setTimeout(() => URL.revokeObjectURL(url), 1000);
+}
+
+function handleFileImport(event) {
+  const file = event.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = (e) => {
+    try {
+      const text = e.target.result;
+      let imported;
+      if (file.name.toLowerCase().endsWith('.csv')) {
+        imported = parseCSV(text);
+      } else {
+        imported = JSON.parse(text);
+      }
+      if (imported && imported.spaces) {
+        state = { ...state, ...imported };
+        renderAll();
+        alert(t('syncImported'));
+        closeSyncModal();
+      } else {
+        throw new Error('Invalid file format');
+      }
+    } catch (err) {
+      alert(t('syncImportFailed') + err.message);
     }
-  } catch(e) { alert('分享失败 Share failed: ' + e.message); }
+    event.target.value = ''; // allow same file re-pick
+  };
+  reader.readAsText(file, 'UTF-8');
+}
+
+function parseCSV(text) {
+  // Simple CSV importer for the format we export
+  // Returns a partial state object with spaces array
+  const lines = text.replace(/^\uFEFF/, '').split(/\r?\n/);
+  const spaces = [];
+  let inDataSection = false;
+  let clientName = '', projectName = '', quoteRef = '';
+  let style = null, tier = null;
+  for (const line of lines) {
+    if (!line.trim()) continue;
+    const cols = parseCSVLine(line);
+    if (cols[0] === 'Qatar Villa Quote') {
+      quoteRef = cols[1] || '';
+      clientName = cols[2] || '';
+      projectName = cols[3] || '';
+    } else if (cols[0] && cols[0].startsWith('Style')) {
+      const sLabel = cols[1];
+      const tLabel = cols[3];
+      for (const [k,v] of Object.entries(STYLES)) if (v.label===sLabel||v.en===sLabel) style = k;
+      for (const [k,v] of Object.entries(TIERS)) if (v.label===tLabel||v.en===tLabel) tier = k;
+    } else if (cols[0] === 'Icon') {
+      inDataSection = true;
+    } else if (inDataSection && cols[0] && cols[0]!=='TOTALS' && cols[0]!=='Price Range Low (QAR)' && cols[0]!=='Price Range High (QAR)' && cols[0]!=='Discount Applied') {
+      const area = parseFloat(cols[4]) || 0;
+      const base = parseFloat(cols[5]) || 350;
+      spaces.push({
+        id: 'sp_'+Math.random().toString(36).slice(2,8),
+        icon: cols[0] || '🏠',
+        name: cols[1] || 'Space',
+        nameEn: cols[2] || cols[1],
+        nameAr: cols[3] || '',
+        base: base,
+        items: '', itemsEn: '',
+        qty: 1,
+        area: area > 0 ? area.toString() : ''
+      });
+    }
+  }
+  return { spaces, clientName, projectName, quoteRef, style, tier };
+}
+
+function parseCSVLine(line) {
+  const result = [];
+  let cur = '', inQuotes = false;
+  for (let i = 0; i < line.length; i++) {
+    const ch = line[i];
+    if (ch === '"' && line[i+1] === '"') { cur += '"'; i++; }
+    else if (ch === '"') { inQuotes = !inQuotes; }
+    else if (ch === ',' && !inQuotes) { result.push(cur); cur = ''; }
+    else cur += ch;
+  }
+  result.push(cur);
+  return result;
 }
 
 // ─── Calculations ──────────────────────────────────────────────────────────────
@@ -747,7 +1147,6 @@ function calcTotals() {
 }
 
 function fmt(n) { return 'QAR ' + Math.round(n).toLocaleString('en-US'); }
-function fmtN(n) { return Math.round(n).toLocaleString('en-US'); }
 function pct(n) { return (n*100).toFixed(0)+'%'; }
 function uid() { return 'sp_'+Math.random().toString(36).slice(2,8); }
 
@@ -758,6 +1157,7 @@ function renderAll() {
   renderTabs();
   renderMain();
   renderBottom();
+  renderPrintRoot();
   saveState();
 }
 
@@ -827,9 +1227,6 @@ function selectTier(k) { state.tier=k; renderAll(); }
 
 // ─── Page 2: Spaces ────────────────────────────────────────────────────────────
 function renderSpaces() {
-  const sm = STYLES[state.style]?.mult||1;
-  const tm = TIERS[state.tier]?.mult||1;
-
   const rows = state.spaces.map((sp,i) => {
     const calc = calcSpace(sp);
     const hasVal = calc.area > 0;
@@ -899,7 +1296,7 @@ function renderSpaces() {
 
 function updateArea(id, val) {
   const sp = state.spaces.find(s=>s.id===id);
-  if (sp) { sp.area = val; saveState(); updateSaveBadge(false); }
+  if (sp) { sp.area = val; saveState(); updateSaveBadge(false); renderPrintRoot(); }
 }
 function adjustArea(id, delta) {
   const sp = state.spaces.find(s=>s.id===id);
@@ -907,7 +1304,7 @@ function adjustArea(id, delta) {
 }
 function updateBase(id, val) {
   const sp = state.spaces.find(s=>s.id===id);
-  if (sp) { sp.base = Math.max(50, parseFloat(val)||50); saveState(); updateSaveBadge(false); }
+  if (sp) { sp.base = Math.max(50, parseFloat(val)||50); saveState(); updateSaveBadge(false); renderPrintRoot(); }
 }
 function deleteSpace(id) { state.spaces = state.spaces.filter(s=>s.id!==id); renderAll(); }
 function addPreset(encoded) {
@@ -962,14 +1359,7 @@ function renderQuote() {
     </tr>`;
   }).join('');
 
-  const payments = [
-    { batchZh:'第1批 签约款',    batchEn:'Batch 1 Deposit',         batchAr:'الدفعة الأولى - الإيداع',      pct2:0.20, color:'#1A3A5C', triggerZh:'合同签订当日',         triggerEn:'Upon contract signing',    triggerAr:'عند توقيع العقد',        products:'全部产品设计确认 + 定制启动金 · Design confirmation + production start' },
-    { batchZh:'第2批 基础款',    batchEn:'Batch 2 Foundation',      batchAr:'الدفعة الثانية - الأساس',      pct2:0.15, color:'#1A5C3A', triggerZh:'开工前45天',            triggerEn:'45 days before start',     triggerAr:'45 يومًا قبل البدء',     products:'防水 / 基础砖材 / 结构件 · Waterproofing / Base tiles / Structural' },
-    { batchZh:'第3批 硬装款',    batchEn:'Batch 3 Hard Fit-out',    batchAr:'الدفعة الثالثة - التشطيب',     pct2:0.25, color:'#2A4A7C', triggerZh:'开工后第2周',           triggerEn:'Week 2 after start',       triggerAr:'الأسبوع 2 من البدء',     products:'地板 / 墙砖 / 天花 / 门窗 · Flooring / Wall tiles / Ceilings / Doors' },
-    { batchZh:'第4批 精装款',    batchEn:'Batch 4 Finishing',       batchAr:'الدفعة الرابعة - الإنهاء',     pct2:0.25, color:'#5C3A1A', triggerZh:'开工后第6周',           triggerEn:'Week 6 after start',       triggerAr:'الأسبوع 6 من البدء',     products:'卫浴 / 厨柜 / 定制家具 / 灯具 · Bathrooms / Kitchen / Custom furniture' },
-    { batchZh:'第5批 尾款',      batchEn:'Batch 5 Final',           batchAr:'الدفعة الخامسة - الإغلاق',     pct2:0.10, color:'#3A1A5C', triggerZh:'竣工验收前2周',        triggerEn:'2 weeks before handover',  triggerAr:'أسبوعان قبل التسليم',    products:'软装 / 五金 / 收尾材料 · Soft furnishings / Hardware / Trim' },
-    { batchZh:'质保金 Retention',batchEn:'Retention (Quality Bond)',batchAr:'ضمان الجودة (مردود)',          pct2:0.05, color:'#2E6B4F', triggerZh:'质保期满12个月后返还', triggerEn:'Returned after 12-month DLP',triggerAr:'يُعاد بعد 12 شهرًا',   products:'质量担保金 · Quality assurance bond (not a payment)' },
-  ];
+  const payments = getPayments();
   const payCards = payments.map(p => `
     <div class="pay-card">
       <div class="pay-head" style="background:${p.color}">${lang==='en'?p.batchEn:p.batchZh}</div>
@@ -1005,31 +1395,17 @@ function renderQuote() {
     `<button class="disc-btn${disc===d.val?' active':''}${d.val<0?' disc-neg':''}" onclick="setDiscount(${d.val})">${d.label}</button>`
   ).join('');
 
-  const terms = lang==='en' ? [
-    'This is a preliminary estimate. Final contract price is subject to confirmed material specifications (±15% variance).',
-    '本报价为概算，材料品牌及规格未最终确认，实际合同价格以确认材料清单后为准，浮动不超过 ±15%。',
-    'هذا عرض سعر تقريبي. السعر النهائي مرهون بتأكيد المواد وقد يتفاوت بنسبة ±15%.',
-    'Quotation valid 30 days from issue date · 报价有效期30天 · صالح 30 يومًا',
-    'All products are custom-manufactured in China. Total lead time approx. 45 days. Payment must be received 45 days before each project milestone.',
-    'Production and shipping commence upon cleared payment. Title remains with Supplier until installation acceptance.',
-  ] : [
-    '本报价为概算，材料品牌及规格未最终确认，实际合同价格以确认材料清单后为准，浮动不超过 ±15%。',
-    'This is a preliminary estimate. Final contract price subject to confirmed material specifications (±15% variance).',
-    'هذا عرض سعر تقريبي. السعر النهائي مرهون بتأكيد المواد وقد يتفاوت بنسبة ±15%.',
-    '报价有效期：30天（自出具之日起）· Valid 30 days · صالح 30 يومًا',
-    '所有产品从中国定制生产，全程供货周期约45天，付款须在对应工程节点前45天完成。',
-    '付款到账后方启动产品生产及发运，所有权在安装验收前归乙方所有。',
-  ];
+  const terms = getTerms();
 
   return `<div class="page">
     <div class="client-row">
       <div class="client-field">
         <label class="client-label">${t('clientName')} &nbsp;<span class="ar" style="font-size:9px">${t('arClientLabel')}</span></label>
-        <input class="client-input" placeholder="Al-____ Family" value="${state.clientName}" oninput="state.clientName=this.value;saveState()"/>
+        <input class="client-input" placeholder="Al-____ Family" value="${state.clientName}" oninput="state.clientName=this.value;saveState();renderPrintRoot()"/>
       </div>
       <div class="client-field">
         <label class="client-label">${t('projectName')} &nbsp;<span class="ar" style="font-size:9px">${t('arProjectLabel')}</span></label>
-        <input class="client-input" placeholder="Villa Project #___" value="${state.projectName}" oninput="state.projectName=this.value;saveState()"/>
+        <input class="client-input" placeholder="Villa Project #___" value="${state.projectName}" oninput="state.projectName=this.value;saveState();renderPrintRoot()"/>
       </div>
     </div>
 
@@ -1121,6 +1497,221 @@ function renderQuote() {
   </div>`;
 }
 
+// ─── Shared data builders ─────────────────────────────────────────────────────
+function getPayments() {
+  return [
+    { batchZh:'第1批 签约款',    batchEn:'Batch 1 Deposit',         batchAr:'الدفعة الأولى - الإيداع',      pct2:0.20, color:'#1A3A5C', triggerZh:'合同签订当日',         triggerEn:'Upon contract signing',    triggerAr:'عند توقيع العقد',        products:'全部产品设计确认 + 定制启动金 · Design confirmation + production start' },
+    { batchZh:'第2批 基础款',    batchEn:'Batch 2 Foundation',      batchAr:'الدفعة الثانية - الأساس',      pct2:0.15, color:'#1A5C3A', triggerZh:'开工前45天',            triggerEn:'45 days before start',     triggerAr:'45 يومًا قبل البدء',     products:'防水 / 基础砖材 / 结构件 · Waterproofing / Base tiles / Structural' },
+    { batchZh:'第3批 硬装款',    batchEn:'Batch 3 Hard Fit-out',    batchAr:'الدفعة الثالثة - التشطيب',     pct2:0.25, color:'#2A4A7C', triggerZh:'开工后第2周',           triggerEn:'Week 2 after start',       triggerAr:'الأسبوع 2 من البدء',     products:'地板 / 墙砖 / 天花 / 门窗 · Flooring / Wall tiles / Ceilings / Doors' },
+    { batchZh:'第4批 精装款',    batchEn:'Batch 4 Finishing',       batchAr:'الدفعة الرابعة - الإنهاء',     pct2:0.25, color:'#5C3A1A', triggerZh:'开工后第6周',           triggerEn:'Week 6 after start',       triggerAr:'الأسبوع 6 من البدء',     products:'卫浴 / 厨柜 / 定制家具 / 灯具 · Bathrooms / Kitchen / Custom furniture' },
+    { batchZh:'第5批 尾款',      batchEn:'Batch 5 Final',           batchAr:'الدفعة الخامسة - الإغلاق',     pct2:0.10, color:'#3A1A5C', triggerZh:'竣工验收前2周',        triggerEn:'2 weeks before handover',  triggerAr:'أسبوعان قبل التسليم',    products:'软装 / 五金 / 收尾材料 · Soft furnishings / Hardware / Trim' },
+    { batchZh:'质保金 Retention',batchEn:'Retention (Quality Bond)',batchAr:'ضمان الجودة (مردود)',          pct2:0.05, color:'#2E6B4F', triggerZh:'质保期满12个月后返还', triggerEn:'Returned after 12-month DLP',triggerAr:'يُعاد بعد 12 شهرًا',   products:'质量担保金 · Quality assurance bond (not a payment)' },
+  ];
+}
+
+function getTerms() {
+  return lang === 'en' ? [
+    'This is a preliminary estimate. Final contract price is subject to confirmed material specifications (±15% variance).',
+    '本报价为概算，材料品牌及规格未最终确认，实际合同价格以确认材料清单后为准，浮动不超过 ±15%。',
+    'هذا عرض سعر تقريبي. السعر النهائي مرهون بتأكيد المواد وقد يتفاوت بنسبة ±15%.',
+    'Quotation valid 30 days from issue date · 报价有效期30天 · صالح 30 يومًا',
+    'All products are custom-manufactured in China. Total lead time approx. 45 days. Payment must be received 45 days before each project milestone.',
+    'Production and shipping commence upon cleared payment. Title remains with Supplier until installation acceptance.',
+  ] : [
+    '本报价为概算，材料品牌及规格未最终确认，实际合同价格以确认材料清单后为准，浮动不超过 ±15%。',
+    'This is a preliminary estimate. Final contract price subject to confirmed material specifications (±15% variance).',
+    'هذا عرض سعر تقريبي. السعر النهائي مرهون بتأكيد المواد وقد يتفاوت بنسبة ±15%.',
+    '报价有效期：30天（自出具之日起）· Valid 30 days · صالح 30 يومًا',
+    '所有产品从中国定制生产，全程供货周期约45天，付款须在对应工程节点前45天完成。',
+    '付款到账后方启动产品生产及发运，所有权在安装验收前归乙方所有。',
+  ];
+}
+
+// ─── Print Root Renderer (separate, optimized for A4 PDF) ─────────────────────
+function renderPrintRoot() {
+  const root = document.getElementById('printRoot');
+  if (!root) return;
+
+  const T2 = calcTotals();
+  const sLabel = STYLES[state.style] ? (STYLES[state.style].label + ' / ' + STYLES[state.style].en) : '—';
+  const tLabel = TIERS[state.tier]   ? (TIERS[state.tier].label + ' / ' + TIERS[state.tier].en) : '—';
+  const sm = STYLES[state.style]?.mult||1;
+  const tm = TIERS[state.tier]?.mult||1;
+  const today = new Date().toLocaleDateString('en-GB');
+  const disc = state.discount || 0;
+
+  // ── Page 1: Header + Client + Price + Cost Breakdown ──
+  const breakdowns = [
+    { labelEn:'Materials 材料货值',                           labelAr:'قيمة المواد',                              val:T2.totalMat,      color:'#4A7FBF' },
+    { labelEn:'Logistics China→Qatar 物流运输',                labelAr:'الشحن والخدمات اللوجستية',                  val:T2.totalLog,      color:'#3FB57A' },
+    { labelEn:'Customs 5% + VAT 5% 关税+VAT',                 labelAr:'الجمارك 5% + ضريبة القيمة المضافة 5%',     val:T2.totalMat*0.10, color:'#C8995A' },
+    { labelEn:'Overhead & Margin 运营+利润',                    labelAr:'المصاريف العامة والهامش',                  val:T2.totalOH,       color:'#9070BB' },
+    { labelEn:'Contingency Buffer 材料缓冲',                    labelAr:'احتياطي المواد ±',                         val:T2.totalCon,      color:'#D4A017' },
+  ];
+
+  const bRowsHtml = breakdowns.map(b => {
+    const p = T2.gross > 0 ? b.val/T2.gross : 0;
+    return `<div class="pr-b-row">
+      <div class="pr-b-dot" style="background:${b.color}"></div>
+      <div class="pr-b-label">${b.labelEn}<span class="pr-b-ar">${b.labelAr}</span></div>
+      <div class="pr-b-bar-track"><div class="pr-b-bar-fill" style="width:${(p*100).toFixed(0)}%;background:${b.color}"></div></div>
+      <div class="pr-b-pct">${(p*100).toFixed(0)}%</div>
+      <div class="pr-b-val">${fmt(b.val)}</div>
+    </div>`;
+  }).join('');
+
+  const page1 = `
+    <div class="pr-page">
+      <div class="pr-header">
+        <div class="pr-header-left">
+          <div class="pr-logo-title">◈ QATAR VILLA QUOTE</div>
+          <div class="pr-logo-sub">卡塔尔别墅装修报价 · نظام تسعير الفلل</div>
+        </div>
+        <div class="pr-ref-block">
+          <strong>Ref:</strong> ${state.quoteRef}<br>
+          <strong>Date:</strong> ${today}<br>
+          <strong>Valid:</strong> 30 Days
+        </div>
+      </div>
+
+      <div class="pr-client-row">
+        <div class="pr-client-cell">
+          <div class="pr-client-label">CLIENT 客户 / العميل</div>
+          <div class="pr-client-val">${state.clientName || '—'}</div>
+        </div>
+        <div class="pr-client-cell">
+          <div class="pr-client-label">PROJECT 项目 / المشروع</div>
+          <div class="pr-client-val">${state.projectName || '—'}</div>
+        </div>
+        <div class="pr-client-cell">
+          <div class="pr-client-label">STYLE / GRADE 风格 / 档次</div>
+          <div class="pr-client-val" style="font-size:9.5pt">${sLabel}<br>${tLabel}</div>
+        </div>
+      </div>
+
+      <div class="pr-price-band">
+        <div class="pr-price-label">PRICE RANGE 报价区间 (Materials TBC ±15%)</div>
+        <div class="pr-price-ar">نطاق السعر (المواد غير مؤكدة ±15%)</div>
+        <div class="pr-price-range">
+          <span class="pr-price-low">${T2.gross>0?fmt(T2.low):'QAR —'}</span>
+          <span class="pr-price-sep">—</span>
+          <span class="pr-price-high">${T2.gross>0?fmt(T2.high):'QAR —'}</span>
+        </div>
+        <div class="pr-price-note">⚠️ Materials unconfirmed · 材料品牌未最终确认 · price variance ±15%</div>
+        ${T2.gross>0&&T2.totalArea>0?`<div class="pr-sqm">Blended rate 综合单价 ≈ QAR ${Math.round(T2.gross/T2.totalArea).toLocaleString()} / m²&nbsp;&nbsp;|&nbsp;&nbsp;Total Area 总面积 ${T2.totalArea.toFixed(1)} m² &nbsp;|&nbsp; ${state.spaces.filter(s=>parseFloat(s.area)>0).length} Spaces</div>`:''}
+        ${disc!==0?`<div style="margin-top:6px;font-size:8pt;color:${disc<0?'#7EC8A0':'#F0A050'}">⚑ ${disc>0?'+':''}${(disc*100).toFixed(0)}% Quote Adjustment Applied 报价调整已应用</div>`:''}
+      </div>
+
+      <div class="pr-card">
+        <div class="pr-card-head">📊 Cost Breakdown 费用构成 · تفصيل التكاليف</div>
+        <div class="pr-card-body">
+          ${bRowsHtml}
+          <div class="pr-b-total">
+            <span>Total 合计 (Midpoint) · الإجمالي</span>
+            <span class="pr-b-total-val">${T2.gross>0?fmt(T2.gross):'QAR —'}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  `;
+
+  // ── Page 2: Space Breakdown Table ──
+  const filteredSpaces = state.spaces.filter(sp=>parseFloat(sp.area)>0);
+  const spaceTableRows = filteredSpaces.length ? filteredSpaces.map(sp => {
+    const c = calcSpace(sp);
+    const unitRate = Math.round(sp.base * sm * tm);
+    const spLabel = (sp.name || '') + (sp.nameEn ? ' / '+sp.nameEn : '');
+    const spAr = sp.nameAr || '';
+    return `<tr>
+      <td>${sp.icon} ${spLabel}${spAr?`<span class="dim-ar">${spAr}</span>`:''}</td>
+      <td style="text-align:center">${c.area} m²</td>
+      <td style="text-align:center">${unitRate.toLocaleString()}</td>
+      <td style="text-align:right">${fmt(c.mat)}</td>
+      <td style="text-align:right" class="gold">${fmt(c.log+c.con)}</td>
+      <td style="text-align:right;font-weight:700">${fmt(c.total)}</td>
+    </tr>`;
+  }).join('') : `<tr><td colspan="6" style="text-align:center;padding:20px;color:rgba(232,237,242,0.4)">No areas entered</td></tr>`;
+
+  const page2 = `
+    <div class="pr-page">
+      <div class="pr-card" style="margin-top:0">
+        <div class="pr-card-head">📋 Space Breakdown 各空间明细 · تفصيل الفضاءات</div>
+        <div class="pr-card-body" style="padding:0">
+          <table class="pr-tbl">
+            <thead><tr>
+              <th>Space 空间 / الفضاء</th>
+              <th>Area<br>m²</th>
+              <th>Rate<br>QAR/m²</th>
+              <th>Material<br>المواد</th>
+              <th>Log+Tax<br>الشحن</th>
+              <th>Subtotal<br>الإجمالي</th>
+            </tr></thead>
+            <tbody>${spaceTableRows}</tbody>
+            ${filteredSpaces.length ? `<tfoot>
+              <tr style="background:rgba(184,134,0,0.15)">
+                <td style="font-weight:700;color:#D4A017">TOTAL 总计 · الإجمالي</td>
+                <td style="text-align:center;font-weight:700">${T2.totalArea.toFixed(1)} m²</td>
+                <td></td>
+                <td style="text-align:right;font-weight:700">${fmt(T2.totalMat)}</td>
+                <td style="text-align:right;font-weight:700;color:#D4A017">${fmt(T2.totalLog+T2.totalCon)}</td>
+                <td style="text-align:right;font-weight:800;color:#D4A017">${fmt(T2.gross)}</td>
+              </tr>
+            </tfoot>` : ''}
+          </table>
+        </div>
+      </div>
+    </div>
+  `;
+
+  // ── Page 3: Payment Schedule + Terms ──
+  const payments = getPayments();
+  const payCardsHtml = payments.map(p => `
+    <div class="pr-pay-card">
+      <div class="pr-pay-head" style="background:${p.color}">${p.batchZh} / ${p.batchEn}</div>
+      <div class="pr-pay-ar-batch">${p.batchAr}</div>
+      <div class="pr-pay-amt">${T2.gross>0?fmt(T2.gross*p.pct2):'QAR —'} <span class="pr-pay-pct">(${(p.pct2*100).toFixed(0)}%)</span></div>
+      <div class="pr-pay-trig">📅 ${p.triggerZh}</div>
+      <div class="pr-pay-trig2">${p.triggerEn}</div>
+      <div class="pr-pay-trig-ar">${p.triggerAr}</div>
+      <div class="pr-pay-prod">📦 ${p.products}</div>
+    </div>
+  `).join('');
+
+  const terms = [
+    '本报价为概算，材料品牌及规格未最终确认，实际合同价格以确认材料清单后为准，浮动不超过 ±15%。',
+    'This is a preliminary estimate. Final contract price subject to confirmed material specifications (±15% variance).',
+    'هذا عرض سعر تقريبي. السعر النهائي مرهون بتأكيد المواد وقد يتفاوت بنسبة ±15%.',
+    '报价有效期：30天（自出具之日起）· Valid 30 days · صالح 30 يومًا',
+    '所有产品从中国定制生产，全程供货周期约45天，付款须在对应工程节点前45天完成。 All products are custom-manufactured in China. Total lead time approx. 45 days.',
+    '付款到账后方启动产品生产及发运，所有权在安装验收前归乙方所有。 Production and shipping commence upon cleared payment. Title remains with Supplier until installation acceptance.',
+  ];
+  const termColors = ['#1A3A5C','#2E6B4F','#B88600','#7B5E3A','#1A3A5C','#7B5E3A'];
+
+  const page3 = `
+    <div class="pr-page no-break-after">
+      <div class="pr-card" style="margin-top:0">
+        <div class="pr-card-head">💳 Payment Schedule 付款计划 · جدول الدفعات</div>
+        <div class="pr-card-body">
+          <div class="pr-pay-grid">${payCardsHtml}</div>
+        </div>
+      </div>
+
+      <div class="pr-card">
+        <div class="pr-card-head">📋 Terms & Conditions 报价说明 · شروط العرض</div>
+        <div class="pr-card-body">
+          ${terms.map((t,i)=>`<div class="pr-disc" style="border-left:3px solid ${termColors[i]}">${t}</div>`).join('')}
+        </div>
+      </div>
+
+      <div class="pr-footer">
+        Qatar Villa Quote · ${state.quoteRef} · Generated ${today} · 此报价由系统自动生成 · Generated automatically
+      </div>
+    </div>
+  `;
+
+  root.innerHTML = page1 + page2 + page3;
+}
+
 // ─── Main render ───────────────────────────────────────────────────────────────
 function renderMain() {
   const el = document.getElementById('mainContent');
@@ -1144,7 +1735,7 @@ function renderBottom() {
     el.innerHTML = `
       <button class="btn-back" onclick="goTab(2)">${t('backBtn')}</button>
       <button class="btn-reset" onclick="resetQuote()">${t('newQuote')}</button>
-      <button class="btn-print" onclick="window.print()">${t('printBtn')}</button>`;
+      <button class="btn-print" onclick="doPrint()">${t('printBtn')}</button>`;
   } else {
     el.innerHTML = `
       ${tab>0?`<button class="btn-back" onclick="goTab(${tab-1})">${t('prevStep')}</button>`:'<div></div>'}
@@ -1152,6 +1743,15 @@ function renderBottom() {
         ${tab===2?t('genQuote'):t('nextStep')}
       </button>`;
   }
+}
+
+// ─── Print trigger (ensures print root is up-to-date) ─────────────────────────
+function doPrint() {
+  renderPrintRoot();
+  // small delay for layout settle (esp. on iOS Safari)
+  setTimeout(() => {
+    window.print();
+  }, 100);
 }
 
 function resetQuote() {
@@ -1168,7 +1768,7 @@ function resetQuote() {
 
 // ─── PWA ──────────────────────────────────────────────────────────────────────
 if ('serviceWorker' in navigator) {
-  const swCode = `const CACHE='qvq-v2';const URLS=[self.location.pathname];self.addEventListener('install',e=>e.waitUntil(caches.open(CACHE).then(c=>c.addAll(URLS))));self.addEventListener('fetch',e=>e.respondWith(caches.match(e.request).then(r=>r||fetch(e.request))));`;
+  const swCode = `const CACHE='qvq-v3';const URLS=[self.location.pathname];self.addEventListener('install',e=>e.waitUntil(caches.open(CACHE).then(c=>c.addAll(URLS))));self.addEventListener('fetch',e=>e.respondWith(caches.match(e.request).then(r=>r||fetch(e.request))));`;
   const blob = new Blob([swCode], {type:'application/javascript'});
   navigator.serviceWorker.register(URL.createObjectURL(blob)).catch(()=>{});
 }
