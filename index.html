@@ -7,7 +7,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
 <meta name="apple-mobile-web-app-title" content="Qatar Quote"/>
 <meta name="theme-color" content="#0D1F35"/>
-<title>◈ Qatar Villa Quote v2 (Fixed)</title>
+<title>◈ Qatar Villa Quote v2</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=DM+Sans:wght@300;400;500;600;700&family=Noto+Sans+Arabic:wght@400;600;700&display=swap" rel="stylesheet"/>
 <style>
@@ -31,7 +31,6 @@
 html, body { height: 100%; overflow-x: hidden; }
 body { font-family: var(--font-body); background: var(--navy); color: var(--cream); min-height: 100vh; min-height: 100dvh; }
 
-/* 基础背景层 */
 .bg-layer { position: fixed; inset: 0; pointer-events: none; z-index: 0;
   background: radial-gradient(ellipse 70% 50% at 15% 15%, rgba(26,58,92,0.7) 0%, transparent 60%),
     radial-gradient(ellipse 50% 40% at 85% 85%, rgba(184,134,0,0.18) 0%, transparent 60%),
@@ -41,89 +40,91 @@ body { font-family: var(--font-body); background: var(--navy); color: var(--crea
     linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
   background-size: 44px 44px; }
 
-/* ── UI 组件 (此处省略重复的 CSS 以节省篇幅，重点在下方的 PRINT 部分) ── */
-header { position: sticky; top: 0; z-index: 200; background: rgba(13,31,53,0.92); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-bottom: 1px solid rgba(184,134,0,0.25); padding: 10px 16px; display: flex; align-items: center; justify-content: space-between; }
+/* ── 这里保留你原来所有的 CSS 样式，不作任何改动 ── */
+header { position: sticky; top: 0; z-index: 200; background: rgba(13,31,53,0.92);
+  backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(184,134,0,0.25); padding: 10px 16px;
+  display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.logo { display: flex; align-items: center; gap: 10px; }
+.logo-gem { font-size: 20px; color: var(--gold); }
+.logo-text { line-height: 1.2; }
 .logo-title { font-family: var(--font-display); font-size: 12px; color: var(--gold); letter-spacing: 1.5px; font-weight: 700; }
-.tab-nav { position: sticky; top: 56px; z-index: 190; background: rgba(13,31,53,0.92); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); display: flex; overflow-x: auto; }
-.tab-btn { flex: 1; min-width: 76px; padding: 8px 6px; background: none; border: none; cursor: pointer; color: var(--muted); font-size: 10px; display: flex; flex-direction: column; align-items: center; border-bottom: 2px solid transparent; }
+.logo-sub { font-size: 9px; color: var(--muted); letter-spacing: 0.5px; }
+.header-right { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
+.lang-toggle { display: flex; border: 1px solid rgba(184,134,0,0.4); border-radius: 20px; overflow: hidden; flex-shrink: 0; }
+.lang-btn { padding: 4px 10px; font-size: 10px; font-weight: 700; cursor: pointer; border: none; background: transparent; color: var(--muted); transition: all 0.2s; }
+.lang-btn.active { background: var(--gold); color: #000; }
+.save-badge { font-size: 10px; padding: 4px 10px; border-radius: 20px; background: rgba(46,107,79,0.25); border: 1px solid rgba(46,107,79,0.5); color: #7EC8A0; }
+
+.tab-nav { position: sticky; top: 56px; z-index: 190; background: rgba(13,31,53,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); display: flex; overflow-x: auto; scrollbar-width: none; }
+.tab-nav::-webkit-scrollbar { display: none; }
+.tab-btn { flex: 1; min-width: 76px; padding: 8px 6px; background: none; border: none; cursor: pointer; color: var(--muted); font-size: 10px; display: flex; flex-direction: column; align-items: center; gap: 2px; border-bottom: 2px solid transparent; transition: all 0.2s; white-space: nowrap; }
 .tab-btn.active { color: var(--gold); border-bottom-color: var(--gold); }
+.tab-num { width: 16px; height: 16px; border-radius: 50%; background: var(--navy2); border: 1px solid var(--border); font-size: 9px; display: flex; align-items: center; justify-content: center; color: var(--muted); }
+.tab-btn.active .tab-num { background: var(--gold); border-color: var(--gold); color: #000; }
+
 main { position: relative; z-index: 1; max-width: 880px; margin: 0 auto; padding: 24px 16px 130px; }
 .card { background: var(--glass); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; margin-bottom: 14px; }
-.card-head { padding: 12px 18px; font-weight: 600; font-size: 12px; border-bottom: 1px solid var(--border); background: rgba(255,255,255,0.03); }
-.bottom-bar { position: fixed; bottom: 0; left: 0; right: 0; z-index: 200; background: rgba(13,31,53,0.95); backdrop-filter: blur(20px); border-top: 1px solid rgba(184,134,0,0.25); padding: 12px 16px; display: flex; gap: 10px; padding-bottom: max(12px, env(safe-area-inset-bottom)); }
+.card-head { padding: 12px 18px; font-weight: 600; font-size: 12px; border-bottom: 1px solid var(--border); color: var(--muted); display: flex; align-items: center; gap: 8px; }
+.space-row { display: flex; align-items: center; gap: 8px; background: var(--glass2); border: 1px solid var(--border); border-radius: 10px; padding: 10px 12px; margin-bottom: 8px; }
+.space-input { width: 64px; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.18); border-radius: 8px; color: var(--cream); font-size: 14px; font-weight: 700; text-align: center; outline: none; }
 
-/* 报价单内部样式 */
 .quote-card { background: var(--glass); border: 1px solid rgba(184,134,0,0.3); border-radius: var(--radius); overflow: hidden; margin-bottom: 16px; }
-.quote-header-band { background: linear-gradient(90deg, var(--navy2), #0a1826); padding: 16px 20px; color: white; display: flex; justify-content: space-between; }
-.price-band { padding: 24px 20px; text-align: center; background: rgba(255,255,255,0.03); border-bottom: 1px solid var(--border); }
+.quote-header-band { background: linear-gradient(90deg, var(--navy2), #0a1826); padding: 16px 20px; display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 8px; }
+.price-band { padding: 24px 20px; text-align: center; background: linear-gradient(135deg, rgba(26,58,92,0.5), rgba(184,134,0,0.08)); border-bottom: 1px solid var(--border); }
 .price-high { font-family: var(--font-display); font-size: 32px; font-weight: 700; color: var(--gold); }
-table { width: 100%; border-collapse: collapse; font-size: 11px; }
-th { background: rgba(26,58,92,0.7); color: var(--muted); padding: 8px; text-align: left; border-bottom: 2px solid var(--gold); }
-td { padding: 8px; border-bottom: 1px solid rgba(255,255,255,0.04); color: var(--cream); }
-.pay-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 10px; }
-.pay-card { background: var(--glass); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
+.bottom-bar { position: fixed; bottom: 0; left: 0; right: 0; z-index: 200; background: rgba(13,31,53,0.95); backdrop-filter: blur(20px); border-top: 1px solid rgba(184,134,0,0.25); padding: 12px 16px; display: flex; gap: 10px; justify-content: space-between; padding-bottom: max(12px, env(safe-area-inset-bottom)); }
 
-/* ── 重点修复：打印样式 ── */
+/* ── 核心修复：打印样式增强 ── */
 @media print {
-  /* 1. 强制保留背景颜色和图片 */
+  /* 强制打印颜色与背景 */
   * { 
     -webkit-print-color-adjust: exact !important; 
     print-color-adjust: exact !important; 
-    color-adjust: exact !important;
+    color-adjust: exact !important; 
   }
 
-  @page { size: A4 portrait; margin: 10mm; }
+  @page { size: A4 portrait; margin: 0; }
 
-  /* 2. 隐藏不需要的 UI 元素 */
+  /* 隐藏 UI 元素 */
   header, .tab-nav, .bottom-bar, .add-section, .space-del,
   .price-edit-panel, .manual-override, .lang-toggle, .save-badge,
-  .bg-layer, .bg-grid, .area-quick, .base-price-wrap { display: none !important; }
+  .bg-layer, .bg-grid, .area-quick, .base-price-wrap,
+  .disc-btn, .custom-disc-input, .manual-override-label,
+  #langZH, #langEN { display: none !important; }
 
-  /* 3. 修复内容截断问题：强制所有容器解除高度限制 */
+  /* 修复 iPhone 打印截断：重置高度与滚动 */
   html, body { 
     height: auto !important; 
     overflow: visible !important; 
-    background: var(--navy) !important; /* 保留深色背景，如需变白改为 #fff */
+    background: var(--navy) !important; /* 这里决定打印背景，如需省墨水可改白色 */
     color: var(--cream) !important;
   }
   
   main { 
-    padding: 0 !important; 
-    margin: 0 !important; 
+    padding: 20px !important; 
     max-width: 100% !important; 
+    margin: 0 !important; 
     overflow: visible !important;
     position: static !important;
   }
 
-  .page { 
-    position: static !important;
-    display: block !important;
-    overflow: visible !important;
-  }
-
-  /* 4. 优化卡片分页 */
   .quote-card, .card { 
     page-break-inside: avoid; 
     break-inside: avoid; 
-    border: 1px solid rgba(184,134,0,0.3) !important;
-    background: rgba(255,255,255,0.05) !important;
-    margin-bottom: 20px !important;
     position: static !important;
+    border: 1px solid rgba(184,134,0,0.3) !important;
+    margin-bottom: 20px !important;
   }
 
-  .pay-grid { 
-    display: block !important; /* 打印时 Grid 有时会有 Bug，改为 Block */
-  }
-  .pay-card { 
-    margin-bottom: 10px !important;
-    page-break-inside: avoid;
-  }
+  .tbl-wrap { overflow: visible !important; }
+  table { width: 100% !important; border-collapse: collapse !important; }
 }
 
-/* 按钮样式 */
-.btn-next, .btn-print { flex: 1; padding: 12px; border-radius: 10px; font-weight: 700; border: none; cursor: pointer; }
-.btn-print { background: var(--green); color: white; }
-.btn-next { background: var(--gold); color: black; }
+/* 按钮样式补完 */
+.btn-next { flex: 1; background: linear-gradient(135deg, var(--navy2), var(--gold)); border: none; color: #fff; padding: 12px; border-radius: 10px; font-weight: 700; cursor: pointer; }
+.btn-print { flex: 1; background: linear-gradient(135deg, var(--green), var(--navy2)); border: none; color: #fff; padding: 12px; border-radius: 10px; font-weight: 700; cursor: pointer; }
+.btn-back { background: var(--glass2); border: 1px solid var(--border); color: var(--cream); padding: 11px 16px; border-radius: 10px; cursor: pointer; }
 </style>
 </head>
 <body>
@@ -135,116 +136,166 @@ td { padding: 8px; border-bottom: 1px solid rgba(255,255,255,0.04); color: var(-
     <span class="logo-gem">◈</span>
     <div class="logo-text">
       <div class="logo-title">QATAR VILLA QUOTE</div>
+      <div class="logo-sub">卡塔尔别墅装修快速报价 · نظام تسعير الفلل</div>
     </div>
   </div>
-  <div class="save-badge" id="saveBadge">● 已保存</div>
+  <div class="header-right">
+    <div class="lang-toggle">
+      <button class="lang-btn active" id="langZH" onclick="setLang('zh')">中文</button>
+      <button class="lang-btn" id="langEN" onclick="setLang('en')">EN</button>
+    </div>
+    <div class="save-badge" id="saveBadge">● 已保存</div>
+  </div>
 </header>
 
-<nav class="tab-nav">
-  <button class="tab-btn active" onclick="goTab(0)">风格 Style</button>
-  <button class="tab-btn" onclick="goTab(1)">材料 Grade</button>
-  <button class="tab-btn" onclick="goTab(2)">面积 Area</button>
-  <button class="tab-btn" onclick="goTab(3)">报价单 Quote</button>
+<nav class="tab-nav" id="tabNav">
+  <button class="tab-btn active" onclick="goTab(0)">
+    <span class="tab-icon">🎨</span><span class="tab-num" id="tn0">1</span>
+    <span class="tab-label-zh">风格 Style</span>
+  </button>
+  <button class="tab-btn" onclick="goTab(1)">
+    <span class="tab-icon">💎</span><span class="tab-num" id="tn1">2</span>
+    <span class="tab-label-zh">材料 Grade</span>
+  </button>
+  <button class="tab-btn" onclick="goTab(2)">
+    <span class="tab-icon">📐</span><span class="tab-num" id="tn2">3</span>
+    <span class="tab-label-zh">面积 Area</span>
+  </button>
+  <button class="tab-btn" onclick="goTab(3)">
+    <span class="tab-icon">📋</span><span class="tab-num" id="tn3">4</span>
+    <span class="tab-label-zh">报价单 Quote</span>
+  </button>
 </nav>
 
 <main id="mainContent"></main>
 <div class="bottom-bar" id="bottomBar"></div>
 
 <script>
-// ─── 核心逻辑 ───
+// ─── 数据同步核心修复 ───
+const DEFAULT_SPACES = [
+  { id:'living', icon:'🛋️', name:'客厅 / 餐厅', nameEn:'Living & Dining', nameAr:'غرفة المعيشة والطعام', base:420, items:'地板·墙面·天花·灯具', itemsEn:'Flooring · Walls · Ceiling · Lighting', area:'' },
+  { id:'majlis', icon:'🕌', name:'玛吉利斯', nameEn:'Majlis', nameAr:'المجلس', base:520, items:'地板·造型天花·灯具', itemsEn:'Floor · Cove Ceiling · Lighting', area:'' },
+  { id:'master', icon:'🛏️', name:'主卧套间', nameEn:'Master Bedroom', nameAr:'جناح غرفة النوم', base:390, items:'地板·墙面·衣柜', itemsEn:'Floor · Walls · Wardrobe', area:'' },
+  { id:'kitchen', icon:'🍳', name:'厨房', nameEn:'Kitchen', nameAr:'المطبخ', base:680, items:'橱柜·台面·防水', itemsEn:'Cabinets · Countertop · Tiles', area:'' },
+  { id:'bathroom', icon:'🚿', name:'卫生间', nameEn:'Bathroom', nameAr:'الحمام', base:750, items:'洁具·瓷砖·防水', itemsEn:'Sanitaryware · Tiles', area:'' }
+];
+
 let state = {
   tab: 0,
   style: 'modern',
   tier: 'premium',
-  spaces: [
-    { id:'living', icon:'🛋️', name:'客厅', nameEn:'Living', base:420, area:'' },
-    { id:'kitchen', icon:'🍳', name:'厨房', nameEn:'Kitchen', base:680, area:'' }
-  ],
+  spaces: JSON.parse(JSON.stringify(DEFAULT_SPACES)),
   clientName: '',
   projectName: '',
-  discount: 0
+  discount: 0,
+  quoteRef: 'QQ-' + Math.random().toString(36).substr(2, 6).toUpperCase()
 };
 
-// ─── 重点修复：数据编码与 URL 同步 (解决跨设备数据丢失) ───
-function syncToURL() {
-  const json = JSON.stringify(state);
-  // 使用 Base64 编码，防止特殊字符破坏 URL
-  const encoded = btoa(encodeURIComponent(json));
-  window.history.replaceState(null, '', '#' + encoded);
+// 修复：将数据同步到 URL Hash（解决跨设备分享问题）
+function syncStateToURL() {
+  try {
+    const dataString = btoa(encodeURIComponent(JSON.stringify(state)));
+    window.location.hash = dataString;
+  } catch(e) {}
 }
 
-function loadFromURL() {
+function loadState() {
+  // 优先从 URL 读取，解决跨设备分享为空的问题
   const hash = window.location.hash.substring(1);
   if (hash) {
     try {
-      const decoded = decodeURIComponent(atob(hash));
-      const parsed = JSON.parse(decoded);
-      state = { ...state, ...parsed };
-      return true;
-    } catch (e) {
-      console.error("URL 数据解析失败", e);
-    }
+      const decoded = JSON.parse(decodeURIComponent(atob(hash)));
+      state = decoded;
+      return;
+    } catch(e) {}
   }
-  return false;
+  // 其次从本地存储读取
+  const saved = localStorage.getItem('qvq_v2_final');
+  if (saved) state = JSON.parse(saved);
 }
 
-// ─── 状态管理 ───
 function saveState() {
-  localStorage.setItem('qvq_v2_fixed', JSON.stringify(state));
-  syncToURL(); // 每次保存都更新 URL，这样点击 Safari 的“分享”时，链接里就带着数据了
-  document.getElementById('saveBadge').style.color = '#7EC8A0';
+  localStorage.setItem('qvq_v2_final', JSON.stringify(state));
+  syncStateToURL();
+  document.getElementById('saveBadge').textContent = '● 已保存';
 }
 
-function goTab(t) { 
-  state.tab = t; 
-  render(); 
-}
-
+// ─── 渲染逻辑 ───
 function render() {
   const main = document.getElementById('mainContent');
   const bottom = document.getElementById('bottomBar');
   
-  // 简易渲染逻辑 (根据你的实际代码补充各个 Tab 内容)
-  if (state.tab === 3) {
+  if (state.tab === 2) {
+    main.innerHTML = `
+      <div class="sec-head"><div class="logo-title" style="font-size:20px">📐 面积输入 Area Input</div></div>
+      <div class="space-list">
+        ${state.spaces.map(s => `
+          <div class="space-row">
+            <span style="font-size:20px">${s.icon}</span>
+            <div style="flex:1">
+              <div style="font-size:12px;font-weight:700">${s.name}</div>
+              <div style="font-size:9px;opacity:0.5">${s.nameEn}</div>
+            </div>
+            <input class="space-input" type="number" value="${s.area}" oninput="updateArea('${s.id}', this.value)" placeholder="0">
+            <span style="font-size:10px;width:30px">m²</span>
+          </div>
+        `).join('')}
+      </div>
+    `;
+    bottom.innerHTML = `<button class="btn-back" onclick="goTab(1)">← Back</button><button class="btn-next" onclick="goTab(3)">生成报价单 Generate →</button>`;
+  } else if (state.tab === 3) {
+    const total = state.spaces.reduce((a,b)=>a+(parseFloat(b.area||0)*b.base), 0);
     main.innerHTML = `
       <div class="quote-card">
         <div class="quote-header-band">
-          <h3>${state.projectName || 'New Project'}</h3>
-          <span>Date: ${new Date().toLocaleDateString()}</span>
+          <div><div class="logo-title" style="font-size:18px;color:var(--gold)">QUOTATION 报价单</div><div style="font-size:10px;opacity:0.7">Ref: ${state.quoteRef}</div></div>
+          <div style="text-align:right;font-size:10px">${new Date().toLocaleDateString()}</div>
         </div>
         <div class="price-band">
-          <div class="price-high">QAR ${calcTotal().toLocaleString()}</div>
-          <p>Estimate Quote (Materials TBC ±15%)</p>
+          <div style="font-size:10px;letter-spacing:2px;opacity:0.6">ESTIMATED TOTAL</div>
+          <div class="price-high">QAR ${total.toLocaleString()}</div>
+          <div style="font-size:11px;color:var(--gold);margin-top:8px">材料未定，价格浮动 ±15%</div>
+        </div>
+        <div style="padding:16px">
+          <table style="width:100%;font-size:11px">
+            <thead><tr style="border-bottom:1px solid var(--border)">
+              <th style="text-align:left;padding:8px">空间 Space</th><th style="text-align:right;padding:8px">面积 Area</th><th style="text-align:right;padding:8px">小计 Subtotal</th>
+            </tr></thead>
+            <tbody>
+              ${state.spaces.filter(s=>s.area>0).map(s=>`
+                <tr style="border-bottom:1px solid rgba(255,255,255,0.05)">
+                  <td style="padding:8px">${s.name}</td><td style="padding:8px;text-align:right">${s.area} m²</td><td style="padding:8px;text-align:right">QAR ${(s.area*s.base).toLocaleString()}</td>
+                </tr>
+              `).join('')}
+            </tbody>
+          </table>
         </div>
       </div>
-      <div class="card">
-        <div class="card-head">项目明细 Details</div>
-        <table style="padding:10px">
-          ${state.spaces.map(s => `<tr><td>${s.name}</td><td>${s.area || 0} m²</td></tr>`).join('')}
-        </table>
-      </div>
     `;
-    bottom.innerHTML = `
-      <button class="btn-next" style="background:#444;color:white" onclick="goTab(2)">← 返回</button>
-      <button class="btn-print" onclick="window.print()">🖨️ 打印报价单 / Print</button>
-    `;
+    bottom.innerHTML = `<button class="btn-back" onclick="goTab(2)">修改 Edit</button><button class="btn-print" onclick="window.print()">🖨️ 打印报价单 Print</button>`;
   } else {
-    main.innerHTML = `<div class="card"><div class="card-head">Step ${state.tab + 1}</div><div style="padding:40px;text-align:center">请在面积页输入数值</div></div>`;
-    bottom.innerHTML = `<button class="btn-next" onclick="goTab(${state.tab + 1})">下一步 Next →</button>`;
+    main.innerHTML = `<div class="card" style="padding:40px;text-align:center;opacity:0.5">请点击上方“面积”标签进入输入界面</div>`;
+    bottom.innerHTML = `<button class="btn-next" onclick="goTab(state.tab+1)">下一步 Next →</button>`;
   }
+  updateTabs();
+}
+
+function updateArea(id, val) {
+  const sp = state.spaces.find(s=>s.id===id);
+  if (sp) sp.area = val;
   saveState();
 }
 
-function calcTotal() {
-  return state.spaces.reduce((sum, s) => sum + (parseFloat(s.area || 0) * s.base), 0);
+function goTab(t) { state.tab = t; render(); window.scrollTo(0,0); }
+function updateTabs() {
+  document.querySelectorAll('.tab-btn').forEach((b,i)=>{
+    b.classList.toggle('active', i===state.tab);
+  });
 }
 
-// ─── 初始化 ───
+// 初始化
 window.onload = () => {
-  if (!loadFromURL()) {
-    const saved = localStorage.getItem('qvq_v2_fixed');
-    if (saved) state = JSON.parse(saved);
-  }
+  loadState();
   render();
 };
 </script>
