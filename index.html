@@ -557,6 +557,127 @@ body.printing .printing-toolbar { display: flex; }
    ═══════════════════════════════════════════════════════════════════════════ */
 
 input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer-spin-button { opacity: 0.4; }
+
+/* ── Material picker (per-space) ── */
+.mat-picker-wrap {
+  width: 100%;
+  background: rgba(184,134,0,0.04);
+  border: 1px dashed rgba(184,134,0,0.25);
+  border-radius: 8px;
+  padding: 8px 10px;
+  margin-top: 8px;
+}
+.mat-picker-head {
+  display: flex; align-items: center; justify-content: space-between;
+  font-size: 10px; color: var(--gold); letter-spacing: 0.5px; margin-bottom: 6px;
+  text-transform: uppercase; font-weight: 700;
+}
+.mat-picker-toggle {
+  background: rgba(184,134,0,0.15); border: 1px solid rgba(184,134,0,0.3);
+  border-radius: 6px; padding: 3px 8px; color: var(--gold); font-size: 10px;
+  cursor: pointer; font-family: var(--font-body);
+}
+.mat-picker-list {
+  display: flex; flex-direction: column; gap: 5px;
+}
+.mat-line {
+  display: flex; align-items: center; gap: 6px; flex-wrap: wrap;
+  background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 6px; padding: 5px 8px; font-size: 10px;
+}
+.mat-line-icon { font-size: 13px; }
+.mat-line-name { flex: 1; min-width: 100px; color: var(--cream); font-weight: 600; }
+.mat-line-brand { color: var(--muted); font-size: 9px; margin-left: 4px; font-weight: 400; }
+.mat-line-qty {
+  width: 50px; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 5px; color: var(--cream); font-size: 11px; font-weight: 700;
+  padding: 3px 5px; text-align: center; outline: none; font-family: var(--font-body);
+}
+.mat-line-qty:focus { border-color: var(--gold); }
+.mat-line-unit { font-size: 9px; color: var(--muted); }
+.mat-line-price {
+  width: 60px; background: rgba(184,134,0,0.08); border: 1px solid rgba(184,134,0,0.25);
+  border-radius: 5px; color: var(--gold); font-size: 10px; font-weight: 700;
+  padding: 3px 5px; text-align: center; outline: none; font-family: var(--font-body);
+}
+.mat-line-cost { font-size: 11px; color: var(--gold); font-weight: 700; min-width: 70px; text-align: right; }
+.mat-line-del {
+  width: 20px; height: 20px; border-radius: 50%; border: 1px solid rgba(255,80,80,0.3);
+  background: rgba(255,80,80,0.1); color: rgba(255,150,150,0.8); cursor: pointer;
+  display: flex; align-items: center; justify-content: center; font-size: 11px;
+}
+
+.mat-picker-add { display: flex; gap: 6px; margin-top: 6px; }
+.mat-picker-select {
+  flex: 1; background: rgba(255,255,255,0.06); border: 1px solid rgba(184,134,0,0.25);
+  border-radius: 6px; color: var(--cream); font-size: 11px; padding: 6px 8px;
+  outline: none; font-family: var(--font-body);
+}
+.mat-picker-select:focus { border-color: var(--gold); }
+.mat-picker-select option { background: var(--navy); color: var(--cream); }
+.mat-picker-select optgroup { background: var(--navy2); color: var(--gold); font-weight: 700; }
+
+.mat-line-summary {
+  font-size: 10px; color: var(--gold); padding: 4px 8px;
+  background: rgba(184,134,0,0.08); border-radius: 5px; margin-top: 4px;
+  display: flex; justify-content: space-between;
+}
+
+/* ── Library modal (full materials manager) ── */
+.lib-section { margin-bottom: 14px; }
+.lib-section-title {
+  font-size: 11px; font-weight: 700; color: var(--gold);
+  text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px;
+  display: flex; align-items: center; gap: 8px;
+}
+.lib-cat-head {
+  display: flex; align-items: center; justify-content: space-between;
+  margin: 12px 0 6px; padding: 6px 10px;
+  background: rgba(255,255,255,0.04); border-radius: 6px;
+}
+.lib-cat-name { font-size: 12px; font-weight: 700; color: var(--cream); }
+.lib-mat-row {
+  display: flex; align-items: center; gap: 6px; flex-wrap: wrap;
+  background: rgba(255,255,255,0.03); border: 1px solid var(--border);
+  border-radius: 6px; padding: 6px 8px; margin-bottom: 4px; font-size: 10px;
+}
+.lib-mat-input {
+  background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 4px; color: var(--cream); font-size: 10px; padding: 3px 6px;
+  outline: none; font-family: var(--font-body);
+}
+.lib-mat-input:focus { border-color: var(--gold); }
+.lib-mat-input.lib-name { width: 110px; }
+.lib-mat-input.lib-brand { width: 80px; }
+.lib-mat-input.lib-price { width: 65px; text-align: center; color: var(--gold); }
+.lib-mat-input.lib-unit { width: 50px; text-align: center; }
+.lib-mat-cat-select {
+  background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 4px; color: var(--cream); font-size: 10px; padding: 3px 4px;
+  outline: none; font-family: var(--font-body); width: 90px;
+}
+.lib-mat-del {
+  width: 22px; height: 22px; border-radius: 4px;
+  border: 1px solid rgba(255,80,80,0.3); background: rgba(255,80,80,0.1);
+  color: rgba(255,150,150,0.8); cursor: pointer; font-size: 11px;
+  display: flex; align-items: center; justify-content: center;
+}
+.lib-add-btn {
+  width: 100%; padding: 9px; border-radius: 8px; border: 1px dashed rgba(184,134,0,0.4);
+  background: rgba(184,134,0,0.08); color: var(--gold); font-size: 11px; font-weight: 700;
+  cursor: pointer; font-family: var(--font-body); margin-top: 8px;
+}
+.lib-add-btn:hover, .lib-add-btn:active { background: rgba(184,134,0,0.18); }
+
+.lib-toolbar {
+  display: flex; gap: 6px; margin-bottom: 10px; flex-wrap: wrap;
+}
+.lib-tool-btn {
+  flex: 1; min-width: 100px; padding: 7px 10px; border-radius: 6px;
+  border: 1px solid var(--border); background: var(--glass);
+  color: var(--cream); font-size: 10px; cursor: pointer; font-family: var(--font-body);
+}
+.lib-tool-btn:hover { border-color: var(--gold); color: var(--gold); }
 </style>
 </head>
 <body>
@@ -576,6 +697,7 @@ input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer
       <button class="lang-btn active" id="langZH" onclick="setLang('zh')">中文</button>
       <button class="lang-btn" id="langEN" onclick="setLang('en')">EN</button>
     </div>
+    <button class="sync-btn" onclick="openLibModal()" title="材料库 / Materials">📦</button>
     <button class="sync-btn" onclick="openSyncModal()" title="同步 / Sync">⇄</button>
     <div class="save-badge" id="saveBadge">● 已保存</div>
   </div>
@@ -630,6 +752,17 @@ input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer
       <button class="sync-close" onclick="closeSyncModal()">×</button>
     </div>
     <div class="sync-modal-body" id="syncModalBody"></div>
+  </div>
+</div>
+
+<!-- Materials Library modal -->
+<div class="sync-modal-overlay" id="libModal" onclick="if(event.target===this)closeLibModal()">
+  <div class="sync-modal" style="max-width:640px">
+    <div class="sync-modal-head">
+      <div class="sync-modal-title">📦 材料库 / Materials Library / مكتبة المواد</div>
+      <button class="sync-close" onclick="closeLibModal()">×</button>
+    </div>
+    <div class="sync-modal-body" id="libModalBody"></div>
   </div>
 </div>
 
@@ -833,6 +966,65 @@ const TIERS = {
   luxury:  { label:'顶奢级', en:'Luxury',   icon:'💎', mult:2.4, noteZh:'意大利/法国顶级品牌', noteEn:'Italian / French prestige brands', color:'#C0392B' },
 };
 
+// ─── Material Library ─────────────────────────────────────────────────────────
+const MATERIAL_CATEGORIES = {
+  flooring:    { label:'地板',    en:'Flooring',     icon:'🟫', color:'#8B6F47' },
+  tile:        { label:'瓷砖',    en:'Tiles',        icon:'⬜', color:'#7B8794' },
+  wall:        { label:'墙面',    en:'Wall Finish',  icon:'🟧', color:'#A07850' },
+  ceiling:     { label:'天花',    en:'Ceiling',      icon:'⬛', color:'#4A5568' },
+  lighting:    { label:'灯具',    en:'Lighting',     icon:'💡', color:'#D4A017' },
+  sanitary:    { label:'洁具',    en:'Sanitaryware', icon:'🚿', color:'#4A9EBF' },
+  cabinet:     { label:'橱柜',    en:'Cabinets',     icon:'🗄️', color:'#7B5E3A' },
+  door:        { label:'门窗',    en:'Doors/Windows',icon:'🚪', color:'#A0826D' },
+  hardware:    { label:'五金',    en:'Hardware',     icon:'🔩', color:'#888888' },
+  furniture:   { label:'家具',    en:'Furniture',    icon:'🛋️', color:'#7B5EA7' },
+  appliance:   { label:'电器',    en:'Appliances',   icon:'📺', color:'#2A4A7C' },
+  textile:     { label:'软装',    en:'Soft Goods',   icon:'🪟', color:'#C97E7E' },
+  other:       { label:'其他',    en:'Other',        icon:'📦', color:'#666666' },
+};
+
+// Starter material library — premade common items at "premium grade" Qatar prices.
+// Users can edit/add via the materials manager. Prices in QAR.
+const DEFAULT_MATERIALS = [
+  // Flooring
+  { id:'mat_lvt',     cat:'flooring', name:'SPC 锁扣地板',   nameEn:'SPC Click Vinyl',     brand:'Floorx',     price:180, unit:'m²' },
+  { id:'mat_oak',     cat:'flooring', name:'橡木实木复合',   nameEn:'Oak Engineered',      brand:'Kährs',      price:480, unit:'m²' },
+  { id:'mat_marble',  cat:'flooring', name:'大理石地砖',     nameEn:'Marble Slab',         brand:'Carrara',    price:720, unit:'m²' },
+  // Tiles
+  { id:'mat_porc',    cat:'tile',     name:'通体大板瓷砖',   nameEn:'Porcelain Large Slab',brand:'Marazzi',    price:320, unit:'m²' },
+  { id:'mat_mosaic',  cat:'tile',     name:'马赛克拼花',     nameEn:'Mosaic Pattern',      brand:'Bisazza',    price:580, unit:'m²' },
+  // Wall
+  { id:'mat_paint',   cat:'wall',     name:'乳胶漆 (含底漆)', nameEn:'Emulsion Paint+Primer',brand:'Dulux',     price:55,  unit:'m²' },
+  { id:'mat_panel',   cat:'wall',     name:'木饰面板',       nameEn:'Wood Veneer Panel',   brand:'Custom',     price:380, unit:'m²' },
+  { id:'mat_wallpaper',cat:'wall',    name:'进口墙纸',       nameEn:'Imported Wallpaper',  brand:'Cole&Son',   price:240, unit:'m²' },
+  // Ceiling
+  { id:'mat_gyp',     cat:'ceiling',  name:'石膏板吊顶',     nameEn:'Gypsum Board Ceiling',brand:'Knauf',      price:180, unit:'m²' },
+  { id:'mat_cove',    cat:'ceiling',  name:'造型石膏线',     nameEn:'Plaster Cornice',     brand:'Custom',     price:120, unit:'m' },
+  // Lighting
+  { id:'mat_chand',   cat:'lighting', name:'水晶吊灯',       nameEn:'Crystal Chandelier',  brand:'Schonbek',   price:8500,unit:'pc' },
+  { id:'mat_downlight',cat:'lighting',name:'嵌入式筒灯',     nameEn:'Recessed Downlight',  brand:'Erco',       price:280, unit:'pc' },
+  { id:'mat_strip',   cat:'lighting', name:'LED 灯带',       nameEn:'LED Strip',           brand:'Philips',    price:65,  unit:'m' },
+  // Sanitary
+  { id:'mat_toilet',  cat:'sanitary', name:'智能马桶',       nameEn:'Smart Toilet',        brand:'TOTO',       price:6800,unit:'pc' },
+  { id:'mat_basin',   cat:'sanitary', name:'台上洗手盆',     nameEn:'Vessel Basin',        brand:'Duravit',    price:1850,unit:'pc' },
+  { id:'mat_shower',  cat:'sanitary', name:'淋浴龙头套装',   nameEn:'Shower Set',          brand:'Hansgrohe',  price:3200,unit:'pc' },
+  // Cabinet
+  { id:'mat_kitc',    cat:'cabinet',  name:'厨柜定制',       nameEn:'Custom Kitchen',      brand:'Boffi',      price:2800,unit:'m' },
+  { id:'mat_ward',    cat:'cabinet',  name:'衣柜定制',       nameEn:'Custom Wardrobe',     brand:'Custom',     price:1800,unit:'m²' },
+  { id:'mat_vanity',  cat:'cabinet',  name:'浴室柜',         nameEn:'Bath Vanity',         brand:'Custom',     price:4500,unit:'pc' },
+  // Door / Window
+  { id:'mat_door',    cat:'door',     name:'实木室内门',     nameEn:'Solid Wood Door',     brand:'Custom',     price:2400,unit:'pc' },
+  { id:'mat_alum',    cat:'door',     name:'断桥铝窗',       nameEn:'Thermal-Break Window',brand:'Schüco',     price:1450,unit:'m²' },
+  // Hardware
+  { id:'mat_hand',    cat:'hardware', name:'门把手套装',     nameEn:'Door Handle Set',     brand:'FSB',        price:380, unit:'pc' },
+  { id:'mat_hinge',   cat:'hardware', name:'阻尼铰链',       nameEn:'Soft-Close Hinge',    brand:'Blum',       price:65,  unit:'pc' },
+  // Appliance
+  { id:'mat_oven',    cat:'appliance',name:'嵌入式烤箱',     nameEn:'Built-in Oven',       brand:'Miele',      price:9800,unit:'pc' },
+  { id:'mat_hood',    cat:'appliance',name:'抽油烟机',       nameEn:'Range Hood',          brand:'Bosch',      price:4200,unit:'pc' },
+  // Textile
+  { id:'mat_curtain', cat:'textile',  name:'电动窗帘',       nameEn:'Motorized Curtains',  brand:'Lutron',     price:680, unit:'m²' },
+];
+
 const LOGISTICS_RATE = 0.12+0.09+0.10+0.04+0.03;
 const OVERHEAD = 0.18;
 const CONTINGENCY = 0.10;
@@ -842,12 +1034,23 @@ let state = {
   style: null,
   tier: null,
   spaces: JSON.parse(JSON.stringify(DEFAULT_SPACES)),
+  materials: JSON.parse(JSON.stringify(DEFAULT_MATERIALS)),
   clientName: '',
   projectName: '',
   quoteRef: 'QQ-' + Date.now().toString(36).toUpperCase(),
   discount: 0,
   globalAdj: 0,
 };
+
+// Migrate old saved states: ensure materials array exists; ensure each space has selectedMaterials
+function migrateState() {
+  if (!state.materials || !Array.isArray(state.materials) || state.materials.length === 0) {
+    state.materials = JSON.parse(JSON.stringify(DEFAULT_MATERIALS));
+  }
+  state.spaces.forEach(sp => {
+    if (!Array.isArray(sp.selectedMaterials)) sp.selectedMaterials = [];
+  });
+}
 
 // ─── Persistence ──────────────────────────────────────────────────────────────
 function saveState() {
@@ -936,6 +1139,13 @@ function renderSyncModal() {
         <div class="sync-action-text">
           <div class="sync-action-name">${t('syncExportCSV')}</div>
           <div class="sync-action-sub">${t('syncExportCSVSub')}</div>
+        </div>
+      </button>
+      <button class="sync-action-btn" onclick="exportPagesHTML()">
+        <span class="sync-action-icon">📝</span>
+        <div class="sync-action-text">
+          <div class="sync-action-name">导出 Pages 文档 (.html) / Export for Pages</div>
+          <div class="sync-action-sub">在 Pages / Word 中直接打开编辑，含完整表格 / Opens directly in Pages with editable tables</div>
         </div>
       </button>
     </div>
@@ -1032,6 +1242,249 @@ function triggerDownload(blob, filename) {
   setTimeout(() => URL.revokeObjectURL(url), 1000);
 }
 
+// ─── Pages-friendly HTML Export ──────────────────────────────────────────────
+// Generates a clean .html file with proper <table> tags that Pages (Mac/iOS)
+// and Word will open as editable documents with native tables.
+// Key requirements: no JS, simple inline CSS, real <table>/<thead>/<tbody>,
+// minimal nested divs, plain UTF-8, no external fonts.
+function exportPagesHTML() {
+  const T2 = calcTotals();
+  const sm = STYLES[state.style]?.mult||1;
+  const tm = TIERS[state.tier]?.mult||1;
+  const sLabel = STYLES[state.style] ? `${STYLES[state.style].label} / ${STYLES[state.style].en}` : '—';
+  const tLabel = TIERS[state.tier]   ? `${TIERS[state.tier].label} / ${TIERS[state.tier].en}` : '—';
+  const today = new Date().toLocaleDateString('en-GB');
+  const esc = (s) => String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+
+  // Filter spaces with content
+  const spacesWithContent = state.spaces.filter(sp => parseFloat(sp.area)>0 || (sp.selectedMaterials||[]).length>0);
+
+  // Space breakdown rows
+  const spaceRows = spacesWithContent.map(sp => {
+    const c = calcSpace(sp);
+    const unitRate = Math.round(sp.base * sm * tm);
+    return `<tr>
+      <td>${esc(sp.icon)} ${esc(sp.name)} / ${esc(sp.nameEn||'')}</td>
+      <td style="text-align:center">${c.area} m²</td>
+      <td style="text-align:center">${unitRate.toLocaleString()}</td>
+      <td style="text-align:right">${Math.round(c.matBase).toLocaleString()}</td>
+      <td style="text-align:right">${Math.round(c.matLineItems).toLocaleString()}</td>
+      <td style="text-align:right">${Math.round(c.log+c.con).toLocaleString()}</td>
+      <td style="text-align:right;font-weight:bold">${Math.round(c.total).toLocaleString()}</td>
+    </tr>`;
+  }).join('');
+
+  // Materials selected per space (separate detailed table)
+  const matRows = [];
+  spacesWithContent.forEach(sp => {
+    const sel = sp.selectedMaterials || [];
+    sel.forEach(s => {
+      const m = getMaterialById(s.matId);
+      if (!m) return;
+      const cat = MATERIAL_CATEGORIES[m.cat] || MATERIAL_CATEGORIES.other;
+      const qty = parseFloat(s.qty) || 0;
+      const priceUsed = (s.priceOverride !== '' && s.priceOverride != null) ? parseFloat(s.priceOverride) : m.price;
+      const cost = qty * priceUsed;
+      matRows.push(`<tr>
+        <td>${esc(sp.icon)} ${esc(sp.name)}</td>
+        <td>${esc(cat.label)} / ${esc(cat.en)}</td>
+        <td>${esc(m.name)}</td>
+        <td>${esc(m.brand||'')}</td>
+        <td style="text-align:center">${qty}</td>
+        <td style="text-align:center">${esc(m.unit||'pc')}</td>
+        <td style="text-align:right">${priceUsed.toLocaleString()}</td>
+        <td style="text-align:right;font-weight:bold">${Math.round(cost).toLocaleString()}</td>
+      </tr>`);
+    });
+  });
+
+  // Cost breakdown
+  const breakdownRows = [
+    ['Materials 材料货值',                     T2.totalMat],
+    ['Logistics 物流运输 (China→Qatar)',        T2.totalLog],
+    ['Customs + VAT 关税+VAT 10%',             T2.totalMat * 0.10],
+    ['Overhead & Margin 运营+利润',             T2.totalOH],
+    ['Contingency Buffer 材料缓冲',             T2.totalCon],
+  ].map(([label, val]) => {
+    const p = T2.gross > 0 ? (val/T2.gross*100).toFixed(1) : '0.0';
+    return `<tr>
+      <td>${esc(label)}</td>
+      <td style="text-align:right">${p}%</td>
+      <td style="text-align:right;font-weight:bold">${Math.round(val).toLocaleString()}</td>
+    </tr>`;
+  }).join('');
+
+  // Payment schedule
+  const payRows = getPayments().map(p => `<tr>
+    <td>${esc(p.batchZh)} / ${esc(p.batchEn)}</td>
+    <td style="text-align:center">${(p.pct2*100).toFixed(0)}%</td>
+    <td style="text-align:right;font-weight:bold">${T2.gross>0 ? Math.round(T2.gross*p.pct2).toLocaleString() : '—'}</td>
+    <td>${esc(p.triggerZh)} / ${esc(p.triggerEn)}</td>
+    <td style="font-size:11px;color:#666">${esc(p.products)}</td>
+  </tr>`).join('');
+
+  // Build clean Pages-compatible HTML.
+  // Use standard fonts only (no Google Fonts), simple inline styles, real tables.
+  const html = `<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8"/>
+<title>Qatar Villa Quote — ${esc(state.clientName||'Quote')} ${esc(state.quoteRef)}</title>
+<style>
+body { font-family: 'Helvetica', 'Arial', sans-serif; color: #222; max-width: 800px; margin: 30px auto; padding: 0 20px; line-height: 1.5; }
+h1 { font-size: 22pt; color: #1A3A5C; border-bottom: 3px solid #B88600; padding-bottom: 8px; margin-bottom: 4px; }
+h2 { font-size: 14pt; color: #1A3A5C; border-left: 4px solid #B88600; padding-left: 10px; margin-top: 28px; margin-bottom: 10px; }
+h3 { font-size: 12pt; color: #555; margin-top: 18px; }
+.subtitle { color: #777; font-size: 10pt; margin-bottom: 18px; }
+.meta-block { background: #F5F2EC; border: 1px solid #D4C9A8; padding: 12px 16px; border-radius: 6px; margin-bottom: 20px; }
+.meta-row { margin-bottom: 6px; }
+.meta-label { display: inline-block; width: 180px; color: #555; font-size: 10pt; }
+.meta-value { font-weight: bold; color: #1A3A5C; }
+.price-band { background: #1A3A5C; color: #fff; padding: 18px; border-radius: 6px; text-align: center; margin: 20px 0; }
+.price-band .label { font-size: 10pt; letter-spacing: 1.5px; opacity: 0.7; text-transform: uppercase; }
+.price-band .range { font-size: 20pt; font-weight: bold; color: #D4A017; margin: 8px 0 4px; }
+.price-band .note { font-size: 9pt; opacity: 0.7; }
+table { width: 100%; border-collapse: collapse; margin: 12px 0 20px; font-size: 10pt; }
+table thead th { background: #1A3A5C; color: #fff; padding: 8px 10px; text-align: left; font-weight: 600; font-size: 9.5pt; }
+table tbody td { padding: 6px 10px; border-bottom: 1px solid #E0DCD0; }
+table tbody tr:nth-child(even) { background: #FAF8F2; }
+table tfoot td { background: #F5E6C0; padding: 8px 10px; font-weight: bold; border-top: 2px solid #B88600; }
+.terms-box { background: #F5F2EC; border-left: 4px solid #B88600; padding: 12px 16px; margin-top: 14px; font-size: 10pt; line-height: 1.7; }
+.editable-note { background: #FFF8DC; border: 1px dashed #B88600; padding: 8px 12px; border-radius: 6px; font-size: 9pt; color: #666; margin: 16px 0; }
+.footer { margin-top: 30px; padding-top: 12px; border-top: 1px solid #ccc; font-size: 8pt; color: #888; text-align: center; }
+</style>
+</head>
+<body>
+
+<h1>QATAR VILLA QUOTATION</h1>
+<div class="subtitle">卡塔尔别墅装修报价单 · عرض سعر فيلا قطر</div>
+
+<div class="editable-note">
+✏️ 此文档可在 Pages / Numbers / Word 中直接编辑。所有表格为标准格式。<br>
+This document can be edited directly in Pages / Numbers / Word. All tables are in standard format.
+</div>
+
+<div class="meta-block">
+  <div class="meta-row"><span class="meta-label">Reference / 编号:</span><span class="meta-value">${esc(state.quoteRef)}</span></div>
+  <div class="meta-row"><span class="meta-label">Client / 客户:</span><span class="meta-value">${esc(state.clientName||'—')}</span></div>
+  <div class="meta-row"><span class="meta-label">Project / 项目:</span><span class="meta-value">${esc(state.projectName||'—')}</span></div>
+  <div class="meta-row"><span class="meta-label">Date / 日期:</span><span class="meta-value">${esc(today)}</span></div>
+  <div class="meta-row"><span class="meta-label">Style / 风格:</span><span class="meta-value">${esc(sLabel)}</span></div>
+  <div class="meta-row"><span class="meta-label">Material Grade / 材料档次:</span><span class="meta-value">${esc(tLabel)}</span></div>
+  <div class="meta-row"><span class="meta-label">Total Area / 总面积:</span><span class="meta-value">${T2.totalArea.toFixed(1)} m²</span></div>
+  <div class="meta-row"><span class="meta-label">Spaces / 空间数:</span><span class="meta-value">${spacesWithContent.length}</span></div>
+  ${state.discount !== 0 ? `<div class="meta-row"><span class="meta-label">Adjustment / 调整:</span><span class="meta-value">${state.discount>0?'+':''}${(state.discount*100).toFixed(0)}%</span></div>` : ''}
+</div>
+
+<div class="price-band">
+  <div class="label">PRICE RANGE 报价区间 (Materials TBC ±15%)</div>
+  <div class="range">QAR ${T2.gross>0?Math.round(T2.low).toLocaleString():'—'} &nbsp;—&nbsp; QAR ${T2.gross>0?Math.round(T2.high).toLocaleString():'—'}</div>
+  <div class="note">Midpoint 中间值: QAR ${T2.gross>0?Math.round(T2.gross).toLocaleString():'—'} · Blended Rate 综合单价: QAR ${T2.gross>0&&T2.totalArea>0?Math.round(T2.gross/T2.totalArea).toLocaleString():'—'} / m²</div>
+</div>
+
+<h2>1. Cost Breakdown 费用构成</h2>
+<table>
+<thead>
+<tr><th>Component 项目</th><th style="text-align:right">% of Total</th><th style="text-align:right">Amount (QAR)</th></tr>
+</thead>
+<tbody>
+${breakdownRows}
+</tbody>
+<tfoot>
+<tr><td>TOTAL 合计 (Midpoint 中间值)</td><td style="text-align:right">100.0%</td><td style="text-align:right">${T2.gross>0?Math.round(T2.gross).toLocaleString():'—'}</td></tr>
+</tfoot>
+</table>
+
+<h2>2. Space Breakdown 各空间明细</h2>
+<table>
+<thead>
+<tr>
+  <th>Space / 空间</th>
+  <th style="text-align:center">Area / 面积</th>
+  <th style="text-align:center">Rate (QAR/m²)</th>
+  <th style="text-align:right">Base Cost</th>
+  <th style="text-align:right">Materials</th>
+  <th style="text-align:right">Logistics+Tax</th>
+  <th style="text-align:right">Subtotal (QAR)</th>
+</tr>
+</thead>
+<tbody>
+${spaceRows || `<tr><td colspan="7" style="text-align:center;color:#999;padding:14px">No spaces with area entered</td></tr>`}
+</tbody>
+<tfoot>
+<tr>
+  <td>TOTAL / 总计</td>
+  <td style="text-align:center">${T2.totalArea.toFixed(1)} m²</td>
+  <td></td>
+  <td style="text-align:right">${Math.round(T2.totalMat - T2.rows.reduce((a,r)=>a+(r.matLineItems||0),0)).toLocaleString()}</td>
+  <td style="text-align:right">${Math.round(T2.rows.reduce((a,r)=>a+(r.matLineItems||0),0)).toLocaleString()}</td>
+  <td style="text-align:right">${Math.round(T2.totalLog+T2.totalCon).toLocaleString()}</td>
+  <td style="text-align:right">${Math.round(T2.gross).toLocaleString()}</td>
+</tr>
+</tfoot>
+</table>
+
+${matRows.length > 0 ? `
+<h2>3. Selected Materials Detail 选定材料明细</h2>
+<table>
+<thead>
+<tr>
+  <th>Space / 空间</th>
+  <th>Category / 类别</th>
+  <th>Material / 材料</th>
+  <th>Brand / 品牌</th>
+  <th style="text-align:center">Qty</th>
+  <th style="text-align:center">Unit</th>
+  <th style="text-align:right">Price (QAR)</th>
+  <th style="text-align:right">Subtotal (QAR)</th>
+</tr>
+</thead>
+<tbody>
+${matRows.join('')}
+</tbody>
+</table>
+` : ''}
+
+<h2>${matRows.length > 0 ? '4' : '3'}. Payment Schedule 付款计划</h2>
+<table>
+<thead>
+<tr>
+  <th>Batch / 批次</th>
+  <th style="text-align:center">%</th>
+  <th style="text-align:right">Amount (QAR)</th>
+  <th>Trigger / 触发条件</th>
+  <th>Products / 产品</th>
+</tr>
+</thead>
+<tbody>
+${payRows}
+</tbody>
+</table>
+
+<h2>${matRows.length > 0 ? '5' : '4'}. Terms & Conditions 报价说明</h2>
+<div class="terms-box">
+1. 本报价为概算，材料品牌及规格未最终确认，实际合同价格以确认材料清单后为准，浮动不超过 ±15%。<br>
+&nbsp;&nbsp;&nbsp;&nbsp;This is a preliminary estimate. Final contract price subject to confirmed material specifications (±15% variance).<br><br>
+2. 报价有效期：30天（自出具之日起）/ Valid 30 days from issue date.<br><br>
+3. 所有产品从中国定制生产，全程供货周期约45天，付款须在对应工程节点前45天完成。<br>
+&nbsp;&nbsp;&nbsp;&nbsp;All products are custom-manufactured in China. Total lead time approx. 45 days. Payment must be received 45 days before each milestone.<br><br>
+4. 付款到账后方启动产品生产及发运，所有权在安装验收前归乙方所有。<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Production and shipping commence upon cleared payment. Title remains with Supplier until installation acceptance.
+</div>
+
+<div class="footer">
+Qatar Villa Quote · Reference ${esc(state.quoteRef)} · Generated ${esc(today)}<br>
+此文档为可编辑格式，可在 Pages / Word / Numbers 中直接修改 · Editable format for Pages / Word / Numbers
+</div>
+
+</body>
+</html>`;
+
+  const blob = new Blob([html], { type: 'text/html;charset=utf-8' });
+  const filename = `QVQ_${(state.clientName||'quote').replace(/\s+/g,'_')}_${Date.now()}.html`;
+  triggerDownload(blob, filename);
+}
+
 function handleFileImport(event) {
   const file = event.target.files[0];
   if (!file) return;
@@ -1116,21 +1569,230 @@ function parseCSVLine(line) {
   return result;
 }
 
+// ─── Materials Library Modal ──────────────────────────────────────────────────
+function openLibModal() {
+  renderLibModal();
+  document.getElementById('libModal').classList.add('show');
+}
+function closeLibModal() {
+  document.getElementById('libModal').classList.remove('show');
+  renderAll(); // refresh main view in case material edits affected pricing
+}
+
+function renderLibModal() {
+  const body = document.getElementById('libModalBody');
+  // Group materials by category
+  const grouped = {};
+  for (const cat of Object.keys(MATERIAL_CATEGORIES)) grouped[cat] = [];
+  for (const m of state.materials) {
+    const c = MATERIAL_CATEGORIES[m.cat] ? m.cat : 'other';
+    grouped[c].push(m);
+  }
+
+  let html = `
+    <div class="lib-toolbar">
+      <button class="lib-tool-btn" onclick="addLibMaterial()">＋ 新增材料 Add Material</button>
+      <button class="lib-tool-btn" onclick="resetLibToDefaults()">↻ 恢复默认 Reset Defaults</button>
+      <button class="lib-tool-btn" onclick="exportLibCSV()">📊 导出 CSV Export</button>
+      <button class="lib-tool-btn" onclick="document.getElementById('libImportInput').click()">📂 导入 CSV Import</button>
+      <input type="file" id="libImportInput" style="display:none" accept=".csv,.json" onchange="importLibFile(event)"/>
+    </div>
+    <div class="sync-section-desc" style="font-size:10px;color:rgba(232,237,242,0.5);margin-bottom:10px">
+      ✏️ 编辑名称 / 品牌 / 单价 / 单位均会自动保存。这些材料会出现在每个空间的下拉选择器中。<br>
+      Edits to name / brand / price / unit auto-save. These materials appear in each space's picker.
+    </div>
+  `;
+
+  for (const cat of Object.keys(MATERIAL_CATEGORIES)) {
+    const catInfo = MATERIAL_CATEGORIES[cat];
+    const items = grouped[cat] || [];
+    if (items.length === 0 && cat !== 'other') continue;
+    html += `
+      <div class="lib-cat-head">
+        <span class="lib-cat-name">${catInfo.icon} ${catInfo.label} / ${catInfo.en}</span>
+        <span style="font-size:9px;color:var(--muted)">${items.length} ${items.length===1?'item':'items'}</span>
+      </div>
+    `;
+    for (const m of items) {
+      html += renderLibRow(m);
+    }
+  }
+  // Catch-all for materials with unknown category
+  body.innerHTML = html;
+}
+
+function renderLibRow(m) {
+  const catOptions = Object.entries(MATERIAL_CATEGORIES).map(([k,v]) =>
+    `<option value="${k}"${m.cat===k?' selected':''}>${v.icon} ${v.label}</option>`).join('');
+  return `
+    <div class="lib-mat-row" id="libRow_${m.id}">
+      <select class="lib-mat-cat-select" onchange="updateLibField('${m.id}','cat',this.value)">${catOptions}</select>
+      <input class="lib-mat-input lib-name" value="${escapeAttr(m.name)}" placeholder="名称" onchange="updateLibField('${m.id}','name',this.value)"/>
+      <input class="lib-mat-input lib-name" value="${escapeAttr(m.nameEn||'')}" placeholder="EN name" onchange="updateLibField('${m.id}','nameEn',this.value)"/>
+      <input class="lib-mat-input lib-brand" value="${escapeAttr(m.brand||'')}" placeholder="品牌" onchange="updateLibField('${m.id}','brand',this.value)"/>
+      <input class="lib-mat-input lib-price" type="number" min="0" value="${m.price}" onchange="updateLibField('${m.id}','price',parseFloat(this.value)||0)"/>
+      <span style="font-size:9px;color:var(--muted)">QAR/</span>
+      <input class="lib-mat-input lib-unit" value="${escapeAttr(m.unit||'pc')}" onchange="updateLibField('${m.id}','unit',this.value)"/>
+      <button class="lib-mat-del" onclick="deleteLibMaterial('${m.id}')" title="删除">×</button>
+    </div>
+  `;
+}
+
+function escapeAttr(s) {
+  return String(s||'').replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;');
+}
+
+function updateLibField(id, field, value) {
+  const m = state.materials.find(x => x.id === id);
+  if (m) { m[field] = value; saveState(); }
+  // For category change, re-render the modal so it moves to right group
+  if (field === 'cat') renderLibModal();
+}
+
+function addLibMaterial() {
+  const newId = 'mat_'+Math.random().toString(36).slice(2,8);
+  state.materials.unshift({
+    id: newId, cat: 'other', name: '新材料', nameEn: 'New Material',
+    brand: '', price: 100, unit: 'pc'
+  });
+  saveState();
+  renderLibModal();
+  // Scroll to top to show new entry
+  setTimeout(() => {
+    const el = document.getElementById('libRow_'+newId);
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      const nameInput = el.querySelector('.lib-name');
+      if (nameInput) nameInput.focus();
+    }
+  }, 50);
+}
+
+function deleteLibMaterial(id) {
+  if (!confirm('删除此材料? 所有空间中引用此材料的也会被移除。\nDelete this material? Also removes references in spaces.')) return;
+  state.materials = state.materials.filter(m => m.id !== id);
+  // Also remove from any space.selectedMaterials
+  state.spaces.forEach(sp => {
+    if (Array.isArray(sp.selectedMaterials)) {
+      sp.selectedMaterials = sp.selectedMaterials.filter(s => s.matId !== id);
+    }
+  });
+  saveState();
+  renderLibModal();
+}
+
+function resetLibToDefaults() {
+  if (!confirm('恢复默认材料库? 你的自定义材料会丢失，已选材料的引用也会失效。\nReset to default library? Your custom materials will be lost.')) return;
+  state.materials = JSON.parse(JSON.stringify(DEFAULT_MATERIALS));
+  state.spaces.forEach(sp => {
+    if (Array.isArray(sp.selectedMaterials)) {
+      sp.selectedMaterials = sp.selectedMaterials.filter(s => state.materials.find(m=>m.id===s.matId));
+    }
+  });
+  saveState();
+  renderLibModal();
+}
+
+// CSV export / import for the library only
+function exportLibCSV() {
+  let csv = '\uFEFF';
+  csv += '"id","category","name_zh","name_en","brand","price_qar","unit"\n';
+  for (const m of state.materials) {
+    csv += `"${m.id}","${m.cat||'other'}","${(m.name||'').replace(/"/g,'""')}","${(m.nameEn||'').replace(/"/g,'""')}","${(m.brand||'').replace(/"/g,'""')}",${m.price||0},"${m.unit||'pc'}"\n`;
+  }
+  const blob = new Blob([csv], { type: 'text/csv;charset=utf-8' });
+  triggerDownload(blob, `QVQ_materials_${Date.now()}.csv`);
+}
+
+function importLibFile(event) {
+  const file = event.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = (e) => {
+    try {
+      const text = e.target.result;
+      let imported;
+      if (file.name.toLowerCase().endsWith('.csv')) {
+        imported = parseLibCSV(text);
+      } else {
+        const json = JSON.parse(text);
+        imported = Array.isArray(json) ? json : (json.materials || []);
+      }
+      if (Array.isArray(imported) && imported.length > 0) {
+        if (confirm(`导入 ${imported.length} 个材料? (替换当前库)\nImport ${imported.length} materials? (replaces current library)`)) {
+          state.materials = imported;
+          saveState();
+          renderLibModal();
+        }
+      }
+    } catch (err) {
+      alert('导入失败: ' + err.message);
+    }
+    event.target.value = '';
+  };
+  reader.readAsText(file, 'UTF-8');
+}
+
+function parseLibCSV(text) {
+  const lines = text.replace(/^\uFEFF/, '').split(/\r?\n/);
+  const result = [];
+  let headerSeen = false;
+  for (const line of lines) {
+    if (!line.trim()) continue;
+    const cols = parseCSVLine(line);
+    if (!headerSeen) { headerSeen = true; continue; }
+    if (cols.length < 7) continue;
+    result.push({
+      id: cols[0] || ('mat_'+Math.random().toString(36).slice(2,8)),
+      cat: cols[1] || 'other',
+      name: cols[2] || '未命名',
+      nameEn: cols[3] || cols[2] || 'Unnamed',
+      brand: cols[4] || '',
+      price: parseFloat(cols[5]) || 0,
+      unit: cols[6] || 'pc',
+    });
+  }
+  return result;
+}
+
 // ─── Calculations ──────────────────────────────────────────────────────────────
+function getMaterialById(id) {
+  return state.materials.find(m => m.id === id);
+}
+
+// Calculate selected materials cost for a space
+function calcSpaceMaterials(sp) {
+  if (!Array.isArray(sp.selectedMaterials) || sp.selectedMaterials.length === 0) return 0;
+  let sum = 0;
+  for (const sel of sp.selectedMaterials) {
+    const mat = getMaterialById(sel.matId);
+    if (!mat) continue;
+    const qty = parseFloat(sel.qty) || 0;
+    const price = parseFloat(sel.priceOverride !== '' && sel.priceOverride != null ? sel.priceOverride : mat.price) || 0;
+    sum += qty * price;
+  }
+  return sum;
+}
+
 function calcSpace(sp) {
   const area = parseFloat(sp.area) || 0;
   const sm = STYLES[state.style]?.mult || 1;
   const tm = TIERS[state.tier]?.mult || 1;
   const discMult = 1 + (state.discount || 0);
-  const mat = area * sp.base * sm * tm * discMult;
+  const matBase = area * sp.base * sm * tm * discMult;
+  const matLineItems = calcSpaceMaterials(sp) * discMult; // user-selected items also subject to discount
+  const mat = matBase + matLineItems;
   const log = mat * LOGISTICS_RATE;
   const oh  = mat * OVERHEAD;
   const con = mat * CONTINGENCY;
-  return { area, mat, log, oh, con, total: mat+log+oh+con };
+  return { area, mat, matBase, matLineItems, log, oh, con, total: mat+log+oh+con };
 }
 
 function calcTotals() {
-  const rows = state.spaces.map(calcSpace).filter(r=>r.area>0);
+  // include space if it has area OR has selected materials
+  const rows = state.spaces.map(calcSpace).filter((r,i) => {
+    return r.area > 0 || (state.spaces[i].selectedMaterials && state.spaces[i].selectedMaterials.length > 0 && r.mat > 0);
+  });
   const totalArea = rows.reduce((a,r)=>a+r.area,0);
   const totalMat  = rows.reduce((a,r)=>a+r.mat,0);
   const totalLog  = rows.reduce((a,r)=>a+r.log,0);
@@ -1221,44 +1883,173 @@ function renderTier() {
 function selectTier(k) { state.tier=k; renderAll(); }
 
 // ─── Page 2: Spaces ────────────────────────────────────────────────────────────
+// ─── Per-Space Material Picker ─────────────────────────────────────────────────
+function renderMatPickerForSpace(sp) {
+  const sel = sp.selectedMaterials || [];
+  const matCount = sel.length;
+  const showPicker = sp._showMatPicker === true;
+  const totalMatCost = calcSpaceMaterials(sp);
+
+  const linesHtml = sel.map((s,idx) => {
+    const m = getMaterialById(s.matId);
+    if (!m) return '';
+    const cat = MATERIAL_CATEGORIES[m.cat] || MATERIAL_CATEGORIES.other;
+    const qty = parseFloat(s.qty) || 0;
+    const priceUsed = (s.priceOverride !== '' && s.priceOverride != null) ? parseFloat(s.priceOverride) : m.price;
+    const cost = qty * priceUsed;
+    return `
+      <div class="mat-line">
+        <span class="mat-line-icon">${cat.icon}</span>
+        <span class="mat-line-name">${m.name}${m.brand?`<span class="mat-line-brand">· ${m.brand}</span>`:''}</span>
+        <input class="mat-line-qty" type="number" min="0" step="0.5" value="${s.qty}" onchange="updateSpaceMatQty('${sp.id}',${idx},this.value)" inputmode="decimal" title="数量 Qty"/>
+        <span class="mat-line-unit">${m.unit||'pc'}</span>
+        <span class="mat-line-unit">×</span>
+        <input class="mat-line-price" type="number" min="0" value="${priceUsed}" onchange="updateSpaceMatPrice('${sp.id}',${idx},this.value)" inputmode="decimal" title="单价 Price (QAR)"/>
+        <span class="mat-line-cost">${fmt(cost)}</span>
+        <button class="mat-line-del" onclick="removeSpaceMaterial('${sp.id}',${idx})" title="移除 Remove">×</button>
+      </div>
+    `;
+  }).filter(Boolean).join('');
+
+  // Build category-grouped dropdown
+  const grouped = {};
+  for (const cat of Object.keys(MATERIAL_CATEGORIES)) grouped[cat] = [];
+  for (const m of state.materials) {
+    const c = MATERIAL_CATEGORIES[m.cat] ? m.cat : 'other';
+    grouped[c].push(m);
+  }
+  const optGroups = Object.entries(MATERIAL_CATEGORIES).map(([k,v]) => {
+    const items = grouped[k] || [];
+    if (items.length === 0) return '';
+    const opts = items.map(m =>
+      `<option value="${m.id}">${m.name}${m.brand?' · '+m.brand:''} (${m.price} QAR/${m.unit||'pc'})</option>`
+    ).join('');
+    return `<optgroup label="${v.icon} ${v.label} ${v.en}">${opts}</optgroup>`;
+  }).join('');
+
+  return `
+    <div class="mat-picker-wrap">
+      <div class="mat-picker-head">
+        <span>📦 材料明细 Materials ${matCount > 0 ? `(${matCount} 项)` : ''}</span>
+        <button class="mat-picker-toggle" onclick="toggleSpaceMatPicker('${sp.id}')">${showPicker?'收起 ▴':'展开 ▾'}</button>
+      </div>
+      ${showPicker || matCount > 0 ? `
+        <div class="mat-picker-list">${linesHtml || '<div style="font-size:10px;color:var(--muted);padding:4px;text-align:center">暂无材料 No materials added</div>'}</div>
+        ${showPicker ? `
+          <div class="mat-picker-add">
+            <select class="mat-picker-select" id="matSel_${sp.id}">
+              <option value="">— 选择材料 / Select material —</option>
+              ${optGroups}
+            </select>
+            <button class="custom-confirm" style="font-size:11px;padding:6px 12px" onclick="addSpaceMaterial('${sp.id}')">＋ 加入 Add</button>
+          </div>
+        ` : ''}
+        ${matCount > 0 ? `<div class="mat-line-summary">
+          <span>材料合计 Materials Subtotal</span>
+          <span style="font-weight:700">${fmt(totalMatCost)}</span>
+        </div>` : ''}
+      ` : ''}
+    </div>
+  `;
+}
+
+function toggleSpaceMatPicker(spId) {
+  const sp = state.spaces.find(s => s.id === spId);
+  if (sp) {
+    sp._showMatPicker = !sp._showMatPicker;
+    renderAll();
+  }
+}
+
+function addSpaceMaterial(spId) {
+  const sp = state.spaces.find(s => s.id === spId);
+  if (!sp) return;
+  if (!Array.isArray(sp.selectedMaterials)) sp.selectedMaterials = [];
+  const sel = document.getElementById('matSel_'+spId);
+  const matId = sel?.value;
+  if (!matId) {
+    alert('请先在下拉中选择材料 / Please select a material first');
+    return;
+  }
+  // default qty: if material is per m², default to space area; else 1
+  const m = getMaterialById(matId);
+  const defaultQty = (m?.unit === 'm²' || m?.unit === 'm') && parseFloat(sp.area) > 0
+    ? parseFloat(sp.area)
+    : 1;
+  sp.selectedMaterials.push({
+    matId: matId,
+    qty: defaultQty,
+    priceOverride: '' // empty = use library price
+  });
+  renderAll();
+}
+
+function updateSpaceMatQty(spId, idx, val) {
+  const sp = state.spaces.find(s => s.id === spId);
+  if (!sp || !sp.selectedMaterials || !sp.selectedMaterials[idx]) return;
+  sp.selectedMaterials[idx].qty = parseFloat(val) || 0;
+  saveState();
+  renderAll();
+}
+
+function updateSpaceMatPrice(spId, idx, val) {
+  const sp = state.spaces.find(s => s.id === spId);
+  if (!sp || !sp.selectedMaterials || !sp.selectedMaterials[idx]) return;
+  sp.selectedMaterials[idx].priceOverride = val === '' ? '' : (parseFloat(val) || 0);
+  saveState();
+  renderAll();
+}
+
+function removeSpaceMaterial(spId, idx) {
+  const sp = state.spaces.find(s => s.id === spId);
+  if (!sp || !sp.selectedMaterials) return;
+  sp.selectedMaterials.splice(idx, 1);
+  renderAll();
+}
+
 function renderSpaces() {
   const rows = state.spaces.map((sp,i) => {
     const calc = calcSpace(sp);
     const hasVal = calc.area > 0;
+    const matCount = (sp.selectedMaterials||[]).length;
     const spaceName = lang==='en' ? (sp.nameEn||sp.name) : sp.name;
     const spaceAlt  = lang==='en' ? sp.name : (sp.nameEn||'');
     const itemsStr  = lang==='en' ? (sp.itemsEn||sp.items) : sp.items;
-    return `<div class="space-row${hasVal?' has-value':''}" id="row_${sp.id}">
-      <span class="space-icon">${sp.icon}</span>
-      <div class="space-info">
-        <div class="space-name">${spaceName}</div>
-        ${spaceAlt?`<div class="space-name-en">${spaceAlt}</div>`:''}
-        <div class="space-sub">${itemsStr}</div>
-      </div>
-      <div style="display:flex;flex-direction:column;gap:4px;align-items:flex-end;flex-shrink:0">
-        <div class="space-controls">
-          <div class="area-quick">
-            <button class="area-quick-btn" onclick="adjustArea('${sp.id}',-5)" title="-5">−</button>
-            <button class="area-quick-btn" onclick="adjustArea('${sp.id}',5)" title="+5">+</button>
+    const showMatPicker = sp._showMatPicker === true;
+    return `<div class="space-row${hasVal||matCount>0?' has-value':''}" id="row_${sp.id}" style="flex-direction:column;align-items:stretch">
+      <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;width:100%">
+        <span class="space-icon">${sp.icon}</span>
+        <div class="space-info">
+          <div class="space-name">${spaceName}</div>
+          ${spaceAlt?`<div class="space-name-en">${spaceAlt}</div>`:''}
+          <div class="space-sub">${itemsStr}</div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:4px;align-items:flex-end;flex-shrink:0">
+          <div class="space-controls">
+            <div class="area-quick">
+              <button class="area-quick-btn" onclick="adjustArea('${sp.id}',-5)" title="-5">−</button>
+              <button class="area-quick-btn" onclick="adjustArea('${sp.id}',5)" title="+5">+</button>
+            </div>
+            <input class="space-input" type="number" min="0" placeholder="0"
+              value="${sp.area}"
+              onchange="updateArea('${sp.id}',this.value)"
+              oninput="updateArea('${sp.id}',this.value)"
+              inputmode="decimal"/>
+            <span class="space-unit">m²</span>
           </div>
-          <input class="space-input" type="number" min="0" placeholder="0"
-            value="${sp.area}"
-            onchange="updateArea('${sp.id}',this.value)"
-            oninput="updateArea('${sp.id}',this.value)"
-            inputmode="decimal"/>
-          <span class="space-unit">m²</span>
+          <div class="base-price-wrap">
+            <input class="base-price-input" type="number" min="50" max="5000"
+              value="${sp.base}"
+              onchange="updateBase('${sp.id}',this.value)"
+              oninput="updateBase('${sp.id}',this.value)"
+              inputmode="decimal" title="Base rate QAR/m²"/>
+            <span class="base-price-label">QAR/m²</span>
+          </div>
         </div>
-        <div class="base-price-wrap">
-          <input class="base-price-input" type="number" min="50" max="5000"
-            value="${sp.base}"
-            onchange="updateBase('${sp.id}',this.value)"
-            oninput="updateBase('${sp.id}',this.value)"
-            inputmode="decimal" title="Base rate QAR/m²"/>
-          <span class="base-price-label">QAR/m²</span>
-        </div>
+        ${(state.style&&state.tier&&(hasVal||matCount>0))?`<div class="space-cost">${fmt(calc.total)}</div>`:`<div class="space-cost" style="color:var(--muted);font-size:10px">${sp.base} QAR/m²</div>`}
+        <button class="space-del" onclick="deleteSpace('${sp.id}')" title="删除 Delete">×</button>
       </div>
-      ${(state.style&&state.tier&&hasVal)?`<div class="space-cost">${fmt(calc.total)}</div>`:`<div class="space-cost" style="color:var(--muted);font-size:10px">${sp.base} QAR/m²</div>`}
-      <button class="space-del" onclick="deleteSpace('${sp.id}')" title="删除 Delete">×</button>
+      ${renderMatPickerForSpace(sp)}
     </div>`;
   }).join('');
 
@@ -1305,14 +2096,14 @@ function deleteSpace(id) { state.spaces = state.spaces.filter(s=>s.id!==id); ren
 function addPreset(encoded) {
   const p = JSON.parse(decodeURIComponent(encoded));
   state.spaces.push({ id:uid(), icon:p.icon, name:p.name, nameEn:p.nameEn, nameAr:p.nameAr||p.nameEn, base:p.base,
-    items:p.nameEn, itemsEn:p.nameEn, qty:1, area:'' });
+    items:p.nameEn, itemsEn:p.nameEn, qty:1, area:'', selectedMaterials:[] });
   renderAll();
 }
 function addCustomSpace() {
   const inp = document.getElementById('customSpaceName');
   const name = inp?.value.trim();
   if (!name) return;
-  state.spaces.push({ id:uid(), icon:'🏠', name, nameEn:name, base:350, items:'自定义 Custom', itemsEn:'Custom Space', qty:1, area:'' });
+  state.spaces.push({ id:uid(), icon:'🏠', name, nameEn:name, base:350, items:'自定义 Custom', itemsEn:'Custom Space', qty:1, area:'', selectedMaterials:[] });
   renderAll();
 }
 
@@ -1339,13 +2130,14 @@ function renderQuote() {
     { label: lang==='en'?'Contingency Buffer 材料缓冲':'材料未定缓冲 Contingency ±',          labelAr:'احتياطي المواد ±',         val:T2.totalCon,    color:'#B88600' },
   ];
 
-  const spaceRows = state.spaces.filter(sp=>parseFloat(sp.area)>0).map(sp => {
+  const spaceRows = state.spaces.filter(sp => parseFloat(sp.area)>0 || (sp.selectedMaterials||[]).length>0).map(sp => {
     const c = calcSpace(sp);
     const unitRate = Math.round(sp.base * sm * tm);
     const spLabel = lang==='en' ? (sp.nameEn||sp.name) : sp.name;
     const spAr = sp.nameAr || sp.nameEn || sp.name;
+    const matCount = (sp.selectedMaterials||[]).length;
     return `<tr>
-      <td>${sp.icon} ${spLabel}<br><span class="ar" style="font-size:8px;color:rgba(255,255,255,0.4)">${spAr}</span></td>
+      <td>${sp.icon} ${spLabel}${matCount>0?`<br><span style="font-size:9px;color:#D4A017">📦 ${matCount} ${lang==='en'?'materials':'项材料'}</span>`:''}<br><span class="ar" style="font-size:8px;color:rgba(255,255,255,0.4)">${spAr}</span></td>
       <td class="ta-center">${c.area} m²</td>
       <td class="ta-center">${unitRate.toLocaleString()}</td>
       <td class="ta-right">${fmt(c.mat)}</td>
@@ -1611,14 +2403,22 @@ function renderPrintRoot() {
   `;
 
   // ── Page 2: Space Breakdown Table ──
-  const filteredSpaces = state.spaces.filter(sp=>parseFloat(sp.area)>0);
+  const filteredSpaces = state.spaces.filter(sp => parseFloat(sp.area)>0 || (sp.selectedMaterials||[]).length>0);
   const spaceTableRows = filteredSpaces.length ? filteredSpaces.map(sp => {
     const c = calcSpace(sp);
     const unitRate = Math.round(sp.base * sm * tm);
     const spLabel = (sp.name || '') + (sp.nameEn ? ' / '+sp.nameEn : '');
     const spAr = sp.nameAr || '';
+    const sel = sp.selectedMaterials || [];
+    const matLines = sel.length > 0 ? sel.map(s => {
+      const m = getMaterialById(s.matId);
+      if (!m) return '';
+      const qty = parseFloat(s.qty) || 0;
+      const priceUsed = (s.priceOverride !== '' && s.priceOverride != null) ? parseFloat(s.priceOverride) : m.price;
+      return `<div style="font-size:7.5pt;color:rgba(232,237,242,0.65);padding-left:14px;line-height:1.4">▸ ${m.name}${m.brand?' · '+m.brand:''} — ${qty}${m.unit||'pc'} × ${priceUsed.toLocaleString()} = <span style="color:#D4A017">${fmt(qty*priceUsed)}</span></div>`;
+    }).join('') : '';
     return `<tr>
-      <td>${sp.icon} ${spLabel}${spAr?`<span class="dim-ar">${spAr}</span>`:''}</td>
+      <td>${sp.icon} ${spLabel}${spAr?`<span class="dim-ar">${spAr}</span>`:''}${matLines}</td>
       <td style="text-align:center">${c.area} m²</td>
       <td style="text-align:center">${unitRate.toLocaleString()}</td>
       <td style="text-align:right">${fmt(c.mat)}</td>
@@ -1820,13 +2620,16 @@ document.addEventListener('keydown', (e) => {
 
 function resetQuote() {
   if (!confirm(t('confirmReset'))) return;
+  const keepMaterials = state.materials; // preserve user library across resets
   state = {
     tab: 0, style: null, tier: null,
     spaces: JSON.parse(JSON.stringify(DEFAULT_SPACES)),
+    materials: keepMaterials || JSON.parse(JSON.stringify(DEFAULT_MATERIALS)),
     clientName: '', projectName: '',
     quoteRef: 'QQ-' + Date.now().toString(36).toUpperCase(),
     discount: 0, globalAdj: 0,
   };
+  migrateState();
   renderAll();
 }
 
@@ -1839,6 +2642,7 @@ if ('serviceWorker' in navigator) {
 
 // ─── Init ──────────────────────────────────────────────────────────────────────
 loadState();
+migrateState();
 renderAll();
 setInterval(saveState, 10000);
 </script>
