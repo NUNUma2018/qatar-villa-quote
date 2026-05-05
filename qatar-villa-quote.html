@@ -17,9 +17,9 @@
   --gold: #B88600;
   --gold2: #D4A017;
   --green: #2E6B4F;
-  --cream: #F0F4F8;
-  --muted: rgba(240,244,248,0.72);
-  --dim: rgba(240,244,248,0.42);
+  --cream: #E8EDF2;
+  --muted: rgba(232,237,242,0.72);
+  --dim: rgba(232,237,242,0.32);
   --glass: rgba(255,255,255,0.05);
   --glass2: rgba(255,255,255,0.09);
   --border: rgba(255,255,255,0.09);
@@ -29,14 +29,8 @@
 }
 * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
 html, body { overflow-x: hidden; }
-body {
-  font-family: var(--font-body); background: var(--navy); color: var(--cream);
-  min-height: 100vh; min-height: 100dvh;
-  font-weight: 500;
-  -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
-  text-rendering: optimizeLegibility;
-}
-input, button, select, textarea { font-weight: 500; }
+body { font-family: var(--font-body); background: var(--navy); color: var(--cream); min-height: 100vh; min-height: 100dvh;
+  font-weight: 500; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; text-rendering: optimizeLegibility; }
 
 .bg-layer { position: fixed; inset: 0; pointer-events: none; z-index: 0;
   background: radial-gradient(ellipse 70% 50% at 15% 15%, rgba(26,58,92,0.7) 0%, transparent 60%),
@@ -159,7 +153,7 @@ main { position: relative; z-index: 1; max-width: 880px; margin: 0 auto; padding
 
 /* ── Cards ── */
 .card { background: var(--glass); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; margin-bottom: 14px; }
-.card-head { padding: 12px 18px; font-weight: 600; font-size: 12px; border-bottom: 1px solid var(--border); color: var(--muted); display: flex; align-items: center; gap: 8px; }
+.card-head { padding: 12px 18px; font-weight: 700; font-size: 12.5px; border-bottom: 1px solid var(--border); color: rgba(232,237,242,0.85); display: flex; align-items: center; gap: 8px; letter-spacing: 0.2px; }
 
 /* ── Style selector ── */
 .style-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(148px, 1fr)); gap: 12px; }
@@ -171,7 +165,7 @@ main { position: relative; z-index: 1; max-width: 880px; margin: 0 auto; padding
 .style-name { font-size: 13px; font-weight: 700; margin-bottom: 1px; }
 .style-en { font-size: 9px; color: var(--muted); margin-bottom: 6px; letter-spacing: 0.5px; }
 .style-desc-zh { font-size: 10px; color: var(--muted); line-height: 1.5; margin-bottom: 2px; }
-.style-desc-en { font-size: 9px; color: rgba(232,237,242,0.6); line-height: 1.5; margin-bottom: 8px; }
+.style-desc-en { font-size: 9px; color: rgba(232,237,242,0.35); line-height: 1.5; margin-bottom: 8px; }
 .style-mult { font-size: 11px; font-weight: 700; }
 .check-badge { position: absolute; top: 8px; right: 8px; width: 20px; height: 20px; border-radius: 50%;
   display: flex; align-items: center; justify-content: center; font-size: 11px; color: #fff; font-weight: 700; }
@@ -186,7 +180,7 @@ main { position: relative; z-index: 1; max-width: 880px; margin: 0 auto; padding
 .tier-name { font-size: 13px; font-weight: 700; margin-bottom: 2px; }
 .tier-name-en { font-size: 10px; color: var(--muted); margin-bottom: 4px; }
 .tier-note-zh { font-size: 10px; color: var(--muted); margin-bottom: 2px; }
-.tier-note-en { font-size: 9px; color: rgba(232,237,242,0.55); margin-bottom: 8px; }
+.tier-note-en { font-size: 9px; color: rgba(232,237,242,0.3); margin-bottom: 8px; }
 .tier-mult { font-size: 18px; font-weight: 800; }
 .rec-badge { margin-top: 8px; font-size: 9px; padding: 3px 8px; border-radius: 20px; display: inline-block; }
 @media (max-width: 480px) {
@@ -209,7 +203,7 @@ main { position: relative; z-index: 1; max-width: 880px; margin: 0 auto; padding
 .space-icon { font-size: 18px; width: 26px; text-align: center; flex-shrink: 0; }
 .space-info { flex: 1; min-width: 90px; }
 .space-name { font-size: 12px; font-weight: 600; }
-.space-name-en { font-size: 9px; color: rgba(232,237,242,0.65); margin-top: 1px; }
+.space-name-en { font-size: 9px; color: rgba(232,237,242,0.4); margin-top: 1px; }
 .space-sub { font-size: 10px; color: var(--muted); margin-top: 1px; }
 
 .space-controls { display: flex; align-items: center; gap: 6px; flex-shrink: 0; flex-wrap: nowrap; }
@@ -262,26 +256,26 @@ main { position: relative; z-index: 1; max-width: 880px; margin: 0 auto; padding
 /* ── Quote ── */
 .client-row { display: flex; gap: 12px; margin-bottom: 18px; flex-wrap: wrap; }
 .client-field { flex: 1; min-width: 180px; }
-.client-label { font-size: 10px; color: var(--muted); display: block; margin-bottom: 4px; letter-spacing: 0.5px; }
+.client-label { font-size: 10.5px; color: rgba(232,237,242,0.8); display: block; margin-bottom: 4px; letter-spacing: 0.5px; font-weight: 600; }
 .client-input { width: 100%; background: var(--glass2); border: 1px solid var(--border); border-radius: 8px;
-  color: var(--cream); font-size: 13px; padding: 9px 12px; outline: none; font-family: var(--font-body); }
+  color: var(--cream); font-size: 13.5px; padding: 9px 12px; outline: none; font-family: var(--font-body); font-weight: 600; }
 .client-input:focus { border-color: var(--gold); }
 
 .quote-card { background: var(--glass); border: 1px solid rgba(184,134,0,0.3); border-radius: var(--radius); overflow: hidden; margin-bottom: 16px; }
 .quote-header-band { background: linear-gradient(90deg, var(--navy2), #0a1826); padding: 16px 20px;
   display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 8px; }
 .quote-htitle { font-family: var(--font-display); font-size: 18px; color: var(--gold); font-weight: 700; }
-.quote-hmeta { font-size: 11px; color: rgba(240,244,248,0.85); font-weight: 500; margin-top: 4px; line-height: 1.7; }
-.quote-hdate { font-size: 11px; color: rgba(240,244,248,0.85); font-weight: 500; text-align: right; }
+.quote-hmeta { font-size: 10.5px; color: rgba(232,237,242,0.75); margin-top: 4px; line-height: 1.7; font-weight: 500; }
+.quote-hdate { font-size: 11.5px; color: rgba(232,237,242,0.8); text-align: right; font-weight: 600; }
 
 .price-band { padding: 24px 20px; text-align: center; background: linear-gradient(135deg, rgba(26,58,92,0.5), rgba(184,134,0,0.08)); border-bottom: 1px solid var(--border); }
-.price-label { font-size: 10px; color: var(--muted); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 12px; }
+.price-label { font-size: 10.5px; color: rgba(232,237,242,0.85); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 12px; font-weight: 700; }
 .price-range { display: flex; align-items: center; justify-content: center; gap: 12px; flex-wrap: wrap; }
-.price-low { font-size: 20px; font-weight: 500; color: rgba(240,244,248,0.85); }
+.price-low { font-size: 20px; font-weight: 500; color: rgba(232,237,242,0.85); }
 .price-sep { font-size: 18px; color: var(--gold); }
 .price-high { font-family: var(--font-display); font-size: 32px; font-weight: 700; color: var(--gold); }
-.price-note { margin-top: 10px; font-size: 11px; color: rgba(255,184,0,0.65); }
-.price-sqm { margin-top: 4px; font-size: 11px; color: var(--muted); }
+.price-note { margin-top: 10px; font-size: 11.5px; color: rgba(255,200,80,0.85); font-weight: 500; }
+.price-sqm { margin-top: 4px; font-size: 11.5px; color: rgba(232,237,242,0.75); font-weight: 500; }
 
 /* Manual price override in quote */
 .manual-override { display: flex; align-items: center; gap: 10px; margin-top: 14px; padding: 10px 16px;
@@ -295,22 +289,22 @@ main { position: relative; z-index: 1; max-width: 880px; margin: 0 auto; padding
 .disc-btn.disc-neg.active { background: rgba(180,60,60,0.2); border-color: rgba(180,60,60,0.4); color: rgba(255,150,150,0.9); }
 
 .breakdown-wrap { padding: 16px 20px; }
-.breakdown-title { font-size: 11px; color: var(--muted); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 12px; }
+.breakdown-title { font-size: 11px; color: var(--muted); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 12px; font-weight: 700; }
 .b-row { display: flex; align-items: center; gap: 8px; margin-bottom: 9px; flex-wrap: wrap; }
 .b-dot { width: 8px; height: 8px; border-radius: 2px; flex-shrink: 0; }
-.b-label { font-size: 11px; font-weight: 500; color: rgba(240,244,248,0.85); flex: 1; min-width: 140px; }
+.b-label { font-size: 11.5px; color: rgba(232,237,242,0.85); flex: 1; min-width: 140px; font-weight: 600; }
 .b-bar { flex: 2; height: 5px; background: rgba(255,255,255,0.07); border-radius: 3px; min-width: 60px; overflow: hidden; }
 .b-fill { height: 100%; border-radius: 3px; transition: width 0.8s cubic-bezier(.4,0,.2,1); }
-.b-pct { font-size: 10px; color: var(--muted); width: 30px; text-align: right; }
-.b-val { font-size: 11px; font-weight: 700; color: var(--cream); min-width: 100px; text-align: right; }
-.b-total { display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border); padding-top: 10px; margin-top: 6px; font-size: 13px; font-weight: 700; }
+.b-pct { font-size: 10.5px; color: rgba(232,237,242,0.7); width: 32px; text-align: right; font-weight: 600; }
+.b-val { font-size: 11.5px; font-weight: 700; color: var(--cream); min-width: 100px; text-align: right; }
+.b-total { display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border); padding-top: 10px; margin-top: 6px; font-size: 13px; font-weight: 800; }
 
 /* ── Table ── */
 .tbl-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
-table { width: 100%; border-collapse: collapse; font-size: 11px; min-width: 480px; }
-th { background: rgba(26,58,92,0.7); color: rgba(240,244,248,0.9); padding: 8px 10px; text-align: left; font-weight: 700;
-  border-bottom: 2px solid rgba(184,134,0,0.3); white-space: nowrap; }
-td { padding: 8px 10px; border-bottom: 1px solid rgba(255,255,255,0.06); color: var(--cream); font-weight: 500; }
+table { width: 100%; border-collapse: collapse; font-size: 11.5px; min-width: 480px; }
+th { background: rgba(26,58,92,0.7); color: rgba(232,237,242,0.85); padding: 9px 10px; text-align: left; font-weight: 700;
+  border-bottom: 2px solid rgba(184,134,0,0.4); white-space: nowrap; letter-spacing: 0.2px; }
+td { padding: 9px 10px; border-bottom: 1px solid rgba(255,255,255,0.06); color: var(--cream); font-weight: 500; }
 tr:last-child td { border-bottom: none; }
 
 /* ── Payment ── */
@@ -320,11 +314,82 @@ tr:last-child td { border-bottom: none; }
 .pay-amount { padding: 10px 12px 2px; font-size: 15px; font-weight: 800; color: var(--gold); }
 .pay-pct { font-size: 11px; color: var(--muted); font-weight: 400; }
 .pay-trigger { padding: 0 12px 2px; font-size: 10px; color: var(--muted); }
-.pay-trigger-en { padding: 0 12px 3px; font-size: 9px; color: rgba(232,237,242,0.55); }
-.pay-products { padding: 0 12px 10px; font-size: 10px; color: rgba(255,255,255,0.6); }
+.pay-trigger-en { padding: 0 12px 3px; font-size: 9px; color: rgba(232,237,242,0.25); }
+.pay-products { padding: 0 12px 10px; font-size: 10px; color: rgba(255,255,255,0.35); }
 
-.disc { padding: 9px 13px; margin-bottom: 7px; font-size: 11.5px; color: rgba(240,244,248,0.82); font-weight: 500;
-  line-height: 1.7; background: rgba(255,255,255,0.05); border-radius: 0 6px 6px 0; }
+.disc { padding: 9px 12px; margin-bottom: 7px; font-size: 11.5px; color: rgba(232,237,242,0.78);
+  line-height: 1.7; background: rgba(255,255,255,0.045); border-radius: 0 6px 6px 0; font-weight: 500; }
+
+/* Editable terms */
+.disc-edit { position: relative; padding-right: 70px; transition: background 0.2s; }
+.disc-edit:hover { background: rgba(255,255,255,0.08); }
+.disc-text { word-break: break-word; }
+.disc-edit-btn, .disc-del-btn {
+  position: absolute; top: 50%; transform: translateY(-50%);
+  width: 26px; height: 26px; border-radius: 6px; border: 1px solid var(--border);
+  background: var(--glass2); color: var(--cream); font-size: 13px; cursor: pointer;
+  display: flex; align-items: center; justify-content: center; padding: 0;
+  font-family: var(--font-body); transition: all 0.15s;
+}
+.disc-edit-btn { right: 38px; }
+.disc-del-btn { right: 8px; color: rgba(255,150,150,0.8); border-color: rgba(255,80,80,0.25); background: rgba(255,80,80,0.08); }
+.disc-edit-btn:hover { background: rgba(184,134,0,0.2); color: var(--gold); border-color: rgba(184,134,0,0.5); }
+.disc-del-btn:hover { background: rgba(255,80,80,0.25); color: #ff9090; }
+.disc-add-btn {
+  width: 100%; padding: 9px 12px; margin-top: 6px; border-radius: 8px;
+  border: 1px dashed rgba(184,134,0,0.4); background: rgba(184,134,0,0.06); color: var(--gold);
+  font-family: var(--font-body); font-size: 11.5px; font-weight: 600; cursor: pointer;
+  transition: all 0.18s;
+}
+.disc-add-btn:hover { background: rgba(184,134,0,0.15); border-color: var(--gold); }
+.disc-reset-btn {
+  width: 100%; padding: 7px 12px; margin-top: 6px; border-radius: 8px;
+  border: 1px solid var(--border); background: var(--glass); color: rgba(232,237,242,0.7);
+  font-family: var(--font-body); font-size: 11px; font-weight: 500; cursor: pointer;
+  transition: all 0.18s;
+}
+.disc-reset-btn:hover { background: var(--glass2); color: var(--cream); }
+
+/* Editable rate cells in space breakdown table */
+.rate-edit-hint {
+  display: inline-block; margin-left: 4px; font-size: 9px; color: rgba(184,134,0,0.7);
+  cursor: pointer; padding: 1px 5px; border: 1px solid rgba(184,134,0,0.25);
+  border-radius: 4px; vertical-align: middle; font-weight: 700; transition: all 0.15s;
+}
+.rate-edit-hint:hover { background: rgba(184,134,0,0.15); color: var(--gold); border-color: var(--gold); }
+
+/* Editable inline values (clickable) */
+.editable {
+  cursor: pointer; padding: 1px 4px; border-radius: 4px; transition: all 0.15s;
+  border-bottom: 1px dashed rgba(184,134,0,0.4);
+}
+.editable:hover { background: rgba(184,134,0,0.15); border-bottom-color: var(--gold); color: var(--gold); }
+.editable::after { content: '✎'; font-size: 9px; margin-left: 4px; opacity: 0.5; }
+
+/* Settings panel for rates */
+.rates-panel {
+  margin-top: 12px; padding: 12px 14px; background: rgba(184,134,0,0.06);
+  border: 1px solid rgba(184,134,0,0.25); border-radius: 10px;
+}
+.rates-panel-title {
+  font-size: 10.5px; color: var(--gold); font-weight: 700; letter-spacing: 1px;
+  text-transform: uppercase; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center;
+}
+.rates-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 8px; }
+.rate-cell {
+  background: var(--glass); border: 1px solid var(--border); border-radius: 8px;
+  padding: 8px 10px; cursor: pointer; transition: all 0.18s;
+}
+.rate-cell:hover { border-color: var(--gold); background: rgba(184,134,0,0.1); }
+.rate-cell-label { font-size: 10px; color: rgba(232,237,242,0.7); font-weight: 600; margin-bottom: 4px; }
+.rate-cell-value { font-size: 15px; color: var(--gold); font-weight: 800; font-family: var(--font-display); }
+.rate-cell-ar { font-size: 9px; color: rgba(232,237,242,0.4); margin-top: 2px; font-family: 'Noto Sans Arabic', sans-serif; direction: rtl; }
+.rates-reset-btn {
+  background: transparent; border: 1px solid var(--border); border-radius: 6px;
+  padding: 3px 10px; font-size: 10px; color: rgba(232,237,242,0.6); cursor: pointer;
+  font-family: var(--font-body); font-weight: 500;
+}
+.rates-reset-btn:hover { color: var(--cream); border-color: var(--gold); }
 
 /* ── Bottom bar ── */
 .bottom-bar { position: fixed; bottom: 0; left: 0; right: 0; z-index: 200; background: rgba(13,31,53,0.95);
@@ -346,49 +411,6 @@ tr:last-child td { border-bottom: none; }
 .mt12 { margin-top: 12px; }
 .ta-right { text-align: right; }
 .ta-center { text-align: center; }
-
-/* ── Editable cells (click to edit) ── */
-.editable-cell {
-  display: inline-block; cursor: text; padding: 3px 8px;
-  border-radius: 5px; border: 1px dashed rgba(184,134,0,0.4);
-  color: var(--gold); font-weight: 700;
-  transition: all 0.15s; background: rgba(184,134,0,0.06);
-}
-.editable-cell:hover { background: rgba(184,134,0,0.18); border-color: var(--gold); }
-.editable-cell.is-overridden { border-style: solid; background: rgba(184,134,0,0.22); }
-.editable-cell .override-dot { font-size: 9px; color: #F0A050; margin-left: 4px; }
-.cell-pencil { font-size: 9px; opacity: 0.6; margin-left: 3px; }
-.editable-cell:hover .cell-pencil { opacity: 1; }
-
-/* Inline edit popover */
-.inline-edit-pop {
-  position: fixed; z-index: 1100;
-  background: linear-gradient(180deg, var(--navy2), var(--navy));
-  border: 1px solid rgba(184,134,0,0.6); border-radius: 10px;
-  padding: 12px; box-shadow: 0 16px 40px rgba(0,0,0,0.6);
-  min-width: 260px; max-width: 90vw;
-}
-.inline-edit-pop-title { font-size: 11px; color: var(--gold); font-weight: 700;
-  letter-spacing: 1px; text-transform: uppercase; margin-bottom: 8px; }
-.inline-edit-pop-input {
-  width: 100%; background: rgba(0,0,0,0.3); border: 1px solid var(--border);
-  border-radius: 6px; color: var(--cream); font-size: 14px; font-weight: 700;
-  padding: 8px 10px; outline: none; font-family: var(--font-body); margin-bottom: 8px;
-}
-.inline-edit-pop-input:focus { border-color: var(--gold); }
-.inline-edit-pop-row { display: flex; gap: 6px; }
-.inline-edit-pop-btn {
-  flex: 1; padding: 7px 10px; border-radius: 6px; border: 1px solid var(--border);
-  background: var(--glass); color: var(--cream); font-size: 11px; font-weight: 600;
-  cursor: pointer; font-family: var(--font-body); transition: all 0.15s;
-}
-.inline-edit-pop-btn.primary { background: var(--gold); color: #000; border-color: var(--gold); }
-.inline-edit-pop-btn.danger { background: rgba(180,60,60,0.15); border-color: rgba(180,60,60,0.4); color: #FFB0B0; }
-.inline-edit-pop-btn:hover { transform: translateY(-1px); }
-.inline-edit-pop-overlay {
-  position: fixed; inset: 0; z-index: 1099; background: rgba(0,0,0,0.45);
-}
-.inline-edit-hint { font-size: 10px; color: var(--muted); margin-bottom: 6px; line-height: 1.5; }
 
 /* lang-aware */
 .zh-only { display: block; }
@@ -507,7 +529,7 @@ body.printing .printing-toolbar { display: flex; }
 .pr-price-label { font-size: 8pt; color: rgba(232,237,242,0.55); letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 6px; }
 .pr-price-ar { font-size: 8pt; color: rgba(184,134,0,0.6); font-family: 'Noto Sans Arabic',sans-serif; direction: rtl; margin-bottom: 8px; }
 .pr-price-range { display: flex; align-items: center; justify-content: center; gap: 10px; flex-wrap: wrap; }
-.pr-price-low { font-size: 14pt; font-weight: 500; color: rgba(232,237,242,0.85); }
+.pr-price-low { font-size: 14pt; font-weight: 300; color: rgba(232,237,242,0.75); }
 .pr-price-sep { font-size: 14pt; color: #B88600; }
 .pr-price-high { font-family: 'Playfair Display', Georgia, serif; font-size: 26pt; font-weight: 700; color: #D4A017; }
 .pr-price-note { margin-top: 6px; font-size: 8pt; color: rgba(184,134,0,0.85); }
@@ -534,7 +556,7 @@ body.printing .printing-toolbar { display: flex; }
 .pr-b-row { display: flex; align-items: center; gap: 8px; margin-bottom: 7px; }
 .pr-b-dot { width: 9px; height: 9px; border-radius: 2px; flex-shrink: 0; }
 .pr-b-label { font-size: 9pt; color: rgba(232,237,242,0.85); flex: 1; }
-.pr-b-ar { font-size: 7.5pt; color: rgba(232,237,242,0.65); font-family: 'Noto Sans Arabic',sans-serif; direction: rtl; display: block; }
+.pr-b-ar { font-size: 7.5pt; color: rgba(232,237,242,0.4); font-family: 'Noto Sans Arabic',sans-serif; direction: rtl; display: block; }
 .pr-b-bar-track { flex: 1.6; height: 6px; background: rgba(255,255,255,0.08); border-radius: 3px; overflow: hidden; min-width: 50px; }
 .pr-b-bar-fill { height: 100%; border-radius: 3px; }
 .pr-b-pct { font-size: 8pt; color: rgba(232,237,242,0.55); width: 32px; text-align: right; }
@@ -562,7 +584,7 @@ body.printing .printing-toolbar { display: flex; }
   color: #E8EDF2;
 }
 .pr-tbl .gold { color: #D4A017; }
-.pr-tbl .dim-ar { font-size: 7.5pt; color: rgba(232,237,242,0.65); font-family: 'Noto Sans Arabic',sans-serif; direction: rtl; display: block; }
+.pr-tbl .dim-ar { font-size: 7.5pt; color: rgba(232,237,242,0.4); font-family: 'Noto Sans Arabic',sans-serif; direction: rtl; display: block; }
 
 .pr-pay-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 7px; }
 .pr-pay-card {
@@ -577,9 +599,9 @@ body.printing .printing-toolbar { display: flex; }
 .pr-pay-amt { font-size: 11pt; font-weight: 800; color: #D4A017; padding: 6px 10px 1px; }
 .pr-pay-pct { font-size: 8pt; color: rgba(232,237,242,0.55); }
 .pr-pay-trig { font-size: 8pt; color: rgba(232,237,242,0.7); padding: 0 10px 2px; }
-.pr-pay-trig2 { font-size: 7.5pt; color: rgba(232,237,242,0.65); padding: 0 10px 2px; }
+.pr-pay-trig2 { font-size: 7.5pt; color: rgba(232,237,242,0.4); padding: 0 10px 2px; }
 .pr-pay-trig-ar { font-size: 7pt; color: rgba(184,134,0,0.7); padding: 0 10px 3px; font-family: 'Noto Sans Arabic',sans-serif; direction: rtl; text-align: right; }
-.pr-pay-prod { font-size: 7pt; color: rgba(255,255,255,0.65); padding: 0 10px 8px; line-height: 1.5; }
+.pr-pay-prod { font-size: 7pt; color: rgba(255,255,255,0.4); padding: 0 10px 8px; line-height: 1.5; }
 
 .pr-disc {
   padding: 7px 10px;
@@ -594,7 +616,7 @@ body.printing .printing-toolbar { display: flex; }
 .pr-footer {
   text-align: center;
   font-size: 7.5pt;
-  color: rgba(232,237,242,0.6);
+  color: rgba(232,237,242,0.35);
   border-top: 1px solid rgba(255,255,255,0.08);
   padding: 10px 0 4px;
   margin-top: 12px;
@@ -1075,21 +1097,22 @@ const DEFAULT_MATERIALS = [
   { id:'mat_curtain', cat:'textile',  name:'电动窗帘',       nameEn:'Motorized Curtains',  brand:'Lutron',     price:680, unit:'m²' },
 ];
 
-// Default rate breakdown — override via state.rates (editable in UI)
-// LOGISTICS_RATE = sea freight + customs/VAT + last-mile + insurance + handling
+// Default rates — editable via state.rates
 const DEFAULT_RATES = {
-  logistics: 0.12 + 0.09 + 0.10 + 0.04 + 0.03, // 0.38
-  overhead:  0.18,
-  contingency: 0.10,
-  customsVat:  0.10, // 5% customs + 5% VAT, applied to materials in breakdown card only
+  logistics: 0.12+0.09+0.10+0.04+0.03,  // 物流+清关+保险+装卸+杂费 = 38%
+  customsVat: 0.10,                      // 关税 5% + VAT 5% = 10% of materials
+  overhead: 0.18,                         // 运营+利润 18%
+  contingency: 0.10,                      // 材料缓冲 10%
 };
-function getRate(key) {
-  return (state.rates && typeof state.rates[key] === 'number') ? state.rates[key] : DEFAULT_RATES[key];
-}
-// Backwards-compat aliases used elsewhere in code:
-const LOGISTICS_RATE = DEFAULT_RATES.logistics;
-const OVERHEAD = DEFAULT_RATES.overhead;
-const CONTINGENCY = DEFAULT_RATES.contingency;
+
+// Default quote settings — editable via state.quoteSettings
+const DEFAULT_QUOTE_SETTINGS = {
+  validDays: 30,
+  rangeLow: 0.92,    // -8%
+  rangeHigh: 1.18,   // +18%
+  clientPlaceholder: 'Al-____ Family',
+  projectPlaceholder: 'Villa Project #___',
+};
 
 let state = {
   tab: 0,
@@ -1099,17 +1122,12 @@ let state = {
   materials: JSON.parse(JSON.stringify(DEFAULT_MATERIALS)),
   clientName: '',
   projectName: '',
-  clientPlaceholder: 'Al-____ Family',      // editable
-  projectPlaceholder: 'Villa Project #___', // editable
   quoteRef: 'QQ-' + Date.now().toString(36).toUpperCase(),
-  quoteDate: '',          // ISO date or empty for "today"
-  validDays: 30,          // editable validity period
-  priceLowMult:  0.92,    // editable price band low
-  priceHighMult: 1.18,    // editable price band high
-  rates: null,            // editable rates {logistics, overhead, contingency, customsVat}
-  customTerms: null,      // editable terms (array of strings) — overrides getTerms()
   discount: 0,
   globalAdj: 0,
+  rates: JSON.parse(JSON.stringify(DEFAULT_RATES)),
+  quoteSettings: JSON.parse(JSON.stringify(DEFAULT_QUOTE_SETTINGS)),
+  customTerms: null, // null means use default getTerms()
 };
 
 // Migrate old saved states: ensure materials array exists; ensure each space has selectedMaterials
@@ -1120,12 +1138,23 @@ function migrateState() {
   state.spaces.forEach(sp => {
     if (!Array.isArray(sp.selectedMaterials)) sp.selectedMaterials = [];
   });
-  if (typeof state.clientPlaceholder !== 'string') state.clientPlaceholder = 'Al-____ Family';
-  if (typeof state.projectPlaceholder !== 'string') state.projectPlaceholder = 'Villa Project #___';
-  if (typeof state.validDays !== 'number') state.validDays = 30;
-  if (typeof state.priceLowMult  !== 'number') state.priceLowMult  = 0.92;
-  if (typeof state.priceHighMult !== 'number') state.priceHighMult = 1.18;
-  if (typeof state.quoteDate !== 'string') state.quoteDate = '';
+  // Ensure rates and quoteSettings exist (migration from older versions)
+  if (!state.rates || typeof state.rates !== 'object') {
+    state.rates = JSON.parse(JSON.stringify(DEFAULT_RATES));
+  } else {
+    // Fill in any missing rate keys
+    Object.keys(DEFAULT_RATES).forEach(k => {
+      if (typeof state.rates[k] !== 'number') state.rates[k] = DEFAULT_RATES[k];
+    });
+  }
+  if (!state.quoteSettings || typeof state.quoteSettings !== 'object') {
+    state.quoteSettings = JSON.parse(JSON.stringify(DEFAULT_QUOTE_SETTINGS));
+  } else {
+    Object.keys(DEFAULT_QUOTE_SETTINGS).forEach(k => {
+      if (state.quoteSettings[k] == null) state.quoteSettings[k] = DEFAULT_QUOTE_SETTINGS[k];
+    });
+  }
+  if (state.customTerms === undefined) state.customTerms = null;
 }
 
 // ─── Persistence ──────────────────────────────────────────────────────────────
@@ -1375,12 +1404,14 @@ function exportPagesHTML() {
   });
 
   // Cost breakdown
+  const _r = state.rates;
+  const _cvPct = Math.round((_r.customsVat || 0) * 100);
   const breakdownRows = [
     ['Materials 材料货值',                     T2.totalMat],
-    ['Logistics 物流运输 (China→Qatar)',        T2.totalLog],
-    ['Customs + VAT 关税+VAT 10%',             T2.totalMat * 0.10],
-    ['Overhead & Margin 运营+利润',             T2.totalOH],
-    ['Contingency Buffer 材料缓冲',             T2.totalCon],
+    [`Logistics 物流运输 (${Math.round(_r.logistics*100)}%)`,        T2.totalLog],
+    [`Customs + VAT 关税+VAT ${_cvPct}%`,             T2.totalMat * _r.customsVat],
+    [`Overhead & Margin 运营+利润 (${Math.round(_r.overhead*100)}%)`,             T2.totalOH],
+    [`Contingency Buffer 材料缓冲 (${Math.round(_r.contingency*100)}%)`,             T2.totalCon],
   ].map(([label, val]) => {
     const p = T2.gross > 0 ? (val/T2.gross*100).toFixed(1) : '0.0';
     return `<tr>
@@ -1858,22 +1889,10 @@ function calcSpace(sp) {
   const matBase = area * sp.base * sm * tm * discMult;
   const matLineItems = calcSpaceMaterials(sp) * discMult; // user-selected items also subject to discount
   const mat = matBase + matLineItems;
-  const logRate = getRate('logistics');
-  const ohRate  = getRate('overhead');
-  const conRate = getRate('contingency');
-  // Per-space override of "Logistics+Tax" total amount (sp.logTaxOverride is QAR amount)
-  let log, con;
-  if (sp.logTaxOverride !== undefined && sp.logTaxOverride !== null && sp.logTaxOverride !== '') {
-    const ov = parseFloat(sp.logTaxOverride) || 0;
-    // split override proportionally between log and con using default ratio
-    const totalRatio = logRate + conRate;
-    log = totalRatio > 0 ? ov * (logRate / totalRatio) : ov;
-    con = totalRatio > 0 ? ov * (conRate / totalRatio) : 0;
-  } else {
-    log = mat * logRate;
-    con = mat * conRate;
-  }
-  const oh  = mat * ohRate;
+  const r = state.rates || DEFAULT_RATES;
+  const log = mat * r.logistics;
+  const oh  = mat * r.overhead;
+  const con = mat * r.contingency;
   return { area, mat, matBase, matLineItems, log, oh, con, total: mat+log+oh+con };
 }
 
@@ -1888,13 +1907,119 @@ function calcTotals() {
   const totalOH   = rows.reduce((a,r)=>a+r.oh,0);
   const totalCon  = rows.reduce((a,r)=>a+r.con,0);
   const gross     = totalMat+totalLog+totalOH+totalCon;
+  const qs = state.quoteSettings || DEFAULT_QUOTE_SETTINGS;
   return { rows, totalArea, totalMat, totalLog, totalOH, totalCon, gross,
-           low: gross*(state.priceLowMult||0.92), high: gross*(state.priceHighMult||1.18) };
+           low: gross*(qs.rangeLow ?? 0.92), high: gross*(qs.rangeHigh ?? 1.18) };
+}
+
+// ─── Terms editing ────────────────────────────────────────────────────────────
+function editTerm(idx) {
+  const cur = (state.customTerms && state.customTerms[idx] != null) ? state.customTerms[idx] : getDefaultTerms()[idx];
+  const next = prompt('编辑条款 / Edit Term:', cur);
+  if (next == null) return; // cancelled
+  // Initialize customTerms from defaults on first edit
+  if (!Array.isArray(state.customTerms)) {
+    state.customTerms = getDefaultTerms().slice();
+  }
+  state.customTerms[idx] = next;
+  saveState(); renderAll();
+}
+function deleteTerm(idx) {
+  if (!confirm('删除此条款? / Delete this term?')) return;
+  if (!Array.isArray(state.customTerms)) {
+    state.customTerms = getDefaultTerms().slice();
+  }
+  state.customTerms.splice(idx, 1);
+  saveState(); renderAll();
+}
+function addTerm() {
+  const txt = prompt('添加新条款 / Add New Term:', '');
+  if (txt == null || txt.trim() === '') return;
+  if (!Array.isArray(state.customTerms)) {
+    state.customTerms = getDefaultTerms().slice();
+  }
+  state.customTerms.push(txt.trim());
+  saveState(); renderAll();
+}
+function resetTerms() {
+  if (!confirm('恢复默认条款? / Reset terms to default?')) return;
+  state.customTerms = null;
+  saveState(); renderAll();
+}
+
+// ─── Rate editing (Logistics + Tax inline edit) ───────────────────────────────
+function editRate(key) {
+  const labels = {
+    logistics:   '物流运输 / Logistics (%)',
+    customsVat:  '关税+VAT / Customs+VAT (%)',
+    overhead:    '运营+利润 / Overhead+Margin (%)',
+    contingency: '材料缓冲 / Contingency (%)',
+  };
+  const cur = ((state.rates[key] || 0) * 100).toFixed(1);
+  const next = prompt(labels[key] + '\n\n当前 / Current: ' + cur + '%\n请输入新百分比 / Enter new percentage (e.g., 38 for 38%):', cur);
+  if (next == null) return;
+  const v = parseFloat(next);
+  if (isNaN(v) || v < 0 || v > 200) {
+    alert('请输入 0-200 之间的数字 / Please enter a number between 0 and 200');
+    return;
+  }
+  state.rates[key] = v / 100;
+  saveState(); renderAll();
+}
+function resetRates() {
+  if (!confirm('恢复默认费率? / Reset rates to default?')) return;
+  state.rates = JSON.parse(JSON.stringify(DEFAULT_RATES));
+  saveState(); renderAll();
+}
+
+// ─── Quote settings editing ───────────────────────────────────────────────────
+function editValidDays() {
+  const cur = state.quoteSettings.validDays;
+  const next = prompt('报价有效期天数 / Quote validity (days):', cur);
+  if (next == null) return;
+  const v = parseInt(next, 10);
+  if (isNaN(v) || v < 1 || v > 3650) { alert('请输入 1-3650 / Enter 1-3650'); return; }
+  state.quoteSettings.validDays = v;
+  saveState(); renderAll();
+}
+function editRef() {
+  const cur = state.quoteRef;
+  const next = prompt('报价编号 / Quote reference:', cur);
+  if (next == null || next.trim() === '') return;
+  state.quoteRef = next.trim();
+  saveState(); renderAll();
+}
+function editPriceRange() {
+  const qs = state.quoteSettings;
+  const lowPct = ((qs.rangeLow - 1) * 100).toFixed(0);
+  const highPct = ((qs.rangeHigh - 1) * 100).toFixed(0);
+  const nl = prompt('价格区间下限 % / Range Low %\n(e.g., -8 for low end -8%):', lowPct);
+  if (nl == null) return;
+  const nh = prompt('价格区间上限 % / Range High %\n(e.g., 18 for high end +18%):', highPct);
+  if (nh == null) return;
+  const lv = parseFloat(nl), hv = parseFloat(nh);
+  if (isNaN(lv) || isNaN(hv)) { alert('请输入有效数字 / Invalid number'); return; }
+  if (lv >= hv) { alert('下限必须小于上限 / Low must be less than high'); return; }
+  state.quoteSettings.rangeLow  = 1 + lv / 100;
+  state.quoteSettings.rangeHigh = 1 + hv / 100;
+  saveState(); renderAll();
+}
+function editPlaceholders() {
+  const cp = prompt('客户名称占位符 / Client name placeholder:', state.quoteSettings.clientPlaceholder);
+  if (cp == null) return;
+  const pp = prompt('项目名称占位符 / Project name placeholder:', state.quoteSettings.projectPlaceholder);
+  if (pp == null) return;
+  state.quoteSettings.clientPlaceholder = cp;
+  state.quoteSettings.projectPlaceholder = pp;
+  saveState(); renderAll();
 }
 
 function fmt(n) { return 'QAR ' + Math.round(n).toLocaleString('en-US'); }
 function pct(n) { return (n*100).toFixed(0)+'%'; }
 function uid() { return 'sp_'+Math.random().toString(36).slice(2,8); }
+function escapeHtml(s) {
+  return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+}
 
 // ─── Tab navigation ────────────────────────────────────────────────────────────
 function goTab(t) { state.tab = t; renderAll(); window.scrollTo(0,0); }
@@ -2211,12 +2336,14 @@ function renderQuote() {
   const today = new Date().toLocaleDateString(lang==='en'?'en-GB':'zh-CN');
   const disc = state.discount || 0;
 
+  const r = state.rates;
+  const cvPct = Math.round((r.customsVat || 0) * 100);
   const breakdowns = [
     { label: lang==='en'?'Materials 材料货值':'材料货值 Materials',                           labelAr:'قيمة المواد',            val:T2.totalMat,    color:'#1A3A5C' },
-    { label: lang==='en'?'Logistics China→Qatar 物流运输':'物流运输 Logistics (China→Qatar)', labelAr:'الشحن والخدمات اللوجستية', val:T2.totalLog,    color:'#2E6B4F' },
-    { label: lang==='en'?'Customs + VAT 关税+VAT':'关税+VAT Customs + VAT',       labelAr:'الجمارك + ضريبة القيمة المضافة', val:T2.totalMat*getRate('customsVat'),color:'#7B5E3A' },
-    { label: lang==='en'?'Overhead & Margin 运营+利润':'运营+利润 Overhead & Margin',          labelAr:'المصاريف العامة والهامش',  val:T2.totalOH,     color:'#4A3060' },
-    { label: lang==='en'?'Contingency Buffer 材料缓冲':'材料未定缓冲 Contingency ±',          labelAr:'احتياطي المواد ±',         val:T2.totalCon,    color:'#B88600' },
+    { label: lang==='en'?`Logistics China→Qatar 物流运输 (${Math.round(r.logistics*100)}%)`:`物流运输 Logistics (${Math.round(r.logistics*100)}%)`, labelAr:'الشحن والخدمات اللوجستية', val:T2.totalLog,    color:'#2E6B4F' },
+    { label: lang==='en'?`Customs + VAT 关税+VAT (${cvPct}%)`:`关税+VAT Customs+VAT (${cvPct}%)`,       labelAr:`الجمارك + الضريبة (${cvPct}%)`, val:T2.totalMat*r.customsVat,color:'#7B5E3A' },
+    { label: lang==='en'?`Overhead & Margin 运营+利润 (${Math.round(r.overhead*100)}%)`:`运营+利润 Overhead (${Math.round(r.overhead*100)}%)`,          labelAr:'المصاريف العامة والهامش',  val:T2.totalOH,     color:'#4A3060' },
+    { label: lang==='en'?`Contingency Buffer 材料缓冲 (${Math.round(r.contingency*100)}%)`:`材料缓冲 Contingency (${Math.round(r.contingency*100)}%)`,          labelAr:'احتياطي المواد ±',         val:T2.totalCon,    color:'#B88600' },
   ];
 
   const spaceRows = state.spaces.filter(sp => parseFloat(sp.area)>0 || (sp.selectedMaterials||[]).length>0).map(sp => {
@@ -2225,19 +2352,12 @@ function renderQuote() {
     const spLabel = lang==='en' ? (sp.nameEn||sp.name) : sp.name;
     const spAr = sp.nameAr || sp.nameEn || sp.name;
     const matCount = (sp.selectedMaterials||[]).length;
-    const logTaxAmt = Math.round(c.log + c.con);
-    const isOverridden = sp.logTaxOverride !== undefined && sp.logTaxOverride !== null && sp.logTaxOverride !== '';
     return `<tr>
-      <td>${sp.icon} ${spLabel}${matCount>0?`<br><span style="font-size:9px;color:#D4A017">📦 ${matCount} ${lang==='en'?'materials':'项材料'}</span>`:''}<br><span class="ar" style="font-size:8px;color:rgba(255,255,255,0.65)">${spAr}</span></td>
+      <td>${sp.icon} ${spLabel}${matCount>0?`<br><span style="font-size:9px;color:#D4A017">📦 ${matCount} ${lang==='en'?'materials':'项材料'}</span>`:''}<br><span class="ar" style="font-size:8px;color:rgba(255,255,255,0.4)">${spAr}</span></td>
       <td class="ta-center">${c.area} m²</td>
       <td class="ta-center">${unitRate.toLocaleString()}</td>
       <td class="ta-right">${fmt(c.mat)}</td>
-      <td class="ta-right" style="position:relative">
-        <span class="editable-cell ${isOverridden?'is-overridden':''}" onclick="editSpaceLogTax('${sp.id}', ${logTaxAmt})" title="${lang==='en'?'Click to edit':'点击编辑'}">
-          ${fmt(logTaxAmt)}
-          ${isOverridden?'<span class="override-dot" title="Manual override">●</span>':''}
-        </span>
-      </td>
+      <td class="ta-right text-gold">${fmt(c.log+c.con)}</td>
       <td class="ta-right fw7">${fmt(c.total)}</td>
     </tr>`;
   }).join('');
@@ -2250,7 +2370,7 @@ function renderQuote() {
       <div class="pay-amount">${T2.gross>0?fmt(T2.gross*p.pct2):'QAR —'}<span class="pay-pct"> (${(p.pct2*100).toFixed(0)}%)</span></div>
       <div class="pay-trigger">📅 ${lang==='en'?p.triggerEn:p.triggerZh}</div>
       <div class="pay-trigger-en">${lang==='en'?p.triggerZh:p.triggerEn}</div>
-      <div style="padding:0 12px 2px;font-size:8px;color:rgba(255,255,255,0.6);font-family:'Noto Sans Arabic',sans-serif;direction:rtl;text-align:right">${p.triggerAr}</div>
+      <div style="padding:0 12px 2px;font-size:8px;color:rgba(255,255,255,0.35);font-family:'Noto Sans Arabic',sans-serif;direction:rtl;text-align:right">${p.triggerAr}</div>
       <div class="pay-products">📦 ${p.products}</div>
     </div>`).join('');
 
@@ -2258,7 +2378,7 @@ function renderQuote() {
     const p = T2.gross>0 ? b.val/T2.gross : 0;
     return `<div class="b-row">
       <div class="b-dot" style="background:${b.color}"></div>
-      <div class="b-label">${b.label}<br><span class="ar" style="font-size:8.5px;color:rgba(255,255,255,0.6)">${b.labelAr}</span></div>
+      <div class="b-label">${b.label}<br><span class="ar" style="font-size:8.5px;color:rgba(255,255,255,0.35)">${b.labelAr}</span></div>
       <div class="b-bar"><div class="b-fill" style="width:${pct(p)};background:${b.color}"></div></div>
       <div class="b-pct">${pct(p)}</div>
       <div class="b-val">${fmt(b.val)}</div>
@@ -2374,7 +2494,13 @@ function renderQuote() {
         &nbsp;<span class="ar" style="font-size:9px;font-weight:400;opacity:0.8">${t('arTermsTitle')}</span>
       </div>
       <div style="padding:12px">
-        ${terms.map((txt,i)=>`<div class="disc" style="border-left:3px solid ${['#1A3A5C','#2E6B4F','#B88600','#555','#1A3A5C','#7B5E3A'][i]}">${txt}</div>`).join('')}
+        ${terms.map((txt,i)=>`<div class="disc disc-edit" data-idx="${i}" style="border-left:3px solid ${['#1A3A5C','#2E6B4F','#B88600','#555','#1A3A5C','#7B5E3A','#4A3060','#3A1A5C','#1A5C3A','#5C3A1A'][i % 10]}">
+          <div class="disc-text">${escapeHtml(txt)}</div>
+          <button class="disc-edit-btn" onclick="editTerm(${i})" title="编辑 / Edit">✎</button>
+          <button class="disc-del-btn" onclick="deleteTerm(${i})" title="删除 / Delete">×</button>
+        </div>`).join('')}
+        <button class="disc-add-btn" onclick="addTerm()">+ 添加条款 / Add Term</button>
+        <button class="disc-reset-btn" onclick="resetTerms()" ${state.customTerms ? '' : 'style="display:none"'}>↻ 恢复默认 / Reset to Default</button>
       </div>
     </div>
   </div>`;
@@ -2392,25 +2518,30 @@ function getPayments() {
   ];
 }
 
-function getTerms() {
-  if (Array.isArray(state.customTerms) && state.customTerms.length > 0) {
-    return state.customTerms.slice();
-  }
+function getDefaultTerms() {
   return lang === 'en' ? [
     'This is a preliminary estimate. Final contract price is subject to confirmed material specifications (±15% variance).',
     '本报价为概算，材料品牌及规格未最终确认，实际合同价格以确认材料清单后为准，浮动不超过 ±15%。',
     'هذا عرض سعر تقريبي. السعر النهائي مرهون بتأكيد المواد وقد يتفاوت بنسبة ±15%.',
-    'Quotation valid '+(state.validDays||30)+' days from issue date · 报价有效期'+(state.validDays||30)+'天 · صالح '+(state.validDays||30)+' يومًا',
+    'Quotation valid 30 days from issue date · 报价有效期30天 · صالح 30 يومًا',
     'All products are custom-manufactured in China. Total lead time approx. 45 days. Payment must be received 45 days before each project milestone.',
     'Production and shipping commence upon cleared payment. Title remains with Supplier until installation acceptance.',
   ] : [
     '本报价为概算，材料品牌及规格未最终确认，实际合同价格以确认材料清单后为准，浮动不超过 ±15%。',
     'This is a preliminary estimate. Final contract price subject to confirmed material specifications (±15% variance).',
     'هذا عرض سعر تقريبي. السعر النهائي مرهون بتأكيد المواد وقد يتفاوت بنسبة ±15%.',
-    '报价有效期：'+(state.validDays||30)+'天（自出具之日起）· Valid '+(state.validDays||30)+' days · صالح '+(state.validDays||30)+' يومًا',
+    '报价有效期：30天（自出具之日起）· Valid 30 days · صالح 30 يومًا',
     '所有产品从中国定制生产，全程供货周期约45天，付款须在对应工程节点前45天完成。',
     '付款到账后方启动产品生产及发运，所有权在安装验收前归乙方所有。',
   ];
+}
+
+function getTerms() {
+  // If user has customized terms, use them; otherwise return language-appropriate defaults
+  if (Array.isArray(state.customTerms) && state.customTerms.length > 0) {
+    return state.customTerms;
+  }
+  return getDefaultTerms();
 }
 
 // ─── Print Root Renderer (separate, optimized for A4 PDF) ─────────────────────
@@ -2427,12 +2558,14 @@ function renderPrintRoot() {
   const disc = state.discount || 0;
 
   // ── Page 1: Header + Client + Price + Cost Breakdown ──
+  const r = state.rates;
+  const cvPct = Math.round((r.customsVat || 0) * 100);
   const breakdowns = [
     { labelEn:'Materials 材料货值',                           labelAr:'قيمة المواد',                              val:T2.totalMat,      color:'#4A7FBF' },
-    { labelEn:'Logistics China→Qatar 物流运输',                labelAr:'الشحن والخدمات اللوجستية',                  val:T2.totalLog,      color:'#3FB57A' },
-    { labelEn:'Customs + VAT 关税+VAT',                 labelAr:'الجمارك + ضريبة القيمة المضافة',     val:T2.totalMat*getRate('customsVat'), color:'#C8995A' },
-    { labelEn:'Overhead & Margin 运营+利润',                    labelAr:'المصاريف العامة والهامش',                  val:T2.totalOH,       color:'#9070BB' },
-    { labelEn:'Contingency Buffer 材料缓冲',                    labelAr:'احتياطي المواد ±',                         val:T2.totalCon,      color:'#D4A017' },
+    { labelEn:`Logistics China→Qatar 物流运输 (${Math.round(r.logistics*100)}%)`,                labelAr:'الشحن والخدمات اللوجستية',                  val:T2.totalLog,      color:'#3FB57A' },
+    { labelEn:`Customs + VAT 关税+VAT (${cvPct}%)`,                 labelAr:`الجمارك + الضريبة (${cvPct}%)`,     val:T2.totalMat*r.customsVat, color:'#C8995A' },
+    { labelEn:`Overhead & Margin 运营+利润 (${Math.round(r.overhead*100)}%)`,                    labelAr:'المصاريف العامة والهامش',                  val:T2.totalOH,       color:'#9070BB' },
+    { labelEn:`Contingency Buffer 材料缓冲 (${Math.round(r.contingency*100)}%)`,                    labelAr:'احتياطي المواد ±',                         val:T2.totalCon,      color:'#D4A017' },
   ];
 
   const bRowsHtml = breakdowns.map(b => {
@@ -2524,7 +2657,7 @@ function renderPrintRoot() {
       <td style="text-align:right" class="gold">${fmt(c.log+c.con)}</td>
       <td style="text-align:right;font-weight:700">${fmt(c.total)}</td>
     </tr>`;
-  }).join('') : `<tr><td colspan="6" style="text-align:center;padding:20px;color:rgba(232,237,242,0.65)">No areas entered</td></tr>`;
+  }).join('') : `<tr><td colspan="6" style="text-align:center;padding:20px;color:rgba(232,237,242,0.4)">No areas entered</td></tr>`;
 
   const page2 = `
     <div class="pr-page">
@@ -2571,19 +2704,15 @@ function renderPrintRoot() {
     </div>
   `).join('');
 
-  // Use customizable terms (state.customTerms) if set, otherwise the default print set
-  const defaultPrintTerms = [
+  const terms = (Array.isArray(state.customTerms) && state.customTerms.length > 0) ? state.customTerms : [
     '本报价为概算，材料品牌及规格未最终确认，实际合同价格以确认材料清单后为准，浮动不超过 ±15%。',
     'This is a preliminary estimate. Final contract price subject to confirmed material specifications (±15% variance).',
     'هذا عرض سعر تقريبي. السعر النهائي مرهون بتأكيد المواد وقد يتفاوت بنسبة ±15%.',
-    '报价有效期：'+(state.validDays||30)+'天（自出具之日起）· Valid '+(state.validDays||30)+' days · صالح '+(state.validDays||30)+' يومًا',
+    '报价有效期：30天（自出具之日起）· Valid 30 days · صالح 30 يومًا',
     '所有产品从中国定制生产，全程供货周期约45天，付款须在对应工程节点前45天完成。 All products are custom-manufactured in China. Total lead time approx. 45 days.',
     '付款到账后方启动产品生产及发运，所有权在安装验收前归乙方所有。 Production and shipping commence upon cleared payment. Title remains with Supplier until installation acceptance.',
   ];
-  const terms = (Array.isArray(state.customTerms) && state.customTerms.length > 0)
-    ? state.customTerms.slice()
-    : defaultPrintTerms;
-  const termColors = ['#1A3A5C','#2E6B4F','#B88600','#7B5E3A','#1A3A5C','#7B5E3A'];
+  const termColors = ['#1A3A5C','#2E6B4F','#B88600','#7B5E3A','#1A3A5C','#7B5E3A','#4A3060','#3A1A5C'];
 
   const page3 = `
     <div class="pr-page no-break-after">
