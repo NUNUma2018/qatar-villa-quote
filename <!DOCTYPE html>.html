@@ -3164,11 +3164,25 @@ function resetQuote() {
   renderAll();
 }
 
-// ─── PWA ──────────────────────────────────────────────────────────────────────
+// ─── Cache cleanup (fixes Vercel deployment showing stale cached version) ───
+// Older versions of this app registered a Service Worker that aggressively
+// cached old HTML. On HTTPS deployments (Vercel/Netlify), users could get
+// stuck on an old version even after deploys. We now actively unregister
+// any existing Service Worker and clear its caches so the latest build
+// always loads.
 if ('serviceWorker' in navigator) {
-  const swCode = `const CACHE='qvq-v3';const URLS=[self.location.pathname];self.addEventListener('install',e=>e.waitUntil(caches.open(CACHE).then(c=>c.addAll(URLS))));self.addEventListener('fetch',e=>e.respondWith(caches.match(e.request).then(r=>r||fetch(e.request))));`;
-  const blob = new Blob([swCode], {type:'application/javascript'});
-  navigator.serviceWorker.register(URL.createObjectURL(blob)).catch(()=>{});
+  navigator.serviceWorker.getRegistrations().then(regs => {
+    regs.forEach(r => r.unregister().catch(() => {}));
+  }).catch(() => {});
+}
+if ('caches' in window) {
+  caches.keys().then(keys => {
+    keys.forEach(k => {
+      if (k.startsWith('qvq-') || k.startsWith('qatar-')) {
+        caches.delete(k).catch(() => {});
+      }
+    });
+  }).catch(() => {});
 }
 
 // ─── Init ──────────────────────────────────────────────────────────────────────
