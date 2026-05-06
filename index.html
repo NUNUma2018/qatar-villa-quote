@@ -7,7 +7,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
 <meta name="apple-mobile-web-app-title" content="Qatar Quote"/>
 <meta name="theme-color" content="#0D1F35"/>
-<title>◈ Qatar Villa Quote v3</title>
+<title>◈ Qatar Villa Quote v8</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=DM+Sans:wght@300;400;500;600;700&family=Noto+Sans+Arabic:wght@400;600;700&display=swap" rel="stylesheet"/>
 <style>
@@ -346,8 +346,71 @@ tr:last-child td { border-bottom: none; }
 body.lang-en .zh-only { display: none; }
 body.lang-en .en-only { display: block; }
 
-/* ── Arabic font support ── */
-.ar { font-family: 'Noto Sans Arabic', 'Segoe UI', sans-serif; direction: rtl; unicode-bidi: embed; }
+/* ═══════════════════════════════════════════════════════════════════════════
+   ARABIC TYPOGRAPHY — Noto Sans Arabic 700, enlarged and high-contrast
+   Applied universally — including elements with inline styles, via !important
+   ═══════════════════════════════════════════════════════════════════════════ */
+.ar,
+[lang="ar"],
+[dir="rtl"]:not(html):not(body),
+.pr-b-ar,
+.dim-ar,
+.pr-pay-ar-batch,
+.pr-pay-trig-ar,
+.pr-price-ar {
+  font-family: 'Noto Sans Arabic', 'Tahoma', 'Segoe UI', sans-serif !important;
+  font-weight: 700 !important;
+  font-style: normal !important;
+  direction: rtl !important;
+  unicode-bidi: embed !important;
+  letter-spacing: 0 !important;
+  font-feature-settings: "kern" 1, "liga" 1, "calt" 1 !important;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Size + color upgrades — bright gold for headings, bright cream for body */
+.ar              { font-size: 13px !important; line-height: 1.6 !important; color: #E8D89A !important; }
+
+/* Print-document Arabic (the PDF preview) */
+.pr-b-ar         { font-size: 10pt !important; color: rgba(232,237,242,0.92) !important; display: block !important; margin-top: 2px; }
+.dim-ar          { font-size: 10pt !important; color: rgba(232,237,242,0.88) !important; display: block !important; margin-top: 2px; }
+.pr-pay-ar-batch { font-size: 10pt !important; color: rgba(255,255,255,0.95) !important; padding: 3px 10px 0 !important; }
+.pr-pay-trig-ar  { font-size: 9.5pt !important; color: #E8D89A !important; padding: 0 10px 3px !important; }
+.pr-price-ar     { font-size: 12pt !important; color: #E8D89A !important; margin-bottom: 8px !important; }
+
+/* Inline aribic in cards / headings — make it pop */
+.card-head .ar, .pr-card-head .ar,
+.quote-htitle .ar, .sec-title .ar,
+h1 .ar, h2 .ar, h3 .ar {
+  font-size: 14px !important;
+  font-weight: 800 !important;
+  color: #F5C842 !important;
+}
+
+/* Force bold even when inline styles try to override */
+span.ar, div.ar, td .ar, th .ar, label .ar {
+  font-weight: 700 !important;
+  color: #E8D89A !important;
+}
+
+/* Print rendering — maintain bold + readable on PDF export */
+@media print {
+  .ar, .pr-b-ar, .dim-ar,
+  .pr-pay-ar-batch, .pr-pay-trig-ar, .pr-price-ar {
+    font-family: 'Noto Sans Arabic', 'Tahoma', sans-serif !important;
+    font-weight: 700 !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    color-adjust: exact !important;
+  }
+  .ar              { font-size: 11pt !important; color: #E8D89A !important; }
+  .pr-b-ar         { font-size: 10pt !important; color: #E8EDF2 !important; }
+  .dim-ar          { font-size: 10pt !important; color: #E8EDF2 !important; }
+  .pr-pay-ar-batch { font-size: 10pt !important; color: #FFFFFF !important; }
+  .pr-pay-trig-ar  { font-size: 9.5pt !important; color: #F5C842 !important; }
+  .pr-price-ar     { font-size: 12pt !important; color: #F5C842 !important; }
+}
 
 /* ═══════════════════════════════════════════════════════════════════════════
    PRINT PREVIEW MODE (in-page overlay used as a fallback)
@@ -551,10 +614,102 @@ body.printing .printing-toolbar { display: flex; }
 }
 
 /* ═══════════════════════════════════════════════════════════════════════════
-   No @media print rules in the main page.
-   Printing happens in a popup window with its own clean stylesheet.
-   See buildPrintHTML() in JavaScript below.
+   PRINT RULES — guarantee 100% Payment Schedule + Terms render on PDF
    ═══════════════════════════════════════════════════════════════════════════ */
+@media print {
+  @page { size: A4; margin: 10mm 8mm; }
+
+  html, body {
+    background: #0D1F35 !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    color-adjust: exact !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+  body > *:not(#printRoot) { display: none !important; }
+  .bg-layer, .bg-grid, header, .tab-nav, main,
+  .bottom-bar, .printing-toolbar, .sync-modal-overlay,
+  #fileInput, #libImportInput,
+  .floating-actions { display: none !important; }
+
+  #printRoot {
+    display: block !important;
+    background: #0D1F35 !important;
+    color: #E8EDF2 !important;
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    box-shadow: none !important;
+    position: static !important;
+  }
+  #printRoot * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    color-adjust: exact !important;
+  }
+
+  .pr-page {
+    page-break-after: always !important;
+    break-after: page !important;
+    background: #0D1F35 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+  .pr-page:last-child,
+  .pr-page.no-break-after { page-break-after: auto !important; break-after: auto !important; }
+
+  .pr-card,
+  .pr-pay-card,
+  .pr-disc {
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+  }
+
+  .pr-pay-grid {
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 6px !important;
+    width: 100% !important;
+  }
+  .pr-pay-card {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    background: rgba(255,255,255,0.04) !important;
+    border: 1px solid rgba(255,255,255,0.18) !important;
+  }
+  .pr-pay-head { color: #fff !important; }
+  .pr-pay-amt { color: #D4A017 !important; }
+
+  .pr-disc {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    color: rgba(232,237,242,0.85) !important;
+    background: rgba(255,255,255,0.04) !important;
+    margin-bottom: 4px !important;
+  }
+}
+
+/* Preview mode (on-screen): show printRoot full-screen above main content */
+body.printing { overflow: auto; }
+body.printing #printRoot {
+  display: block;
+  position: fixed;
+  inset: 0;
+  z-index: 99000;
+  overflow-y: auto;
+  padding: 60px 14px 30px;
+  -webkit-overflow-scrolling: touch;
+}
+body.printing header,
+body.printing .tab-nav,
+body.printing main,
+body.printing .bottom-bar,
+body.printing .floating-actions,
+body.printing .bg-layer,
+body.printing .bg-grid { display: none !important; }
 
 input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer-spin-button { opacity: 0.4; }
 
@@ -678,6 +833,108 @@ input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer
   color: var(--cream); font-size: 10px; cursor: pointer; font-family: var(--font-body);
 }
 .lib-tool-btn:hover { border-color: var(--gold); color: var(--gold); }
+
+/* ── Editable Logistics+Tax cell in space breakdown table ── */
+.cell-logtax-input {
+  width: 88px;
+  background: rgba(184,134,0,0.12);
+  border: 1.5px solid rgba(184,134,0,0.45);
+  border-radius: 6px;
+  color: var(--gold);
+  font-size: 11.5px;
+  font-weight: 700;
+  padding: 5px 7px;
+  text-align: right;
+  outline: none;
+  font-family: var(--font-body);
+  transition: background 0.15s, border-color 0.15s, box-shadow 0.15s;
+  -moz-appearance: textfield;
+}
+.cell-logtax-input::-webkit-outer-spin-button,
+.cell-logtax-input::-webkit-inner-spin-button {
+  -webkit-appearance: none; margin: 0;
+}
+.cell-logtax-input:hover { background: rgba(184,134,0,0.22); border-color: var(--gold); }
+.cell-logtax-input:focus {
+  background: rgba(212,160,23,0.28);
+  border-color: var(--gold2);
+  box-shadow: 0 0 0 3px rgba(212,160,23,0.2);
+  color: #fff;
+}
+.cell-logtax-input.is-override {
+  background: rgba(212,160,23,0.28);
+  border-color: var(--gold2);
+  color: var(--gold2);
+}
+.cell-logtax-reset {
+  background: none; border: none;
+  color: var(--muted);
+  cursor: pointer;
+  font-size: 14px;
+  padding: 2px 4px;
+  line-height: 1;
+}
+.cell-logtax-reset:hover { color: var(--gold); }
+.cell-logtax-wrap {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  justify-content: flex-end;
+}
+.cell-logtax-wrap .qar-prefix {
+  font-size: 9px;
+  color: var(--muted);
+  font-weight: 600;
+}
+
+/* ── Floating action buttons (always visible bottom-right) ── */
+.floating-actions {
+  position: fixed;
+  right: 14px;
+  bottom: 90px;
+  bottom: calc(90px + env(safe-area-inset-bottom));
+  z-index: 250;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: flex-end;
+  pointer-events: none;
+}
+.floating-action-btn {
+  pointer-events: auto;
+  display: flex; align-items: center; gap: 8px;
+  padding: 10px 14px;
+  border-radius: 26px;
+  border: 1px solid rgba(184,134,0,0.55);
+  background: linear-gradient(135deg, rgba(13,31,53,0.96), rgba(26,58,92,0.96));
+  backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+  color: var(--gold);
+  font-family: var(--font-body);
+  font-size: 12px; font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 6px 22px rgba(0,0,0,0.45), 0 0 0 1px rgba(255,255,255,0.04) inset;
+  white-space: nowrap;
+  transition: transform 0.18s, background 0.18s, box-shadow 0.18s;
+}
+.floating-action-btn:hover, .floating-action-btn:active {
+  transform: translateY(-1px);
+  background: linear-gradient(135deg, rgba(184,134,0,0.22), rgba(26,58,92,0.96));
+  box-shadow: 0 10px 28px rgba(184,134,0,0.35);
+}
+.floating-action-btn .fa-icon { font-size: 15px; }
+.floating-action-btn.fa-primary {
+  background: linear-gradient(135deg, var(--gold), #8a6700);
+  color: #0D1F35;
+  border-color: var(--gold2);
+}
+.floating-action-btn.fa-primary:hover {
+  background: linear-gradient(135deg, var(--gold2), var(--gold));
+  color: #0D1F35;
+}
+@media (max-width: 480px) {
+  .floating-actions { right: 10px; bottom: 80px; bottom: calc(80px + env(safe-area-inset-bottom)); }
+  .floating-action-btn { padding: 9px 12px; font-size: 11px; }
+}
 </style>
 </head>
 <body>
@@ -769,6 +1026,22 @@ input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer
 <input type="file" id="fileInput" class="sync-file-input" accept=".json,.csv" onchange="handleFileImport(event)"/>
 
 <div class="bottom-bar" id="bottomBar"></div>
+
+<!-- Floating actions: always visible 3 edit modules + HD PDF export -->
+<div class="floating-actions" id="floatingActions">
+  <button class="floating-action-btn" onclick="openLibModal()" title="材料库 / Materials Library">
+    <span class="fa-icon">📦</span><span>材料库 Materials</span>
+  </button>
+  <button class="floating-action-btn" onclick="openSyncModal()" title="同步 / Sync">
+    <span class="fa-icon">⇄</span><span>同步 Sync</span>
+  </button>
+  <button class="floating-action-btn" onclick="goTab(3)" title="报价单 / Quote">
+    <span class="fa-icon">📋</span><span>报价单 Quote</span>
+  </button>
+  <button class="floating-action-btn fa-primary" onclick="saveAndExportHDPDF()" title="一键保存并导出高清 PDF">
+    <span class="fa-icon">💾</span><span>保存 + 高清 PDF</span>
+  </button>
+</div>
 
 <script>
 // ─── i18n ────────────────────────────────────────────────────────────────────
@@ -1040,6 +1313,8 @@ let state = {
   quoteRef: 'QQ-' + Date.now().toString(36).toUpperCase(),
   discount: 0,
   globalAdj: 0,
+  paymentOverrides: {},
+  termsOverrides: {},
 };
 
 // Migrate old saved states: ensure materials array exists; ensure each space has selectedMaterials
@@ -1049,7 +1324,10 @@ function migrateState() {
   }
   state.spaces.forEach(sp => {
     if (!Array.isArray(sp.selectedMaterials)) sp.selectedMaterials = [];
+    if (sp.logTaxOverride === undefined) sp.logTaxOverride = '';
   });
+  if (!state.paymentOverrides || typeof state.paymentOverrides !== 'object') state.paymentOverrides = {};
+  if (!state.termsOverrides || typeof state.termsOverrides !== 'object') state.termsOverrides = {};
 }
 
 // ─── Persistence ──────────────────────────────────────────────────────────────
@@ -1780,12 +2058,31 @@ function calcSpace(sp) {
   const tm = TIERS[state.tier]?.mult || 1;
   const discMult = 1 + (state.discount || 0);
   const matBase = area * sp.base * sm * tm * discMult;
-  const matLineItems = calcSpaceMaterials(sp) * discMult; // user-selected items also subject to discount
+  const matLineItems = calcSpaceMaterials(sp) * discMult;
   const mat = matBase + matLineItems;
-  const log = mat * LOGISTICS_RATE;
+  const defaultLog = mat * LOGISTICS_RATE;
+  const defaultCon = mat * CONTINGENCY;
   const oh  = mat * OVERHEAD;
-  const con = mat * CONTINGENCY;
-  return { area, mat, matBase, matLineItems, log, oh, con, total: mat+log+oh+con };
+  // logTaxOverride (when set) replaces log + con (the "物流+税费" combined column)
+  const overrideRaw = sp.logTaxOverride;
+  const hasOverride = overrideRaw !== '' && overrideRaw != null && !isNaN(parseFloat(overrideRaw));
+  let log, con;
+  if (hasOverride) {
+    const total = Math.max(0, parseFloat(overrideRaw));
+    const ratio = LOGISTICS_RATE / (LOGISTICS_RATE + CONTINGENCY);
+    log = total * ratio;
+    con = total * (1 - ratio);
+  } else {
+    log = defaultLog;
+    con = defaultCon;
+  }
+  return {
+    area, mat, matBase, matLineItems,
+    log, oh, con,
+    total: mat + log + oh + con,
+    logTax: log + con,
+    hasLogOverride: hasOverride
+  };
 }
 
 function calcTotals() {
@@ -2113,6 +2410,168 @@ function setDiscount(val) {
   renderAll();
 }
 
+// ─── Logistics+Tax editable cell handlers ─────────────────────────────────────
+// Per-space override for the "物流+税费" combined column.
+// Uses fast in-place DOM update to keep input focus while typing.
+function updateLogTax(spId, val) {
+  const sp = state.spaces.find(s => s.id === spId);
+  if (!sp) return;
+  if (val === '' || val == null) {
+    sp.logTaxOverride = '';
+  } else {
+    const num = parseFloat(val);
+    sp.logTaxOverride = isNaN(num) ? '' : Math.max(0, num);
+  }
+  saveState();
+  updateSaveBadge(false);
+  // Fast in-place update — keeps input focused & cursor in place
+  updateAllRates();
+  // Refresh hidden print root so PDF reflects the change
+  renderPrintRoot();
+}
+
+function resetLogTax(spId) {
+  const sp = state.spaces.find(s => s.id === spId);
+  if (!sp) return;
+  sp.logTaxOverride = '';
+  saveState();
+  // Full re-render — needed because the ↺ reset button must disappear
+  renderAll();
+}
+
+// In-place update of all calculated cells without full re-render.
+// Critical for keeping focus/cursor on the logistics+tax input while typing.
+function updateAllRates() {
+  const T2 = calcTotals();
+
+  // Update each row's calculated cells
+  state.spaces.forEach(sp => {
+    if (parseFloat(sp.area) <= 0 && (sp.selectedMaterials || []).length === 0) return;
+    const c = calcSpace(sp);
+    const row = document.querySelector(`tr[data-sp-id="${sp.id}"]`);
+    if (!row) return;
+
+    const matCell = row.querySelector('.cell-mat');
+    if (matCell) matCell.textContent = fmt(c.mat);
+
+    const logInput = row.querySelector('.cell-logtax-input');
+    if (logInput && document.activeElement !== logInput) {
+      logInput.value = Math.round(c.logTax);
+    }
+    if (logInput) {
+      logInput.classList.toggle('is-override', !!c.hasLogOverride);
+    }
+
+    const subCell = row.querySelector('.cell-subtotal');
+    if (subCell) subCell.textContent = fmt(c.total);
+  });
+
+  // Update table footer totals
+  const tfArea = document.getElementById('tf-area');
+  const tfMat  = document.getElementById('tf-mat');
+  const tfLog  = document.getElementById('tf-log');
+  const tfSub  = document.getElementById('tf-sub');
+  if (tfArea) tfArea.textContent = T2.totalArea.toFixed(1) + ' m²';
+  if (tfMat)  tfMat.textContent  = fmt(T2.totalMat);
+  if (tfLog)  tfLog.textContent  = fmt(T2.totalLog + T2.totalCon);
+  if (tfSub)  tfSub.textContent  = fmt(T2.gross);
+
+  // Update price band
+  const priceLow  = document.querySelector('.price-low');
+  const priceHigh = document.querySelector('.price-high');
+  if (priceLow)  priceLow.textContent  = T2.gross > 0 ? fmt(T2.low)  : 'QAR —';
+  if (priceHigh) priceHigh.textContent = T2.gross > 0 ? fmt(T2.high) : 'QAR —';
+
+  // Update breakdown bars
+  const bVals = document.querySelectorAll('.b-val');
+  if (bVals.length >= 5) {
+    const vals = [T2.totalMat, T2.totalLog, T2.totalMat * 0.10, T2.totalOH, T2.totalCon];
+    vals.forEach((v, i) => { if (bVals[i]) bVals[i].textContent = fmt(v); });
+  }
+  // Update breakdown total
+  const bTotal = document.querySelector('.b-total .text-gold');
+  if (bTotal) bTotal.textContent = T2.gross > 0 ? fmt(T2.gross) : 'QAR —';
+
+  updateSaveBadge(true);
+}
+
+// One-click Save + Export HD PDF
+function saveAndExportHDPDF() {
+  saveState();
+  updateSaveBadge(true);
+  const badge = document.getElementById('saveBadge');
+  if (badge) {
+    const prev = badge.textContent;
+    badge.textContent = '✓ 已保存 Saved';
+    setTimeout(() => { badge.textContent = prev; }, 1200);
+  }
+  if (state.tab !== 3) {
+    state.tab = 3;
+    renderAll();
+  }
+  renderPrintRoot();
+  setTimeout(() => doPrint(), 80);
+}
+
+// ─── Payment card editing ─────────────────────────────────────────────────────
+function updatePaymentPct(idx, val) {
+  if (!state.paymentOverrides) state.paymentOverrides = {};
+  if (!state.paymentOverrides[idx]) state.paymentOverrides[idx] = {};
+  const num = parseFloat(val);
+  state.paymentOverrides[idx].pct = isNaN(num) ? '' : Math.max(0, Math.min(100, num));
+  saveState();
+  updateSaveBadge(false);
+  // Update the corresponding card amount in-place to avoid focus loss
+  const T2 = calcTotals();
+  const card = document.querySelector(`.pay-card[data-pay-idx="${idx}"]`);
+  if (card) {
+    const amount = card.querySelector('.pay-amount');
+    if (amount) {
+      const pct = (num || 0) / 100;
+      // Replace just the leading text node (before the <span>)
+      const firstNode = amount.firstChild;
+      if (firstNode && firstNode.nodeType === Node.TEXT_NODE) {
+        firstNode.nodeValue = (T2.gross > 0 ? fmt(T2.gross * pct) : 'QAR —') + ' ';
+      }
+    }
+  }
+  renderPrintRoot();
+}
+
+function updatePaymentTrigger(idx, langKey, val) {
+  if (!state.paymentOverrides) state.paymentOverrides = {};
+  if (!state.paymentOverrides[idx]) state.paymentOverrides[idx] = {};
+  state.paymentOverrides[idx]['trigger' + langKey] = val;
+  saveState();
+  updateSaveBadge(false);
+  renderPrintRoot();
+}
+
+function updatePaymentProducts(idx, val) {
+  if (!state.paymentOverrides) state.paymentOverrides = {};
+  if (!state.paymentOverrides[idx]) state.paymentOverrides[idx] = {};
+  state.paymentOverrides[idx].products = val;
+  saveState();
+  updateSaveBadge(false);
+  renderPrintRoot();
+}
+
+// ─── Terms editing ────────────────────────────────────────────────────────────
+function updateTermText(idx, txt) {
+  if (!state.termsOverrides) state.termsOverrides = {};
+  state.termsOverrides[idx] = txt;
+  saveState();
+  updateSaveBadge(false);
+  renderPrintRoot();
+}
+
+function resetTerms() {
+  if (!confirm(lang==='en' ? 'Reset terms to defaults?' : '恢复默认条款？')) return;
+  state.termsOverrides = {};
+  saveState();
+  renderAll();
+}
+
 function renderQuote() {
   const T2 = calcTotals();
   const sm = STYLES[state.style]?.mult||1;
@@ -2136,26 +2595,66 @@ function renderQuote() {
     const spLabel = lang==='en' ? (sp.nameEn||sp.name) : sp.name;
     const spAr = sp.nameAr || sp.nameEn || sp.name;
     const matCount = (sp.selectedMaterials||[]).length;
-    return `<tr>
-      <td>${sp.icon} ${spLabel}${matCount>0?`<br><span style="font-size:9px;color:#D4A017">📦 ${matCount} ${lang==='en'?'materials':'项材料'}</span>`:''}<br><span class="ar" style="font-size:8px;color:rgba(255,255,255,0.4)">${spAr}</span></td>
+    const logTaxValue = Math.round(c.logTax);
+    const isOverride = c.hasLogOverride;
+    return `<tr data-sp-id="${sp.id}">
+      <td>${sp.icon} ${spLabel}${matCount>0?`<br><span style="font-size:9px;color:#D4A017">📦 ${matCount} ${lang==='en'?'materials':'项材料'}</span>`:''}<br><span class="ar">${spAr}</span></td>
       <td class="ta-center">${c.area} m²</td>
       <td class="ta-center">${unitRate.toLocaleString()}</td>
-      <td class="ta-right">${fmt(c.mat)}</td>
-      <td class="ta-right text-gold">${fmt(c.log+c.con)}</td>
-      <td class="ta-right fw7">${fmt(c.total)}</td>
+      <td class="ta-right cell-mat">${fmt(c.mat)}</td>
+      <td class="ta-right">
+        <span class="cell-logtax-wrap">
+          <span class="qar-prefix">QAR</span>
+          <input type="number" min="0" step="1" inputmode="decimal"
+            class="cell-logtax-input${isOverride?' is-override':''}"
+            value="${logTaxValue}"
+            oninput="updateLogTax('${sp.id}',this.value)"
+            onchange="updateLogTax('${sp.id}',this.value)"
+            title="${lang==='en'?'Edit Logistics+Tax · auto-recalculates total':'编辑物流+税费 · 自动重算总价'}"/>
+          ${isOverride?`<button class="cell-logtax-reset" onclick="resetLogTax('${sp.id}')" title="恢复默认 Reset">↺</button>`:''}
+        </span>
+      </td>
+      <td class="ta-right fw7 text-gold cell-subtotal">${fmt(c.total)}</td>
     </tr>`;
   }).join('');
 
   const payments = getPayments();
-  const payCards = payments.map(p => `
-    <div class="pay-card">
+  // Apply user overrides if any
+  payments.forEach((p, i) => {
+    const ov = (state.paymentOverrides || {})[i] || {};
+    if (ov.pct != null && ov.pct !== '') p.pct2 = parseFloat(ov.pct) / 100;
+    if (ov.triggerZh != null) p.triggerZh = ov.triggerZh;
+    if (ov.triggerEn != null) p.triggerEn = ov.triggerEn;
+    if (ov.products != null) p.products = ov.products;
+  });
+  const payCards = payments.map((p, i) => `
+    <div class="pay-card" data-pay-idx="${i}">
       <div class="pay-head" style="background:${p.color}">${lang==='en'?p.batchEn:p.batchZh}</div>
-      <div style="padding:3px 12px 0;font-size:8px;font-family:'Noto Sans Arabic',sans-serif;direction:rtl;color:rgba(255,255,255,0.5)">${p.batchAr}</div>
-      <div class="pay-amount">${T2.gross>0?fmt(T2.gross*p.pct2):'QAR —'}<span class="pay-pct"> (${(p.pct2*100).toFixed(0)}%)</span></div>
-      <div class="pay-trigger">📅 ${lang==='en'?p.triggerEn:p.triggerZh}</div>
+      <div style="padding:3px 12px 0" class="ar" >${p.batchAr}</div>
+      <div class="pay-amount">
+        ${T2.gross>0?fmt(T2.gross*p.pct2):'QAR —'}
+        <span class="pay-pct">
+          (<input type="number" min="0" max="100" step="0.5" value="${(p.pct2*100).toFixed(0)}"
+            oninput="updatePaymentPct(${i},this.value)"
+            onchange="updatePaymentPct(${i},this.value)"
+            style="width:42px;background:rgba(255,255,255,0.08);border:1px solid rgba(184,134,0,0.3);border-radius:4px;color:var(--gold);font-size:11px;font-weight:700;padding:1px 4px;text-align:center;outline:none;font-family:var(--font-body)"
+            title="${lang==='en'?'Edit %':'编辑百分比'}"/>%)
+        </span>
+      </div>
+      <div class="pay-trigger">📅
+        <input type="text" value="${(lang==='en'?p.triggerEn:p.triggerZh).replace(/"/g,'&quot;')}"
+          oninput="updatePaymentTrigger(${i},'${lang==='en'?'En':'Zh'}',this.value)"
+          style="width:calc(100% - 22px);background:transparent;border:none;border-bottom:1px dashed rgba(255,255,255,0.15);color:var(--cream);font-size:10px;padding:1px 2px;outline:none;font-family:var(--font-body)"
+          title="${lang==='en'?'Edit trigger':'编辑触发条件'}"/>
+      </div>
       <div class="pay-trigger-en">${lang==='en'?p.triggerZh:p.triggerEn}</div>
-      <div style="padding:0 12px 2px;font-size:8px;color:rgba(255,255,255,0.35);font-family:'Noto Sans Arabic',sans-serif;direction:rtl;text-align:right">${p.triggerAr}</div>
-      <div class="pay-products">📦 ${p.products}</div>
+      <div class="ar" style="padding:0 12px 2px;text-align:right">${p.triggerAr}</div>
+      <div class="pay-products">📦
+        <input type="text" value="${(p.products||'').replace(/"/g,'&quot;')}"
+          oninput="updatePaymentProducts(${i},this.value)"
+          style="width:calc(100% - 22px);background:transparent;border:none;border-bottom:1px dashed rgba(255,255,255,0.1);color:rgba(255,255,255,0.55);font-size:10px;padding:1px 2px;outline:none;font-family:var(--font-body)"
+          title="${lang==='en'?'Edit products':'编辑产品说明'}"/>
+      </div>
     </div>`).join('');
 
   const bRows = breakdowns.map(b => {
@@ -2247,7 +2746,8 @@ function renderQuote() {
     <div class="card">
       <div class="card-head">
         ${t('spaceBreakTitle')}
-        &nbsp;<span class="ar" style="font-size:9px;font-weight:400;opacity:0.8">${t('arSpaceBreak')}</span>
+        &nbsp;<span class="ar">${t('arSpaceBreak')}</span>
+        <span style="margin-left:auto;font-size:10px;color:var(--gold);font-weight:600">✏️ ${lang==='en'?'Logistics+Tax editable':'物流+税费可编辑'}</span>
       </div>
       <div class="tbl-wrap">
         <table>
@@ -2255,11 +2755,21 @@ function renderQuote() {
             <th>${t('colSpace')}</th>
             <th>${t('colArea')}</th>
             <th>${t('colUnit')}</th>
-            <th>${t('colMat')}<br><span class="ar" style="font-size:8px;font-weight:400">${t('arColMat')}</span></th>
-            <th>${t('colLogTax')}<br><span class="ar" style="font-size:8px;font-weight:400">${t('arColLogTax')}</span></th>
-            <th>${t('colSubtotal')}<br><span class="ar" style="font-size:8px;font-weight:400">${t('arColSub')}</span></th>
+            <th>${t('colMat')}<br><span class="ar">${t('arColMat')}</span></th>
+            <th>${t('colLogTax')} ✏️<br><span class="ar">${t('arColLogTax')}</span></th>
+            <th>${t('colSubtotal')}<br><span class="ar">${t('arColSub')}</span></th>
           </tr></thead>
           <tbody>${spaceRows||`<tr><td colspan="6" style="text-align:center;color:var(--muted);padding:20px">${t('noAreaMsg')}</td></tr>`}</tbody>
+          ${spaceRows ? `<tfoot>
+            <tr style="background:rgba(184,134,0,0.12);border-top:2px solid rgba(184,134,0,0.4)">
+              <td style="font-weight:700;color:var(--gold)">${lang==='en'?'TOTAL':'总计'} <span class="ar">الإجمالي</span></td>
+              <td class="ta-center fw7" id="tf-area">${T2.totalArea.toFixed(1)} m²</td>
+              <td></td>
+              <td class="ta-right fw7" id="tf-mat">${fmt(T2.totalMat)}</td>
+              <td class="ta-right fw7 text-gold" id="tf-log">${fmt(T2.totalLog+T2.totalCon)}</td>
+              <td class="ta-right fw7 text-gold" id="tf-sub" style="font-size:13px">${fmt(T2.gross)}</td>
+            </tr>
+          </tfoot>` : ''}
         </table>
       </div>
     </div>
@@ -2275,10 +2785,18 @@ function renderQuote() {
     <div class="card">
       <div class="card-head">
         ${t('termsTitle')}
-        &nbsp;<span class="ar" style="font-size:9px;font-weight:400;opacity:0.8">${t('arTermsTitle')}</span>
+        &nbsp;<span class="ar">${t('arTermsTitle')}</span>
+        <span style="margin-left:auto;font-size:10px;color:var(--gold);font-weight:600">✏️ ${lang==='en'?'Click to edit':'点击编辑'}</span>
       </div>
       <div style="padding:12px">
-        ${terms.map((txt,i)=>`<div class="disc" style="border-left:3px solid ${['#1A3A5C','#2E6B4F','#B88600','#555','#1A3A5C','#7B5E3A'][i]}">${txt}</div>`).join('')}
+        ${terms.map((txt,i)=>`<div class="disc" contenteditable="true"
+          data-term-idx="${i}"
+          onblur="updateTermText(${i},this.innerText)"
+          style="border-left:3px solid ${['#1A3A5C','#2E6B4F','#B88600','#555','#1A3A5C','#7B5E3A'][i]};outline:none;cursor:text"
+          title="${lang==='en'?'Click to edit · Tap outside to save':'点击编辑 · 点击外部保存'}">${txt}</div>`).join('')}
+        <div style="margin-top:8px;font-size:10px;color:var(--muted);text-align:right">
+          <button onclick="resetTerms()" style="background:rgba(255,255,255,0.05);border:1px solid var(--border);color:var(--muted);font-size:10px;padding:4px 10px;border-radius:6px;cursor:pointer;font-family:var(--font-body)">↺ ${lang==='en'?'Reset to defaults':'恢复默认条款'}</button>
+        </div>
       </div>
     </div>
   </div>`;
@@ -2297,7 +2815,7 @@ function getPayments() {
 }
 
 function getTerms() {
-  return lang === 'en' ? [
+  const defaults = lang === 'en' ? [
     'This is a preliminary estimate. Final contract price is subject to confirmed material specifications (±15% variance).',
     '本报价为概算，材料品牌及规格未最终确认，实际合同价格以确认材料清单后为准，浮动不超过 ±15%。',
     'هذا عرض سعر تقريبي. السعر النهائي مرهون بتأكيد المواد وقد يتفاوت بنسبة ±15%.',
@@ -2312,6 +2830,8 @@ function getTerms() {
     '所有产品从中国定制生产，全程供货周期约45天，付款须在对应工程节点前45天完成。',
     '付款到账后方启动产品生产及发运，所有权在安装验收前归乙方所有。',
   ];
+  const overrides = state.termsOverrides || {};
+  return defaults.map((txt, i) => (overrides[i] != null && overrides[i] !== '') ? overrides[i] : txt);
 }
 
 // ─── Print Root Renderer (separate, optimized for A4 PDF) ─────────────────────
@@ -2460,6 +2980,14 @@ function renderPrintRoot() {
 
   // ── Page 3: Payment Schedule + Terms ──
   const payments = getPayments();
+  // Apply user overrides
+  payments.forEach((p, i) => {
+    const ov = (state.paymentOverrides || {})[i] || {};
+    if (ov.pct != null && ov.pct !== '') p.pct2 = parseFloat(ov.pct) / 100;
+    if (ov.triggerZh != null && ov.triggerZh !== '') p.triggerZh = ov.triggerZh;
+    if (ov.triggerEn != null && ov.triggerEn !== '') p.triggerEn = ov.triggerEn;
+    if (ov.products != null && ov.products !== '') p.products = ov.products;
+  });
   const payCardsHtml = payments.map(p => `
     <div class="pr-pay-card">
       <div class="pr-pay-head" style="background:${p.color}">${p.batchZh} / ${p.batchEn}</div>
@@ -2472,7 +3000,7 @@ function renderPrintRoot() {
     </div>
   `).join('');
 
-  const terms = [
+  const defaultTerms = [
     '本报价为概算，材料品牌及规格未最终确认，实际合同价格以确认材料清单后为准，浮动不超过 ±15%。',
     'This is a preliminary estimate. Final contract price subject to confirmed material specifications (±15% variance).',
     'هذا عرض سعر تقريبي. السعر النهائي مرهون بتأكيد المواد وقد يتفاوت بنسبة ±15%.',
@@ -2480,6 +3008,8 @@ function renderPrintRoot() {
     '所有产品从中国定制生产，全程供货周期约45天，付款须在对应工程节点前45天完成。 All products are custom-manufactured in China. Total lead time approx. 45 days.',
     '付款到账后方启动产品生产及发运，所有权在安装验收前归乙方所有。 Production and shipping commence upon cleared payment. Title remains with Supplier until installation acceptance.',
   ];
+  const termsOv = state.termsOverrides || {};
+  const terms = defaultTerms.map((d, i) => (termsOv[i] != null && termsOv[i] !== '') ? termsOv[i] : d);
   const termColors = ['#1A3A5C','#2E6B4F','#B88600','#7B5E3A','#1A3A5C','#7B5E3A'];
 
   const page3 = `
@@ -2628,16 +3158,31 @@ function resetQuote() {
     clientName: '', projectName: '',
     quoteRef: 'QQ-' + Date.now().toString(36).toUpperCase(),
     discount: 0, globalAdj: 0,
+    paymentOverrides: {}, termsOverrides: {},
   };
   migrateState();
   renderAll();
 }
 
-// ─── PWA ──────────────────────────────────────────────────────────────────────
+// ─── Cache cleanup (fixes Vercel deployment showing stale cached version) ───
+// Older versions of this app registered a Service Worker that aggressively
+// cached old HTML. On HTTPS deployments (Vercel/Netlify), users could get
+// stuck on an old version even after deploys. We now actively unregister
+// any existing Service Worker and clear its caches so the latest build
+// always loads.
 if ('serviceWorker' in navigator) {
-  const swCode = `const CACHE='qvq-v3';const URLS=[self.location.pathname];self.addEventListener('install',e=>e.waitUntil(caches.open(CACHE).then(c=>c.addAll(URLS))));self.addEventListener('fetch',e=>e.respondWith(caches.match(e.request).then(r=>r||fetch(e.request))));`;
-  const blob = new Blob([swCode], {type:'application/javascript'});
-  navigator.serviceWorker.register(URL.createObjectURL(blob)).catch(()=>{});
+  navigator.serviceWorker.getRegistrations().then(regs => {
+    regs.forEach(r => r.unregister().catch(() => {}));
+  }).catch(() => {});
+}
+if ('caches' in window) {
+  caches.keys().then(keys => {
+    keys.forEach(k => {
+      if (k.startsWith('qvq-') || k.startsWith('qatar-')) {
+        caches.delete(k).catch(() => {});
+      }
+    });
+  }).catch(() => {});
 }
 
 // ─── Init ──────────────────────────────────────────────────────────────────────
