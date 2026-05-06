@@ -7,7 +7,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
 <meta name="apple-mobile-web-app-title" content="Qatar Quote"/>
 <meta name="theme-color" content="#0D1F35"/>
-<title>◈ Qatar Villa Quote v3</title>
+<title>◈ Qatar Villa Quote v7</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=DM+Sans:wght@300;400;500;600;700&family=Noto+Sans+Arabic:wght@400;600;700&display=swap" rel="stylesheet"/>
 <style>
@@ -29,19 +29,7 @@
 }
 * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
 html, body { overflow-x: hidden; }
-body { font-family: var(--font-body); background: var(--navy); color: var(--cream); min-height: 100vh; min-height: 100dvh;
-  font-weight: 500; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; text-rendering: optimizeLegibility; }
-/* MEDIUM-WEIGHT TYPE OVERRIDE — thin text 500, body 600, headers 800 */
-.sec-sub, .quote-hmeta, .quote-hdate, .price-label, .price-note, .price-sqm,
-.breakdown-title, .b-label, .b-pct, .pay-trigger, .pay-trigger-en, .pay-products,
-.disc, .pay-pct, .style-desc-zh, .style-desc-en, .style-en,
-.tab-label-en, .logo-sub { font-weight: 500 !important; }
-.style-name, .style-mult, .b-val, .pay-amount, .pay-head, td, th,
-.client-label, .manual-override-label, .disc-btn { font-weight: 600 !important; }
-.sec-title, .quote-htitle, .price-high, .b-total, .breakdown-total,
-.logo-title, .pay-amount { font-weight: 800 !important; }
-/* lift muted text contrast so weights actually read */
-:root { --muted: rgba(232,237,242,0.72); --dim: rgba(232,237,242,0.4); }
+body { font-family: var(--font-body); background: var(--navy); color: var(--cream); min-height: 100vh; min-height: 100dvh; }
 
 .bg-layer { position: fixed; inset: 0; pointer-events: none; z-index: 0;
   background: radial-gradient(ellipse 70% 50% at 15% 15%, rgba(26,58,92,0.7) 0%, transparent 60%),
@@ -331,53 +319,6 @@ tr:last-child td { border-bottom: none; }
 .disc { padding: 8px 12px; margin-bottom: 7px; font-size: 11px; color: rgba(255,255,255,0.5);
   line-height: 1.65; background: rgba(255,255,255,0.03); border-radius: 0 6px 6px 0; }
 
-/* ── Editable cards (rates, terms, quote meta) ── */
-.edit-card-toggle { display: flex; align-items: center; justify-content: space-between;
-  padding: 10px 14px; cursor: pointer; user-select: none; }
-.edit-card-toggle-label { font-size: 11px; color: var(--gold); letter-spacing: 0.6px; font-weight: 700; }
-.edit-card-toggle-state { font-size: 10px; color: var(--muted); }
-.edit-card-body { padding: 12px 14px 14px; border-top: 1px solid var(--border);
-  display: none; }
-.edit-card.open .edit-card-body { display: block; }
-.rate-grid { display: grid; grid-template-columns: 1fr; gap: 8px; }
-.rate-row { display: flex; align-items: center; gap: 10px; padding: 8px 10px;
-  background: rgba(255,255,255,0.03); border-radius: 8px; border-left: 3px solid var(--gold); }
-.rate-row.rate-tax { border-left-color: #C8995A; }
-.rate-label { flex: 1; font-size: 11px; color: var(--cream); line-height: 1.4; font-weight: 600; }
-.rate-label-ar { font-size: 9px; color: var(--muted); font-family: 'Noto Sans Arabic',sans-serif; direction: rtl; display: block; margin-top: 2px; font-weight: 500; }
-.rate-input-wrap { display: flex; align-items: center; gap: 4px; flex-shrink: 0; }
-.rate-input { width: 60px; padding: 6px 8px; background: rgba(0,0,0,0.3); border: 1px solid var(--border);
-  border-radius: 6px; color: var(--cream); font-size: 12px; font-family: var(--font-body); text-align: right;
-  font-weight: 700; }
-.rate-input:focus { outline: none; border-color: var(--gold); }
-.rate-suffix { font-size: 11px; color: var(--muted); font-weight: 600; }
-.rate-summary { margin-top: 10px; padding: 8px 10px; background: rgba(184,134,0,0.08);
-  border-radius: 6px; font-size: 11px; color: var(--gold); font-weight: 700; display: flex; justify-content: space-between; }
-.rate-reset { margin-top: 8px; padding: 6px 12px; background: var(--glass2); border: 1px solid var(--border);
-  border-radius: 6px; color: var(--muted); font-size: 10px; cursor: pointer; font-family: var(--font-body); font-weight: 600; }
-.rate-reset:hover { color: var(--gold); border-color: var(--gold); }
-
-/* Terms editor */
-.term-row { display: flex; gap: 8px; margin-bottom: 8px; align-items: flex-start; }
-.term-textarea { flex: 1; padding: 8px 10px; background: rgba(0,0,0,0.25); border: 1px solid var(--border);
-  border-radius: 6px; color: var(--cream); font-size: 11px; font-family: var(--font-body); line-height: 1.55;
-  resize: vertical; min-height: 50px; font-weight: 500; }
-.term-textarea:focus { outline: none; border-color: var(--gold); }
-.term-del { width: 28px; height: 28px; flex-shrink: 0; background: rgba(180,60,60,0.15); border: 1px solid rgba(180,60,60,0.3);
-  border-radius: 6px; color: rgba(255,150,150,0.9); cursor: pointer; font-size: 14px; font-weight: 700; }
-.term-add { padding: 8px 14px; background: rgba(46,107,79,0.18); border: 1px dashed rgba(46,107,79,0.5);
-  border-radius: 8px; color: #7EC8A0; font-size: 11px; cursor: pointer; font-family: var(--font-body); width: 100%; font-weight: 700; }
-
-/* Quote meta editor inputs */
-.meta-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-.meta-grid > .meta-field-full { grid-column: 1 / -1; }
-.meta-field { display: flex; flex-direction: column; gap: 4px; }
-.meta-field label { font-size: 10px; color: var(--muted); letter-spacing: 0.5px; font-weight: 600; }
-.meta-field input, .meta-field textarea { padding: 7px 9px; background: rgba(0,0,0,0.25); border: 1px solid var(--border);
-  border-radius: 6px; color: var(--cream); font-size: 12px; font-family: var(--font-body); font-weight: 600; }
-.meta-field input:focus, .meta-field textarea:focus { outline: none; border-color: var(--gold); }
-.meta-field textarea { resize: vertical; min-height: 44px; font-weight: 500; }
-
 /* ── Bottom bar ── */
 .bottom-bar { position: fixed; bottom: 0; left: 0; right: 0; z-index: 200; background: rgba(13,31,53,0.95);
   backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-top: 1px solid rgba(184,134,0,0.25);
@@ -405,8 +346,31 @@ tr:last-child td { border-bottom: none; }
 body.lang-en .zh-only { display: none; }
 body.lang-en .en-only { display: block; }
 
-/* ── Arabic font support ── */
-.ar { font-family: 'Noto Sans Arabic', 'Segoe UI', sans-serif; direction: rtl; unicode-bidi: embed; }
+/* ── Arabic font support (bold 700 + enlarged) ── */
+.ar,
+[class*="ar-"],
+.pr-b-ar,
+.dim-ar,
+.pr-pay-ar-batch,
+.pr-pay-trig-ar,
+.pr-price-ar {
+  font-family: 'Noto Sans Arabic', 'Segoe UI', 'Tahoma', sans-serif !important;
+  font-weight: 700 !important;
+  direction: rtl;
+  unicode-bidi: embed;
+  letter-spacing: 0;
+  font-feature-settings: "kern" 1, "liga" 1;
+}
+/* Enlarge Arabic text wherever it appears with size hints */
+.ar { font-size: 1.18em; line-height: 1.55; }
+.pr-b-ar { font-size: 9.5pt !important; color: rgba(232,237,242,0.7) !important; }
+.dim-ar { font-size: 9pt !important; color: rgba(232,237,242,0.65) !important; }
+.pr-pay-ar-batch { font-size: 9pt !important; color: rgba(255,255,255,0.85) !important; }
+.pr-pay-trig-ar { font-size: 8.5pt !important; color: rgba(212,160,23,0.95) !important; }
+.pr-price-ar { font-size: 10pt !important; color: rgba(212,160,23,0.85) !important; }
+
+/* Arabic text inside any inline span lifted to bold */
+span.ar, div.ar { font-weight: 700 !important; }
 
 /* ═══════════════════════════════════════════════════════════════════════════
    PRINT PREVIEW MODE (in-page overlay used as a fallback)
@@ -421,6 +385,25 @@ body.lang-en .en-only { display: block; }
   color: #E8EDF2;
   font-family: 'DM Sans', 'Segoe UI', Arial, sans-serif;
 }
+
+/* Preview mode (on-screen): show printRoot, hide normal page chrome */
+body.printing { overflow: auto; }
+body.printing #printRoot {
+  display: block;
+  position: fixed;
+  inset: 0;
+  z-index: 99000;
+  overflow-y: auto;
+  padding: 60px 14px 30px;
+  -webkit-overflow-scrolling: touch;
+}
+body.printing header,
+body.printing .tab-nav,
+body.printing main,
+body.printing .bottom-bar,
+body.printing .floating-actions,
+body.printing .bg-layer,
+body.printing .bg-grid { display: none !important; }
 
 /* Print preview toolbar (shown on top when in print mode) */
 .printing-toolbar {
@@ -593,16 +576,12 @@ body.printing .printing-toolbar { display: flex; }
 .pr-disc {
   padding: 7px 10px;
   margin-bottom: 5px;
-  font-size: 8.5pt;
-  font-weight: 500;
-  color: rgba(232,237,242,0.92);
-  line-height: 1.65;
-  background: rgba(255,255,255,0.04);
+  font-size: 8pt;
+  color: rgba(232,237,242,0.7);
+  line-height: 1.6;
+  background: rgba(255,255,255,0.03);
   border-radius: 0 5px 5px 0;
 }
-.pr-card-head { font-weight: 800 !important; }
-.pr-b-label { font-weight: 600 !important; color: rgba(232,237,242,0.95) !important; }
-.pr-pay-trig, .pr-pay-trig2, .pr-pay-prod { font-weight: 500 !important; }
 
 .pr-footer {
   text-align: center;
@@ -614,10 +593,98 @@ body.printing .printing-toolbar { display: flex; }
 }
 
 /* ═══════════════════════════════════════════════════════════════════════════
-   No @media print rules in the main page.
-   Printing happens in a popup window with its own clean stylesheet.
-   See buildPrintHTML() in JavaScript below.
+   PRINT RULES — guarantee 100% Payment Schedule + Terms render on PDF
    ═══════════════════════════════════════════════════════════════════════════ */
+@media print {
+  @page {
+    size: A4;
+    margin: 10mm 8mm;
+  }
+
+  /* Hide everything except the print root */
+  html, body {
+    background: #0D1F35 !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    color-adjust: exact !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+  body > *:not(#printRoot) { display: none !important; }
+  .bg-layer, .bg-grid, header, .tab-nav, main,
+  .bottom-bar, .printing-toolbar, .sync-modal-overlay,
+  #fileInput, #libImportInput,
+  .floating-actions, .floating-action-btn { display: none !important; }
+
+  /* Force print root visible & full width */
+  #printRoot {
+    display: block !important;
+    background: #0D1F35 !important;
+    color: #E8EDF2 !important;
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    box-shadow: none !important;
+  }
+  #printRoot * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    color-adjust: exact !important;
+  }
+
+  /* Each pr-page = full A4 page */
+  .pr-page {
+    page-break-after: always !important;
+    break-after: page !important;
+    background: #0D1F35 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+  .pr-page:last-child,
+  .pr-page.no-break-after { page-break-after: auto !important; break-after: auto !important; }
+
+  /* Critical: prevent payment cards & terms from being clipped */
+  .pr-card,
+  .pr-pay-card,
+  .pr-disc {
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+  }
+
+  /* Payment schedule grid — must NOT collapse on print */
+  .pr-pay-grid {
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 6px !important;
+    width: 100% !important;
+  }
+  .pr-pay-card {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    background: rgba(255,255,255,0.04) !important;
+    border: 1px solid rgba(255,255,255,0.18) !important;
+  }
+  .pr-pay-head { color: #fff !important; }
+  .pr-pay-amt { color: #D4A017 !important; }
+
+  /* Terms block — every line visible */
+  .pr-disc {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    color: rgba(232,237,242,0.85) !important;
+    background: rgba(255,255,255,0.04) !important;
+    margin-bottom: 4px !important;
+  }
+
+  /* Arabic stays bold and enlarged on print */
+  .ar, .pr-b-ar, .dim-ar,
+  .pr-pay-ar-batch, .pr-pay-trig-ar, .pr-price-ar {
+    font-family: 'Noto Sans Arabic', 'Tahoma', sans-serif !important;
+    font-weight: 700 !important;
+  }
+}
 
 input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer-spin-button { opacity: 0.4; }
 
@@ -741,6 +808,53 @@ input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer
   color: var(--cream); font-size: 10px; cursor: pointer; font-family: var(--font-body);
 }
 .lib-tool-btn:hover { border-color: var(--gold); color: var(--gold); }
+
+/* ── Floating action buttons (always visible bottom-right) ── */
+.floating-actions {
+  position: fixed;
+  right: 14px;
+  bottom: 90px;
+  bottom: calc(90px + env(safe-area-inset-bottom));
+  z-index: 250;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: flex-end;
+}
+.floating-action-btn {
+  display: flex; align-items: center; gap: 8px;
+  padding: 10px 14px;
+  border-radius: 26px;
+  border: 1px solid rgba(184,134,0,0.55);
+  background: linear-gradient(135deg, rgba(13,31,53,0.96), rgba(26,58,92,0.96));
+  backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+  color: var(--gold);
+  font-family: var(--font-body);
+  font-size: 12px; font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 6px 22px rgba(0,0,0,0.45), 0 0 0 1px rgba(255,255,255,0.04) inset;
+  white-space: nowrap;
+  transition: transform 0.18s, background 0.18s, box-shadow 0.18s;
+}
+.floating-action-btn:hover, .floating-action-btn:active {
+  transform: translateY(-1px);
+  background: linear-gradient(135deg, rgba(184,134,0,0.22), rgba(26,58,92,0.96));
+  box-shadow: 0 10px 28px rgba(184,134,0,0.35);
+}
+.floating-action-btn .fa-icon { font-size: 15px; }
+.floating-action-btn.fa-primary {
+  background: linear-gradient(135deg, var(--gold), #8a6700);
+  color: #0D1F35;
+  border-color: var(--gold2);
+}
+.floating-action-btn.fa-primary:hover {
+  background: linear-gradient(135deg, var(--gold2), var(--gold));
+  color: #0D1F35;
+}
+@media (max-width: 480px) {
+  .floating-actions { right: 10px; bottom: 80px; bottom: calc(80px + env(safe-area-inset-bottom)); }
+  .floating-action-btn { padding: 9px 12px; font-size: 11px; }
+}
 </style>
 </head>
 <body>
@@ -832,6 +946,22 @@ input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer
 <input type="file" id="fileInput" class="sync-file-input" accept=".json,.csv" onchange="handleFileImport(event)"/>
 
 <div class="bottom-bar" id="bottomBar"></div>
+
+<!-- Floating actions: always visible 3 edit modules + HD PDF export -->
+<div class="floating-actions" id="floatingActions">
+  <button class="floating-action-btn" onclick="openLibModal()" title="材料库 / Materials Library">
+    <span class="fa-icon">📦</span><span>材料库 Materials</span>
+  </button>
+  <button class="floating-action-btn" onclick="openSyncModal()" title="同步 / Sync">
+    <span class="fa-icon">⇄</span><span>同步 Sync</span>
+  </button>
+  <button class="floating-action-btn" onclick="goTab(3)" title="报价单 / Quote">
+    <span class="fa-icon">📋</span><span>报价单 Quote</span>
+  </button>
+  <button class="floating-action-btn fa-primary" onclick="saveAndExportHDPDF()" title="一键保存并导出高清 PDF">
+    <span class="fa-icon">💾</span><span>保存 + 高清 PDF</span>
+  </button>
+</div>
 
 <script>
 // ─── i18n ────────────────────────────────────────────────────────────────────
@@ -1088,33 +1218,7 @@ const DEFAULT_MATERIALS = [
   { id:'mat_curtain', cat:'textile',  name:'电动窗帘',       nameEn:'Motorized Curtains',  brand:'Lutron',     price:680, unit:'m²' },
 ];
 
-// Logistics & tax rates — editable via UI, persisted in state.rates
-const DEFAULT_RATES = {
-  seaFreight:    0.12, // 海运 Sea Freight
-  landFreight:   0.09, // 陆运 Land Freight
-  customsClear:  0.10, // 清关代理 Customs Clearance
-  insurance:     0.04, // 保险 Insurance
-  handling:      0.03, // 港杂/仓储 Port Handling
-  customsDuty:   0.05, // 关税 Customs Duty
-  vat:           0.05, // VAT 增值税
-};
-const RATE_META = [
-  { key:'seaFreight',   zh:'海运 Sea Freight',          en:'Sea Freight 海运',           ar:'الشحن البحري',          group:'log' },
-  { key:'landFreight',  zh:'陆运 Land Freight',         en:'Land Freight 陆运',          ar:'النقل البري',           group:'log' },
-  { key:'customsClear', zh:'清关代理 Customs Clearance',en:'Customs Clearance 清关代理', ar:'التخليص الجمركي',       group:'log' },
-  { key:'insurance',    zh:'保险 Insurance',            en:'Insurance 保险',             ar:'التأمين',               group:'log' },
-  { key:'handling',     zh:'港杂/仓储 Handling',         en:'Port Handling 港杂/仓储',    ar:'مناولة الميناء',        group:'log' },
-  { key:'customsDuty',  zh:'关税 Customs Duty',         en:'Customs Duty 关税',          ar:'الرسوم الجمركية',       group:'tax' },
-  { key:'vat',          zh:'VAT 增值税',                en:'VAT 增值税',                  ar:'ضريبة القيمة المضافة',  group:'tax' },
-];
-function getLogRate() {
-  const r = state.rates || DEFAULT_RATES;
-  return (+r.seaFreight||0)+(+r.landFreight||0)+(+r.customsClear||0)+(+r.insurance||0)+(+r.handling||0);
-}
-function getTaxRate() {
-  const r = state.rates || DEFAULT_RATES;
-  return (+r.customsDuty||0)+(+r.vat||0);
-}
+const LOGISTICS_RATE = 0.12+0.09+0.10+0.04+0.03;
 const OVERHEAD = 0.18;
 const CONTINGENCY = 0.10;
 
@@ -1127,14 +1231,8 @@ let state = {
   clientName: '',
   projectName: '',
   quoteRef: 'QQ-' + Date.now().toString(36).toUpperCase(),
-  discount: 0, globalAdj: 0,
-  rates: JSON.parse(JSON.stringify(DEFAULT_RATES)),
-  customTerms: null,        // null = use default getTerms(); array = user-edited
-  quoteMeta: {              // editable QUOTATION header fields
-    title: '',              // '' = use default t('quoteTitle')
-    validDays: 30,
-    priceNote: '',          // '' = use default t('priceNote')
-  },
+  discount: 0,
+  globalAdj: 0,
 };
 
 // Migrate old saved states: ensure materials array exists; ensure each space has selectedMaterials
@@ -1144,23 +1242,8 @@ function migrateState() {
   }
   state.spaces.forEach(sp => {
     if (!Array.isArray(sp.selectedMaterials)) sp.selectedMaterials = [];
+    if (sp.logTaxOverride === undefined) sp.logTaxOverride = '';
   });
-  if (!state.rates || typeof state.rates !== 'object') {
-    state.rates = JSON.parse(JSON.stringify(DEFAULT_RATES));
-  } else {
-    // ensure all keys exist
-    Object.keys(DEFAULT_RATES).forEach(k => {
-      if (typeof state.rates[k] !== 'number') state.rates[k] = DEFAULT_RATES[k];
-    });
-  }
-  if (state.customTerms !== null && !Array.isArray(state.customTerms)) state.customTerms = null;
-  if (!state.quoteMeta || typeof state.quoteMeta !== 'object') {
-    state.quoteMeta = { title:'', validDays:30, priceNote:'' };
-  } else {
-    if (typeof state.quoteMeta.title !== 'string')     state.quoteMeta.title = '';
-    if (typeof state.quoteMeta.validDays !== 'number') state.quoteMeta.validDays = 30;
-    if (typeof state.quoteMeta.priceNote !== 'string') state.quoteMeta.priceNote = '';
-  }
 }
 
 // ─── Persistence ──────────────────────────────────────────────────────────────
@@ -1413,7 +1496,7 @@ function exportPagesHTML() {
   const breakdownRows = [
     ['Materials 材料货值',                     T2.totalMat],
     ['Logistics 物流运输 (China→Qatar)',        T2.totalLog],
-    ['Customs + VAT 关税+VAT ' + (getTaxRate()*100).toFixed(0) + '%',             T2.totalMat * getTaxRate()],
+    ['Customs + VAT 关税+VAT 10%',             T2.totalMat * 0.10],
     ['Overhead & Margin 运营+利润',             T2.totalOH],
     ['Contingency Buffer 材料缓冲',             T2.totalCon],
   ].map(([label, val]) => {
@@ -1893,10 +1976,23 @@ function calcSpace(sp) {
   const matBase = area * sp.base * sm * tm * discMult;
   const matLineItems = calcSpaceMaterials(sp) * discMult; // user-selected items also subject to discount
   const mat = matBase + matLineItems;
-  const log = mat * getLogRate();
+  const defaultLog = mat * LOGISTICS_RATE;
+  const defaultCon = mat * CONTINGENCY;
+  // logTaxOverride (when set) replaces log + con (the "物流+税费" combined column)
+  const hasOverride = sp.logTaxOverride !== '' && sp.logTaxOverride != null && !isNaN(parseFloat(sp.logTaxOverride));
+  let log, con;
+  if (hasOverride) {
+    const total = parseFloat(sp.logTaxOverride);
+    // split proportionally between log and con keeping their ratio
+    const ratio = LOGISTICS_RATE / (LOGISTICS_RATE + CONTINGENCY);
+    log = total * ratio;
+    con = total * (1 - ratio);
+  } else {
+    log = defaultLog;
+    con = defaultCon;
+  }
   const oh  = mat * OVERHEAD;
-  const con = mat * CONTINGENCY;
-  return { area, mat, matBase, matLineItems, log, oh, con, total: mat+log+oh+con };
+  return { area, mat, matBase, matLineItems, log, oh, con, total: mat+log+oh+con, logTax: log+con, hasLogOverride: hasOverride };
 }
 
 function calcTotals() {
@@ -2224,73 +2320,56 @@ function setDiscount(val) {
   renderAll();
 }
 
-// ─── Editable rates / terms / quote meta — UI handlers ────────────────────────
-function updateRate(key, val) {
-  const num = parseFloat(val);
-  if (!isFinite(num) || num < 0) return;
-  state.rates[key] = num / 100; // input is in percent
-  saveState();
-  // re-render quote view to reflect new totals (no full tab change)
-  document.getElementById('mainContent').innerHTML = renderQuote();
-  renderPrintRoot();
-}
-function resetRates() {
-  if (!confirm(lang==='en' ? 'Reset all logistics & tax rates to defaults?' : '重置全部物流+税率为默认值？')) return;
-  state.rates = JSON.parse(JSON.stringify(DEFAULT_RATES));
-  saveState();
-  document.getElementById('mainContent').innerHTML = renderQuote();
-  renderPrintRoot();
-}
-function toggleEditCard(id) {
-  const el = document.getElementById(id);
-  if (el) el.classList.toggle('open');
-}
-function updateTerm(idx, val) {
-  if (state.customTerms === null) state.customTerms = getTerms().slice();
-  state.customTerms[idx] = val;
-  saveState();
-  renderPrintRoot();
-}
-function deleteTerm(idx) {
-  if (state.customTerms === null) state.customTerms = getTerms().slice();
-  state.customTerms.splice(idx, 1);
-  saveState();
-  document.getElementById('mainContent').innerHTML = renderQuote();
-  renderPrintRoot();
-}
-function addTerm() {
-  if (state.customTerms === null) state.customTerms = getTerms().slice();
-  state.customTerms.push(lang==='en' ? 'New term — click to edit' : '新增条款 — 点击编辑');
-  saveState();
-  document.getElementById('mainContent').innerHTML = renderQuote();
-  renderPrintRoot();
-}
-function resetTerms() {
-  if (!confirm(lang==='en' ? 'Restore default terms?' : '恢复默认报价说明？')) return;
-  state.customTerms = null;
-  saveState();
-  document.getElementById('mainContent').innerHTML = renderQuote();
-  renderPrintRoot();
-}
-function getActiveTerms() {
-  return Array.isArray(state.customTerms) ? state.customTerms : getTerms();
-}
-function updateQuoteMeta(field, val) {
-  if (field === 'validDays') {
-    const n = parseInt(val,10); if (!isFinite(n) || n < 0) return;
-    state.quoteMeta.validDays = n;
+// Per-space logistics+tax override (editable cell in space breakdown table)
+function updateLogTax(spId, val) {
+  const sp = state.spaces.find(s => s.id === spId);
+  if (!sp) return;
+  if (val === '' || val == null) {
+    sp.logTaxOverride = '';
   } else {
-    state.quoteMeta[field] = val;
+    const num = parseFloat(val);
+    sp.logTaxOverride = isNaN(num) ? '' : Math.max(0, num);
   }
   saveState();
-  // light re-render — header band reads quoteMeta directly
-  document.getElementById('mainContent').innerHTML = renderQuote();
-  renderPrintRoot();
+  // Recalc & re-render — auto updates the total cell
+  renderAll();
 }
-function updateQuoteRef(val) {
-  state.quoteRef = val.trim() || ('QQ-' + Date.now().toString(36).toUpperCase());
+function resetLogTax(spId) {
+  const sp = state.spaces.find(s => s.id === spId);
+  if (!sp) return;
+  sp.logTaxOverride = '';
   saveState();
+  renderAll();
+}
+
+// ─── One-click Save + Export HD PDF ──────────────────────────────────────────
+// Saves the current state then triggers a high-resolution print-to-PDF flow.
+// Works on iOS Safari, Mac Safari, Chrome, Edge.
+function saveAndExportHDPDF() {
+  // 1. Persist state
+  saveState();
+  updateSaveBadge(true);
+
+  // 2. Briefly visually confirm save
+  const badge = document.getElementById('saveBadge');
+  if (badge) {
+    const prev = badge.textContent;
+    badge.textContent = '✓ 已保存 Saved';
+    badge.style.background = 'rgba(46,107,79,0.5)';
+    setTimeout(() => { badge.textContent = prev; badge.style.background = ''; }, 1200);
+  }
+
+  // 3. Make sure we're on the quote page so user sees the result rendered
+  if (state.tab !== 3) {
+    state.tab = 3;
+    renderAll();
+  }
+
+  // 4. Re-render print root with latest data BEFORE entering print mode
   renderPrintRoot();
+
+  // 5. Trigger print pipeline (uses existing doPrint flow)
+  setTimeout(() => doPrint(), 60);
 }
 
 function renderQuote() {
@@ -2305,7 +2384,7 @@ function renderQuote() {
   const breakdowns = [
     { label: lang==='en'?'Materials 材料货值':'材料货值 Materials',                           labelAr:'قيمة المواد',            val:T2.totalMat,    color:'#1A3A5C' },
     { label: lang==='en'?'Logistics China→Qatar 物流运输':'物流运输 Logistics (China→Qatar)', labelAr:'الشحن والخدمات اللوجستية', val:T2.totalLog,    color:'#2E6B4F' },
-    { label: lang==='en'?`Customs ${((+state.rates.customsDuty)*100).toFixed(1)}% + VAT ${((+state.rates.vat)*100).toFixed(1)}% 关税+VAT`:`关税+VAT Customs ${((+state.rates.customsDuty)*100).toFixed(1)}%+VAT ${((+state.rates.vat)*100).toFixed(1)}%`,       labelAr:`الجمارك ${((+state.rates.customsDuty)*100).toFixed(1)}% + ضريبة القيمة المضافة ${((+state.rates.vat)*100).toFixed(1)}%`, val:T2.totalMat*getTaxRate(),color:'#7B5E3A' },
+    { label: lang==='en'?'Customs 5% + VAT 5% 关税+VAT':'关税+VAT Customs 5%+VAT 5%',       labelAr:'الجمارك 5% + ضريبة القيمة المضافة 5%', val:T2.totalMat*0.10,color:'#7B5E3A' },
     { label: lang==='en'?'Overhead & Margin 运营+利润':'运营+利润 Overhead & Margin',          labelAr:'المصاريف العامة والهامش',  val:T2.totalOH,     color:'#4A3060' },
     { label: lang==='en'?'Contingency Buffer 材料缓冲':'材料未定缓冲 Contingency ±',          labelAr:'احتياطي المواد ±',         val:T2.totalCon,    color:'#B88600' },
   ];
@@ -2316,13 +2395,26 @@ function renderQuote() {
     const spLabel = lang==='en' ? (sp.nameEn||sp.name) : sp.name;
     const spAr = sp.nameAr || sp.nameEn || sp.name;
     const matCount = (sp.selectedMaterials||[]).length;
+    const logTaxValue = Math.round(c.logTax);
     return `<tr>
-      <td>${sp.icon} ${spLabel}${matCount>0?`<br><span style="font-size:9px;color:#D4A017">📦 ${matCount} ${lang==='en'?'materials':'项材料'}</span>`:''}<br><span class="ar" style="font-size:8px;color:rgba(255,255,255,0.4)">${spAr}</span></td>
+      <td>${sp.icon} ${spLabel}${matCount>0?`<br><span style="font-size:9px;color:#D4A017">📦 ${matCount} ${lang==='en'?'materials':'项材料'}</span>`:''}<br><span class="ar" style="font-size:9px;color:rgba(255,255,255,0.55)">${spAr}</span></td>
       <td class="ta-center">${c.area} m²</td>
       <td class="ta-center">${unitRate.toLocaleString()}</td>
       <td class="ta-right">${fmt(c.mat)}</td>
-      <td class="ta-right text-gold">${fmt(c.log+c.con)}</td>
-      <td class="ta-right fw7">${fmt(c.total)}</td>
+      <td class="ta-right">
+        <div style="display:inline-flex;align-items:center;gap:3px;justify-content:flex-end">
+          <span style="font-size:10px;color:var(--muted)">QAR</span>
+          <input type="number" min="0" step="1"
+            value="${logTaxValue}"
+            onchange="updateLogTax('${sp.id}',this.value)"
+            oninput="updateLogTax('${sp.id}',this.value)"
+            inputmode="decimal"
+            title="${lang==='en'?'Edit Logistics + Tax (auto-recalculates total)':'编辑物流+税费（自动重算总价）'}"
+            style="width:78px;background:${c.hasLogOverride?'rgba(212,160,23,0.18)':'rgba(184,134,0,0.08)'};border:1px solid ${c.hasLogOverride?'var(--gold)':'rgba(184,134,0,0.35)'};border-radius:5px;color:${c.hasLogOverride?'var(--gold2)':'var(--gold)'};font-size:11px;font-weight:700;padding:4px 6px;text-align:right;outline:none;font-family:var(--font-body)"/>
+          ${c.hasLogOverride?`<button onclick="resetLogTax('${sp.id}')" title="恢复默认 / Reset" style="background:none;border:none;color:var(--muted);cursor:pointer;font-size:11px;padding:2px 4px">↺</button>`:''}
+        </div>
+      </td>
+      <td class="ta-right fw7 text-gold">${fmt(c.total)}</td>
     </tr>`;
   }).join('');
 
@@ -2362,7 +2454,7 @@ function renderQuote() {
     `<button class="disc-btn${disc===d.val?' active':''}${d.val<0?' disc-neg':''}" onclick="setDiscount(${d.val})">${d.label}</button>`
   ).join('');
 
-  const terms = getActiveTerms();
+  const terms = getTerms();
 
   return `<div class="page">
     <div class="client-row">
@@ -2379,7 +2471,7 @@ function renderQuote() {
     <div class="quote-card">
       <div class="quote-header-band">
         <div>
-          <div class="quote-htitle">${state.quoteMeta.title || t('quoteTitle')}</div>
+          <div class="quote-htitle">${t('quoteTitle')}</div>
           <div class="quote-hmeta">
             Ref: ${state.quoteRef}<br>
             ${t('styleLabel')}: ${sLabel} &nbsp;·&nbsp; ${t('matLabel')}: ${tLabel}
@@ -2391,8 +2483,7 @@ function renderQuote() {
         </div>
         <div class="quote-hdate">
           ${t('quoteDate')}<br>${today}<br><br>
-          ${lang==='en'?`Valid ${state.quoteMeta.validDays} days · 有效期 ${state.quoteMeta.validDays}天 · صالح ${state.quoteMeta.validDays} يومًا`
-                       :`有效期 ${state.quoteMeta.validDays}天 · Valid ${state.quoteMeta.validDays} days · صالح ${state.quoteMeta.validDays} يومًا`}
+          ${t('validDays')}
         </div>
       </div>
 
@@ -2404,7 +2495,7 @@ function renderQuote() {
           <span class="price-sep">—</span>
           <span class="price-high">${T2.gross>0?fmt(T2.high):'QAR —'}</span>
         </div>
-        <div class="price-note">${state.quoteMeta.priceNote || t('priceNote')}</div>
+        <div class="price-note">${t('priceNote')}</div>
         ${T2.gross>0&&T2.totalArea>0?`<div class="price-sqm">${t('sqmLabel')} ≈ QAR ${Math.round(T2.gross/T2.totalArea).toLocaleString()} / m² &nbsp;·&nbsp; <span class="ar" style="font-size:10px">${t('arSqmLabel')} ≈ QAR ${Math.round(T2.gross/T2.totalArea).toLocaleString()} / م²</span></div>`:''}
         <div class="manual-override">
           <span class="manual-override-label">${t('manualAdjLabel')}</span>
@@ -2453,99 +2544,13 @@ function renderQuote() {
       <div style="padding:14px"><div class="pay-grid">${payCards}</div></div>
     </div>
 
-    <!-- ── Editable: QUOTATION header data ── -->
-    <div class="card edit-card" id="ec-meta">
-      <div class="edit-card-toggle" onclick="toggleEditCard('ec-meta')">
-        <span class="edit-card-toggle-label">⚙️ ${lang==='en'?'Edit Quotation Header 编辑报价单抬头':'编辑报价单抬头 Edit Quotation Header'}</span>
-        <span class="edit-card-toggle-state">▼</span>
-      </div>
-      <div class="edit-card-body">
-        <div class="meta-grid">
-          <div class="meta-field">
-            <label>${lang==='en'?'Reference 报价编号':'报价编号 Reference'}</label>
-            <input value="${state.quoteRef}" oninput="updateQuoteRef(this.value)"/>
-          </div>
-          <div class="meta-field">
-            <label>${lang==='en'?'Validity (days) 有效天数':'有效天数 Validity (days)'}</label>
-            <input type="number" min="0" value="${state.quoteMeta.validDays}" oninput="updateQuoteMeta('validDays', this.value)"/>
-          </div>
-          <div class="meta-field meta-field-full">
-            <label>${lang==='en'?'Custom Title 自定义标题 (空=默认)':'自定义标题 Custom Title (empty=default)'}</label>
-            <input placeholder="${t('quoteTitle')}" value="${state.quoteMeta.title}" oninput="updateQuoteMeta('title', this.value)"/>
-          </div>
-          <div class="meta-field meta-field-full">
-            <label>${lang==='en'?'Price Note 价格说明 (空=默认)':'价格说明 Price Note (empty=default)'}</label>
-            <textarea placeholder="${t('priceNote')}" oninput="updateQuoteMeta('priceNote', this.value)">${state.quoteMeta.priceNote}</textarea>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- ── Editable: Logistics + Tax rates ── -->
-    <div class="card edit-card open" id="ec-rates">
-      <div class="edit-card-toggle" onclick="toggleEditCard('ec-rates')">
-        <span class="edit-card-toggle-label">🚢 ${lang==='en'?'Logistics + Tax الشحن + الضريبة 物流+税费':'物流+税费 Logistics + Tax · الشحن + الضريبة'}</span>
-        <span class="edit-card-toggle-state">${(getLogRate()*100).toFixed(1)}% + ${(getTaxRate()*100).toFixed(1)}% &nbsp;▼</span>
-      </div>
-      <div class="edit-card-body">
-        <div style="font-size:10px;color:var(--muted);margin-bottom:10px;font-weight:500">
-          ${lang==='en'
-            ? 'Rates apply to material cost. Edits save automatically and update the breakdown above.'
-            : '所有费率基于材料货值计算，修改后自动保存并实时刷新上方费用构成。'}
-        </div>
-        <div class="rate-grid">
-          ${RATE_META.map(m => `
-            <div class="rate-row ${m.group==='tax'?'rate-tax':''}">
-              <div class="rate-label">
-                ${lang==='en'?m.en:m.zh}
-                <span class="rate-label-ar">${m.ar}</span>
-              </div>
-              <div class="rate-input-wrap">
-                <input class="rate-input" type="number" step="0.1" min="0"
-                  value="${(state.rates[m.key]*100).toFixed(2).replace(/\.?0+$/,'')}"
-                  oninput="updateRate('${m.key}', this.value)"/>
-                <span class="rate-suffix">%</span>
-              </div>
-            </div>
-          `).join('')}
-        </div>
-        <div class="rate-summary">
-          <span>${lang==='en'?'Logistics subtotal 物流小计':'物流小计 Logistics subtotal'}</span>
-          <span>${(getLogRate()*100).toFixed(2)}%</span>
-        </div>
-        <div class="rate-summary" style="background:rgba(200,153,90,0.12);color:#D4A017">
-          <span>${lang==='en'?'Tax subtotal 税费小计':'税费小计 Tax subtotal'}</span>
-          <span>${(getTaxRate()*100).toFixed(2)}%</span>
-        </div>
-        <button class="rate-reset" onclick="resetRates()">${lang==='en'?'↺ Reset to defaults 恢复默认':'↺ 恢复默认 Reset to defaults'}</button>
-      </div>
-    </div>
-
-    <!-- ── Editable: Terms & Conditions ── -->
-    <div class="card edit-card open" id="ec-terms">
-      <div class="edit-card-toggle" onclick="toggleEditCard('ec-terms')">
-        <span class="edit-card-toggle-label">📋 ${t('termsTitle')}</span>
-        <span class="edit-card-toggle-state">${terms.length} ${lang==='en'?'items':'条'} &nbsp;▼</span>
-      </div>
-      <div class="edit-card-body">
-        ${terms.map((txt,i)=>`
-          <div class="term-row">
-            <textarea class="term-textarea" oninput="updateTerm(${i}, this.value)">${txt.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}</textarea>
-            <button class="term-del" title="${lang==='en'?'Delete':'删除'}" onclick="deleteTerm(${i})">×</button>
-          </div>
-        `).join('')}
-        <button class="term-add" onclick="addTerm()">+ ${lang==='en'?'Add Term 添加条款':'添加条款 Add Term'}</button>
-        ${state.customTerms !== null ? `<button class="rate-reset" style="margin-top:6px" onclick="resetTerms()">↺ ${lang==='en'?'Restore defaults 恢复默认':'恢复默认 Restore defaults'}</button>` : ''}
-      </div>
-    </div>
-
-    <!-- ── Read-only preview of Terms (mirrors print output) ── -->
     <div class="card">
       <div class="card-head">
-        ${lang==='en'?'Preview 预览':'预览 Preview'} · ${t('termsTitle')}
+        ${t('termsTitle')}
+        &nbsp;<span class="ar" style="font-size:9px;font-weight:400;opacity:0.8">${t('arTermsTitle')}</span>
       </div>
       <div style="padding:12px">
-        ${terms.map((txt,i)=>`<div class="disc" style="border-left:3px solid ${['#1A3A5C','#2E6B4F','#B88600','#7B5E3A','#1A3A5C','#7B5E3A','#4A3060','#0F4F4F','#7C3A1A'][i % 9]}">${txt}</div>`).join('')}
+        ${terms.map((txt,i)=>`<div class="disc" style="border-left:3px solid ${['#1A3A5C','#2E6B4F','#B88600','#555','#1A3A5C','#7B5E3A'][i]}">${txt}</div>`).join('')}
       </div>
     </div>
   </div>`;
@@ -2598,7 +2603,7 @@ function renderPrintRoot() {
   const breakdowns = [
     { labelEn:'Materials 材料货值',                           labelAr:'قيمة المواد',                              val:T2.totalMat,      color:'#4A7FBF' },
     { labelEn:'Logistics China→Qatar 物流运输',                labelAr:'الشحن والخدمات اللوجستية',                  val:T2.totalLog,      color:'#3FB57A' },
-    { labelEn:`Customs ${((+state.rates.customsDuty)*100).toFixed(1)}% + VAT ${((+state.rates.vat)*100).toFixed(1)}% 关税+VAT`,                 labelAr:`الجمارك ${((+state.rates.customsDuty)*100).toFixed(1)}% + ضريبة القيمة المضافة ${((+state.rates.vat)*100).toFixed(1)}%`,     val:T2.totalMat*getTaxRate(), color:'#C8995A' },
+    { labelEn:'Customs 5% + VAT 5% 关税+VAT',                 labelAr:'الجمارك 5% + ضريبة القيمة المضافة 5%',     val:T2.totalMat*0.10, color:'#C8995A' },
     { labelEn:'Overhead & Margin 运营+利润',                    labelAr:'المصاريف العامة والهامش',                  val:T2.totalOH,       color:'#9070BB' },
     { labelEn:'Contingency Buffer 材料缓冲',                    labelAr:'احتياطي المواد ±',                         val:T2.totalCon,      color:'#D4A017' },
   ];
@@ -2618,13 +2623,13 @@ function renderPrintRoot() {
     <div class="pr-page">
       <div class="pr-header">
         <div class="pr-header-left">
-          <div class="pr-logo-title">◈ ${state.quoteMeta.title || 'QATAR VILLA QUOTE'}</div>
+          <div class="pr-logo-title">◈ QATAR VILLA QUOTE</div>
           <div class="pr-logo-sub">卡塔尔别墅装修报价 · نظام تسعير الفلل</div>
         </div>
         <div class="pr-ref-block">
           <strong>Ref:</strong> ${state.quoteRef}<br>
           <strong>Date:</strong> ${today}<br>
-          <strong>Valid:</strong> ${state.quoteMeta.validDays} Days
+          <strong>Valid:</strong> 30 Days
         </div>
       </div>
 
@@ -2651,7 +2656,7 @@ function renderPrintRoot() {
           <span class="pr-price-sep">—</span>
           <span class="pr-price-high">${T2.gross>0?fmt(T2.high):'QAR —'}</span>
         </div>
-        <div class="pr-price-note">${state.quoteMeta.priceNote || '⚠️ Materials unconfirmed · 材料品牌未最终确认 · price variance ±15%'}</div>
+        <div class="pr-price-note">⚠️ Materials unconfirmed · 材料品牌未最终确认 · price variance ±15%</div>
         ${T2.gross>0&&T2.totalArea>0?`<div class="pr-sqm">Blended rate 综合单价 ≈ QAR ${Math.round(T2.gross/T2.totalArea).toLocaleString()} / m²&nbsp;&nbsp;|&nbsp;&nbsp;Total Area 总面积 ${T2.totalArea.toFixed(1)} m² &nbsp;|&nbsp; ${state.spaces.filter(s=>parseFloat(s.area)>0).length} Spaces</div>`:''}
         ${disc!==0?`<div style="margin-top:6px;font-size:8pt;color:${disc<0?'#7EC8A0':'#F0A050'}">⚑ ${disc>0?'+':''}${(disc*100).toFixed(0)}% Quote Adjustment Applied 报价调整已应用</div>`:''}
       </div>
@@ -2739,8 +2744,15 @@ function renderPrintRoot() {
     </div>
   `).join('');
 
-  const terms = getActiveTerms();
-  const termColors = ['#1A3A5C','#2E6B4F','#B88600','#7B5E3A','#1A3A5C','#7B5E3A','#4A3060','#0F4F4F','#7C3A1A'];
+  const terms = [
+    '本报价为概算，材料品牌及规格未最终确认，实际合同价格以确认材料清单后为准，浮动不超过 ±15%。',
+    'This is a preliminary estimate. Final contract price subject to confirmed material specifications (±15% variance).',
+    'هذا عرض سعر تقريبي. السعر النهائي مرهون بتأكيد المواد وقد يتفاوت بنسبة ±15%.',
+    '报价有效期：30天（自出具之日起）· Valid 30 days · صالح 30 يومًا',
+    '所有产品从中国定制生产，全程供货周期约45天，付款须在对应工程节点前45天完成。 All products are custom-manufactured in China. Total lead time approx. 45 days.',
+    '付款到账后方启动产品生产及发运，所有权在安装验收前归乙方所有。 Production and shipping commence upon cleared payment. Title remains with Supplier until installation acceptance.',
+  ];
+  const termColors = ['#1A3A5C','#2E6B4F','#B88600','#7B5E3A','#1A3A5C','#7B5E3A'];
 
   const page3 = `
     <div class="pr-page no-break-after">
@@ -2754,7 +2766,7 @@ function renderPrintRoot() {
       <div class="pr-card">
         <div class="pr-card-head">📋 Terms & Conditions 报价说明 · شروط العرض</div>
         <div class="pr-card-body">
-          ${terms.map((t,i)=>`<div class="pr-disc" style="border-left:3px solid ${termColors[i % termColors.length]}">${t}</div>`).join('')}
+          ${terms.map((t,i)=>`<div class="pr-disc" style="border-left:3px solid ${termColors[i]}">${t}</div>`).join('')}
         </div>
       </div>
 
@@ -2881,8 +2893,6 @@ document.addEventListener('keydown', (e) => {
 function resetQuote() {
   if (!confirm(t('confirmReset'))) return;
   const keepMaterials = state.materials; // preserve user library across resets
-  const keepRates     = state.rates;     // preserve user-customized rates
-  const keepTerms     = state.customTerms; // preserve user-customized terms
   state = {
     tab: 0, style: null, tier: null,
     spaces: JSON.parse(JSON.stringify(DEFAULT_SPACES)),
@@ -2890,9 +2900,6 @@ function resetQuote() {
     clientName: '', projectName: '',
     quoteRef: 'QQ-' + Date.now().toString(36).toUpperCase(),
     discount: 0, globalAdj: 0,
-    rates: keepRates || JSON.parse(JSON.stringify(DEFAULT_RATES)),
-    customTerms: keepTerms || null,
-    quoteMeta: { title:'', validDays:30, priceNote:'' },
   };
   migrateState();
   renderAll();
